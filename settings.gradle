@@ -1,0 +1,2 @@
+include ':app', ':api-dark-sky', ':api-location'
+rootProject.name='Weather'
