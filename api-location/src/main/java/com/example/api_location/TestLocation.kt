@@ -1,7 +1,7 @@
 package com.example.api_location
 
-import com.example.api_location.autocomplete.LocationAutocomplete
-import com.example.api_location.locations.Locations
+import com.example.api_location.autocomplete.LocationAutocompleteResponse
+import com.example.api_location.locations.LocationResponse
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -17,8 +17,8 @@ class TestLocation {
 
     fun get(){
 
-        val single1 = object : SingleObserver<Locations>{
-            override fun onSuccess(t: Locations) {
+        val single1 = object : SingleObserver<LocationResponse>{
+            override fun onSuccess(t: LocationResponse) {
                 t
             }
 
@@ -32,8 +32,8 @@ class TestLocation {
 
         }
 
-        val single2 = object : SingleObserver<Locations>{
-            override fun onSuccess(t: Locations) {
+        val single2 = object : SingleObserver<LocationResponse>{
+            override fun onSuccess(t: LocationResponse) {
                 t
             }
 
@@ -63,8 +63,8 @@ class TestLocation {
             .subscribe(single2)
 
 
-        val single = object : SingleObserver<LocationAutocomplete>{
-            override fun onSuccess(t: LocationAutocomplete) {
+        val single = object : SingleObserver<LocationAutocompleteResponse>{
+            override fun onSuccess(t: LocationAutocompleteResponse) {
                 t
             }
 

@@ -15,4 +15,8 @@ object LocationColumns{
     const val COUNTRY = "country"
     const val LATITUDE = "latitude"
     const val LONGITUDE = "longitude"
+    const val NORTHEAST_LAT = "ne_latitude"
+    const val NORTHEAST_LNG = "ne_longitude"
+    const val SOUTHWEST_LAT = "sw_latitude"
+    const val SOUTHWEST_LNG = "sw_longitude"
 }
