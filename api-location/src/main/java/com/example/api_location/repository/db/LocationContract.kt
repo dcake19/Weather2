@@ -1,0 +1,18 @@
+package com.example.api_location.repository.db
+
+object DatabaseName{
+    const val LOCATION = "location_db"
+}
+
+object LocationTables{
+    const val LOCATIONS = "locations"
+}
+
+object LocationColumns{
+    const val PLACE_ID = "place_id"
+    const val LOCALITY = "locality"
+    const val ADMIN_AREA_1 = "administrative_area_level_1"
+    const val COUNTRY = "country"
+    const val LATITUDE = "latitude"
+    const val LONGITUDE = "longitude"
+}

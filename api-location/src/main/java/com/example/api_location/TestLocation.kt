@@ -47,20 +47,21 @@ class TestLocation {
 
         }
 
-//        locationApi.getLocationsByAddress("manchester")
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(single1)
+        locationApi.getLocations("manchester")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(single1)
 
-//        locationApi.getLocations(52.2053,0.1218)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(single2)
+        locationApi.getLocations(52.2053,0.1218)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(single2)
 
         locationApi.getLocationsByPlaceId("ChIJ2_UmUkxNekgRqmv-BDgUvtk")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(single2)
+
 
         val single = object : SingleObserver<LocationAutocomplete>{
             override fun onSuccess(t: LocationAutocomplete) {
@@ -77,10 +78,10 @@ class TestLocation {
 
         }
 
-//        locationApi.getAutocompleteLocation("man")
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(single)
+        locationApi.getAutocompleteLocation("man")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(single)
     }
 
 }

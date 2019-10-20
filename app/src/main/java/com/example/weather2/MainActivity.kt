@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         //val tds = TestDarkSky()
         //tds.get()
 
-      // val tl = TestLocation()
-      //  tl.get()
+       val tl = TestLocation()
+        tl.get()
     }
 }
