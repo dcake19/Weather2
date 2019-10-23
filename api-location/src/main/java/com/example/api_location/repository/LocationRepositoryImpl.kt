@@ -1,15 +1,23 @@
 package com.example.api_location.repository
 
+import android.content.Context
 import com.example.api_location.LocationApi
 import com.example.api_location.locations.AddressComponent
 import com.example.api_location.locations.LocationResponse
 import com.example.api_location.locations.Result
 import com.example.api_location.repository.db.LocationDao
+import com.example.api_location.repository.db.LocationDaoProvider
 import com.example.api_location.repository.db.LocationEntity
 import io.reactivex.Single
 
 class LocationRepositoryImpl(private val locationApi: LocationApi,
-                             private val locationDao: LocationDao): LocationRepository {
+                             private val locationDaoProvider: LocationDaoProvider): LocationRepository {
+
+    private lateinit var locationDao: LocationDao
+
+    override fun initialize(context: Context) {
+        locationDao = locationDaoProvider.getLocationDao(context)
+    }
 
     override fun getLocation(latitude: Double, longitude: Double): Single<LocationEntity> {
         return locationDao.getLocationsBounding(latitude,longitude)

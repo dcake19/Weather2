@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = LocationTables.LOCATIONS)
 data class LocationEntity(
     @PrimaryKey @ColumnInfo(name = LocationColumns.PLACE_ID)var placeId: String,
     @ColumnInfo(name = LocationColumns.LOCALITY)var locality: String?,
