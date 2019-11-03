@@ -28,8 +28,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':data-location-remote')
-    implementation project(':data-location-local')
+    //implementation project(':data-location-remote')
+    //implementation project(':data-location-local')
     implementation project(':domain')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

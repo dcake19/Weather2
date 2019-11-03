@@ -6,6 +6,7 @@ import com.example.domain.LocationInteractor
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 class LocationViewModelImpl(private val locationInteractor: LocationInteractor): LocationViewModel {
 
@@ -14,7 +15,7 @@ class LocationViewModelImpl(private val locationInteractor: LocationInteractor):
         .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : SingleObserver<Location>{
                 override fun onSuccess(t: Location) {
-                    Log.v("remote","${t.name}  ${t.region}, ${t.country}")
+                    Log.v("view_model_remote","${t.name}  ${t.region}, ${t.country}")
                 }
 
                 override fun onSubscribe(d: Disposable) {
@@ -30,7 +31,7 @@ class LocationViewModelImpl(private val locationInteractor: LocationInteractor):
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : SingleObserver<Location>{
                 override fun onSuccess(t: Location) {
-                    Log.v("remote","${t.name}  ${t.region}, ${t.country}")
+                    Log.v("view_model_remote","${t.name}  ${t.region}, ${t.country}")
                 }
 
                 override fun onSubscribe(d: Disposable) {
@@ -47,7 +48,7 @@ class LocationViewModelImpl(private val locationInteractor: LocationInteractor):
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : SingleObserver<Location>{
                 override fun onSuccess(t: Location) {
-                    Log.v("remote","${t.name}  ${t.region}, ${t.country}")
+                    Log.v("view_model_remote","${t.name}  ${t.region}, ${t.country}")
                 }
 
                 override fun onSubscribe(d: Disposable) {
@@ -63,18 +64,19 @@ class LocationViewModelImpl(private val locationInteractor: LocationInteractor):
 
     override fun getStoredLocations(){
         locationInteractor.getStoredLocations()
+            .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : SingleObserver<List<Location>>{
                 override fun onSuccess(t: List<Location>) {
-                    t.forEach { Log.v("local","${it.name}  ${it.region}, ${it.country}") }
+                    t.forEach { Log.v("view_model_local","${it.name}  ${it.region}, ${it.country}") }
                 }
 
                 override fun onSubscribe(d: Disposable) {
-
+                    d
                 }
 
                 override fun onError(e: Throwable) {
-
+                    e
                 }
 
             })
