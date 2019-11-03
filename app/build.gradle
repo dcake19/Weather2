@@ -24,8 +24,15 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':api-dark-sky')
-    implementation project(':api-location')
+    implementation project(':domain')
+    
+    implementation project(':data-location')
+    implementation project(':data-location-local')
+    implementation project(':data-location-remote')
+
+    implementation project(':data-dark-sky-remote')
+
+    implementation project(':presentation-location')
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.0.2'

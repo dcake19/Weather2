@@ -8,9 +8,13 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/api-dark-sky" />
-            <option value="$PROJECT_DIR$/api-location" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/data-dark-sky-remote" />
+            <option value="$PROJECT_DIR$/data-location" />
+            <option value="$PROJECT_DIR$/data-location-local" />
+            <option value="$PROJECT_DIR$/data-location-remote" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/presentation-location" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

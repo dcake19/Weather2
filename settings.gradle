@@ -1,2 +1,2 @@
-include ':app', ':api-dark-sky', ':api-location'
+include ':app', ':data-dark-sky-remote', ':data-location-remote', ':presentation-location', ':data-location-local', ':data-location', ':domain'
 rootProject.name='Weather'
