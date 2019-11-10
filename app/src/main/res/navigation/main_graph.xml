@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/weather">
+
+    <include app:graph="@navigation/location_graph" />
+
+    <fragment
+        android:id="@+id/weather"
+        android:name="com.example.weather2.FragmentWeather"
+        android:label="fragment_weather"
+        tools:layout="@layout/weather_fragment">
+
+        <action
+            android:id="@+id/action_weather_to_locations"
+            app:destination="@id/location_graph" />
+
+        <action
+            android:id="@+id/action_weather_to_map"
+            app:destination="@id/location_graph" />
+
+    </fragment>
+
+<!--    <fragment-->
+<!--        android:id="@+id/locations"-->
+<!--        android:name="com.example.locations.FragmentLocations"-->
+<!--        android:label="fragment_weather"-->
+<!--        tools:layout="@layout/locations_fragment"-->
+<!--        >-->
+<!--    </fragment>-->
+
+</navigation>

@@ -14,7 +14,10 @@
             <option value="$PROJECT_DIR$/data-location-local" />
             <option value="$PROJECT_DIR$/data-location-remote" />
             <option value="$PROJECT_DIR$/domain" />
-            <option value="$PROJECT_DIR$/presentation-location" />
+            <option value="$PROJECT_DIR$/presentation-location-ui" />
+            <option value="$PROJECT_DIR$/presentation-location-view-model" />
+            <option value="$PROJECT_DIR$/presentation-weather" />
+            <option value="$PROJECT_DIR$/utils" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

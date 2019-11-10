@@ -3,6 +3,7 @@ package com.example.weather2
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.navigation.Navigation
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,9 +11,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.container, FragmentLocation())
-        ft.commit()
+//        val navController = Navigation.findNavController(this,R.id.nav_host_fragment)
+//        val navGraph = navController.navInflater.inflate(R.navigation.main_graph)
+//       // navGraph.startDestination = R.id.location_graph
+//        navGraph.startDestination = R.id.location_graph
+//        navController.graph = navGraph
+
+       // val ft = supportFragmentManager.beginTransaction()
+      //  ft.replace(R.id.container, FragmentLocations())
+      //  ft.commit()
         //val tds = TestDarkSky()
         //tds.get()
 
