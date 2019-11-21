@@ -1,5 +1,6 @@
 package com.example.weather2.dagger
 
+import com.example.FragmentSearch
 import com.example.presentation_location_view_model.dagger.FeatureLocationModule
 import com.example.presentation_location_view_model.dagger.FeatureLocationScope
 import com.example.locations.FragmentLocations
@@ -9,5 +10,5 @@ import dagger.Component
 @FeatureLocationScope
 interface FeatureLocationComponent {
     fun inject(fragmentLocations: FragmentLocations)
-   // fun getLocationViewModel(): LocationViewModel
+    fun inject(fragmentSearch: FragmentSearch)
 }

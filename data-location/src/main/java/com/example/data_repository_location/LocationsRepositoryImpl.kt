@@ -1,12 +1,12 @@
 package com.example.data_repository_location
 
 import com.example.domain.Location
-import com.example.domain.LocationRepository
+import com.example.domain.LocationsRepository
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
-class LocationRepositoryImpl2(private val locationDataNetwork: LocationDataNetwork,
-                              private val locationDataCache: LocationDataCache): LocationRepository {
+class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwork,
+                              private val locationDataCache: LocationDataCache): LocationsRepository {
 
     override fun getLocation(latitude: Double, longitude: Double): Single<Location> {
         return locationDataCache
@@ -33,7 +33,6 @@ class LocationRepositoryImpl2(private val locationDataNetwork: LocationDataNetwo
             .subscribeOn(Schedulers.io())
             .doOnSuccess { locationData -> locationDataCache.insert(locationData) }
             .map { locationData -> mapToLocation(locationData) }
-
     }
 
     override fun getStoredLocations(): Single<List<Location>> {

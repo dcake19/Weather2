@@ -1,2 +1,2 @@
-include ':app', ':data-dark-sky-remote', ':data-location-remote', ':presentation-location-ui', ':data-location-local', ':data-location', ':domain', ':presentation-weather', ':utils', ':presentation-location-view-model'
+include ':app', ':data-dark-sky-remote', ':data-location-remote', ':ui-location', ':data-location-local', ':data-location', ':domain', ':presentation-weather', ':utils', ':presentation-location'
 rootProject.name='Weather'

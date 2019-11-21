@@ -9,7 +9,7 @@ import com.example.data_repository_location.LocationData
 import com.example.data_repository_location.LocationDataNetwork
 import io.reactivex.Single
 
-class LocationGeocodingApi(private val retrofitLocationApi: RetrofitLocationApi): LocationDataNetwork{
+class LocationGeocodeApi(private val retrofitLocationApi: RetrofitLocationApi): LocationDataNetwork{
 
     override fun getLocations(latitude: Double, longitude: Double): Single<LocationData> {
         return retrofitLocationApi.getLocationsByLatLong("$latitude,$longitude",GEOCODING_API_KEY)

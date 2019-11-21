@@ -19,7 +19,7 @@ class FragmentWeather : Fragment() {
         container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        (activity!!.application as WeatherApplication).inject(this)
+        //(activity!!.application as WeatherApplication).inject(this)
         return inflater.inflate(R.layout.weather_fragment, container, false)
     }
 

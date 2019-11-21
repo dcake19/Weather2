@@ -1,4 +1,4 @@
-package com.example.presentation_location_view_model
+package com.example.presentation_location_view_model.locations
 
 import com.example.domain.Location
 import com.example.domain.LocationInteractor
@@ -6,8 +6,8 @@ import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class LocationViewModelImpl(private val locationInteractor: LocationInteractor):
-    LocationViewModel {
+class LocationsViewModelImpl(private val locationInteractor: LocationInteractor):
+    LocationsViewModel {
 
     override fun init() {
         locationInteractor.getLocation(52.2053,0.1218)
@@ -81,4 +81,7 @@ class LocationViewModelImpl(private val locationInteractor: LocationInteractor):
             })
     }
 
+    override fun deleteLocation(placeId: String) {
+        locationInteractor.deleteLocation(placeId)
+    }
 }
