@@ -20,6 +20,8 @@ class FeatureLocationModule {
         return LocationsViewModelImpl(locationInteractor)
     }
 
+
+
     @Provides
     @FeatureLocationScope
     fun provideLocationInteractor(locationsRepository: LocationsRepository): LocationInteractor{
