@@ -11,7 +11,7 @@ import com.example.weather2.dagger.DaggerAppComponent
 import com.example.weather2.dagger.DaggerFeatureLocationComponent
 import com.example.weather2.dagger.FeatureLocationComponent
 
-class WeatherApplication: Application(), ApplicationFeatureLocation {
+class WeatherApplication: Application(), ApplicationMain, ApplicationFeatureLocation {
 
     companion object{
 
@@ -29,8 +29,11 @@ class WeatherApplication: Application(), ApplicationFeatureLocation {
 
     override fun onCreate() {
         super.onCreate()
-
         application = this
+    }
+
+    override fun injectMainActivity(mainActivity: MainActivity){
+        mainActivity.weatherNavigationController = WeatherNavigationControllerImpl()
     }
 
     override fun injectLocation(fragment: Fragment) {
