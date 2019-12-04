@@ -19,4 +19,5 @@ object LocationColumns{
     const val NORTHEAST_LNG = "ne_longitude"
     const val SOUTHWEST_LAT = "sw_latitude"
     const val SOUTHWEST_LNG = "sw_longitude"
+    const val POSITION = "position"
 }

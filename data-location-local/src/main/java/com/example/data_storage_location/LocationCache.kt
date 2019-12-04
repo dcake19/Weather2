@@ -24,8 +24,10 @@ class LocationCache(private val locationDatabase: LocationDatabaseProvider) : Lo
         locationDao.delete(placeId)
     }
 
-    override fun insert(locationData: LocationData) {
+    override fun insert(locationData: LocationData): LocationData {
+        locationData.position = locationDao.getLastPosition()+1
         locationDao.insert(LocationEntity(locationData))
+        return locationData
     }
 
     private fun mapToLocationData(locationEntity: LocationEntity): LocationData{

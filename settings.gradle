@@ -1,2 +1,2 @@
-include ':app', ':data-dark-sky-remote', ':data-location-remote', ':ui-location', ':data-location-local', ':data-location', ':domain', ':presentation-weather', ':utils', ':presentation-location', ':buildSrc'
+include ':app', ':data-dark-sky-remote', ':data-location-remote', ':ui-location', ':data-location-local', ':data-location', ':domain', ':presentation-weather', ':utils-android', ':presentation-location', ':buildSrc', ':utils'
 rootProject.name='Weather'

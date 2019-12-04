@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/presentation-weather" />
             <option value="$PROJECT_DIR$/ui-location" />
             <option value="$PROJECT_DIR$/utils" />
+            <option value="$PROJECT_DIR$/utils-android" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

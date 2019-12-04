@@ -1,32 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/dark_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/button_back"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/ic_back_arrow"
+        android:tint="@color/dark_text_1"/>
+
     <TextView
+        android:id="@+id/text_locations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="36dp"
-        android:layout_gravity="center"
-        android:text="Fragment Location"/>
+        android:text="@string/locations"
+        android:textColor="@color/dark_text_1"
+        android:textSize="24sp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="@id/button_back"
+        app:layout_constraintStart_toEndOf="@+id/button_back"
+        app:layout_constraintBottom_toBottomOf="@id/button_back"
+        />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="get locations"/>
+    <ImageButton
+        android:id="@+id/button_add"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/ic_add"
+        android:tint="@color/dark_text_1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_edit"/>
 
-    <Button
-        android:id="@+id/button_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="search"/>
+    <ImageButton
+        android:id="@+id/button_edit"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/ic_edit"
+        android:tint="@color/dark_text_1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_settings"
+        />
 
-    <Button
-        android:id="@+id/button_weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="weather"/>
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/button_settings"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/ic_settings"
+        android:tint="@color/dark_text_1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_locations"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/button_settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/locations_item"
+        />
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="36dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:text="Fragment Location"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="get locations"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button_search"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="search"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button_weather"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="weather"/>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

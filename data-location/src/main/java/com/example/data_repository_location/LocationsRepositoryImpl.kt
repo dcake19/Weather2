@@ -15,7 +15,7 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
             .flatMap { locations ->
                 if (locations.isEmpty())
                     locationDataNetwork.getLocations(latitude, longitude)
-                    .doOnSuccess { locationData -> locationDataCache.insert(locationData) }
+                    .map { locationData -> locationDataCache.insert(locationData) }
                 else
                     Single.just(getNearestLocation(latitude, longitude, locations))}
             .map { locationData -> mapToLocation(locationData) }
@@ -31,7 +31,7 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
         return locationDataNetwork
             .getLocationsByPlaceId(placeId)
             .subscribeOn(Schedulers.io())
-            .doOnSuccess { locationData -> locationDataCache.insert(locationData) }
+            .map { locationData -> locationDataCache.insert(locationData) }
             .map { locationData -> mapToLocation(locationData) }
     }
 
@@ -46,7 +46,8 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
     }
 
     private fun mapToLocation(locationData: LocationData): Location{
-        return Location(locationData.placeId,locationData.name,locationData.region,
-            locationData.country,locationData.latitude,locationData.longitude)
+        return Location(locationData.placeId,locationData.position,locationData.name,
+            locationData.region, locationData.country,locationData.latitude,locationData.longitude)
     }
+
 }

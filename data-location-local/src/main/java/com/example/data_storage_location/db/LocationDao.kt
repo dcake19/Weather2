@@ -19,4 +19,7 @@ interface LocationDao {
 
     @Query("select * from ${LocationTables.LOCATIONS} where ${LocationColumns.NORTHEAST_LAT} >= :lat and ${LocationColumns.SOUTHWEST_LAT} <= :lat and ${LocationColumns.NORTHEAST_LNG} >= :lng and ${LocationColumns.SOUTHWEST_LNG} <= :lng")
     fun getLocationsBounding(lat: Double,lng: Double): Single<List<LocationEntity>>
+
+    @Query("select ${LocationColumns.POSITION} from ${LocationTables.LOCATIONS} order by ${LocationColumns.POSITION} desc limit 1")
+    fun getLastPosition(): Int
 }
