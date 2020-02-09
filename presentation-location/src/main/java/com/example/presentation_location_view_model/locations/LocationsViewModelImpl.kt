@@ -2,6 +2,7 @@ package com.example.presentation_location_view_model.locations
 
 import com.example.domain.Location
 import com.example.domain.LocationInteractor
+import com.example.utils.schedulers.RxSchedulerProvider
 import com.example.utils.ViewModelEmitter
 import io.reactivex.SingleObserver
 import io.reactivex.Observable
@@ -10,10 +11,11 @@ import io.reactivex.schedulers.Schedulers
 
 
 class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
-                             private val mapper: LocationsMapper):
-    LocationsViewModel {
+                             private val scheduler: RxSchedulerProvider,
+                             private val mapper: LocationsMapper,
+                             private val locationsEmitter: ViewModelEmitter<List<LocationsView>>): LocationsViewModel {
 
-    private val locationsEmitter = ViewModelEmitter<List<LocationsView>>(true)
+    //private val locationsEmitter = ViewModelEmitter<List<LocationsView>>(true)
 
     override fun init() {
         locationInteractor.getLocation(52.2053,0.1218)
@@ -73,8 +75,8 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
 
     override fun getStoredLocations(){
         locationInteractor.getStoredLocations()
-            .subscribeOn(Schedulers.computation())
-            .observeOn(Schedulers.computation())
+            .subscribeOn(scheduler.computation())
+            .observeOn(scheduler.computation())
             .map {mapper.map(it)}
 //            .map { locations -> locations.map { location -> LocationsView(location.placeId,
 //                    location.position,location.name,location.region,location.country) }
