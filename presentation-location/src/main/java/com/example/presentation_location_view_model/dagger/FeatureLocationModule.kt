@@ -4,6 +4,7 @@ import com.example.domain.LocationInteractor
 import com.example.domain.LocationsRepository
 import com.example.domain.autocomplete.AutoCompleteRepository
 import com.example.domain.autocomplete.PredictionInteractor
+import com.example.presentation_location_view_model.locations.LocationsMapper
 import com.example.presentation_location_view_model.locations.LocationsViewModel
 import com.example.presentation_location_view_model.locations.LocationsViewModelImpl
 import com.example.presentation_location_view_model.search.SearchLocationViewModel
@@ -16,11 +17,14 @@ class FeatureLocationModule {
 
     @Provides
     @FeatureLocationScope
-    fun provideLocationViewModel(locationInteractor: LocationInteractor): LocationsViewModel {
-        return LocationsViewModelImpl(locationInteractor)
+    fun provideLocationViewModel(locationInteractor: LocationInteractor,
+                                 locationsMapper: LocationsMapper): LocationsViewModel {
+        return LocationsViewModelImpl(locationInteractor,locationsMapper)
     }
 
-
+    @Provides
+    @FeatureLocationScope
+    fun provideLocationMapper(): LocationsMapper = LocationsMapper()
 
     @Provides
     @FeatureLocationScope

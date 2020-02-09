@@ -5,7 +5,7 @@ import io.reactivex.Observable
 
 interface LocationsViewModel {
     fun init()
-    fun getLocationsObservable(): Observable<List<LocationsPresentation>>
+    fun getLocationsObservable(): Observable<List<LocationsView>>
     fun getStoredLocations()
     fun deleteLocation(placeId: String)
 }

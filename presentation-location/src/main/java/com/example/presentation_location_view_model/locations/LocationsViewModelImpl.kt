@@ -9,10 +9,11 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
-class LocationsViewModelImpl(private val locationInteractor: LocationInteractor):
+class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
+                             private val mapper: LocationsMapper):
     LocationsViewModel {
 
-    private val locationsEmitter = ViewModelEmitter<List<LocationsPresentation>>(true)
+    private val locationsEmitter = ViewModelEmitter<List<LocationsView>>(true)
 
     override fun init() {
         locationInteractor.getLocation(52.2053,0.1218)
@@ -66,7 +67,7 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor)
 //            })
     }
 
-    override fun getLocationsObservable(): Observable<List<LocationsPresentation>> {
+    override fun getLocationsObservable(): Observable<List<LocationsView>> {
         return Observable.create{locationsEmitter.initEmitter(it)}
     }
 
@@ -74,12 +75,12 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor)
         locationInteractor.getStoredLocations()
             .subscribeOn(Schedulers.computation())
             .observeOn(Schedulers.computation())
-            .map { locations -> locations
-                .map { location -> LocationsPresentation(location.placeId,
-                    location.position,location.name,location.region,location.country) }
-                .sortedBy { it.position }}
-            .subscribe(object : SingleObserver<List<LocationsPresentation>>{
-                override fun onSuccess(t: List<LocationsPresentation>) {
+            .map {mapper.map(it)}
+//            .map { locations -> locations.map { location -> LocationsView(location.placeId,
+//                    location.position,location.name,location.region,location.country) }
+//                .sortedBy { it.position }}
+            .subscribe(object : SingleObserver<List<LocationsView>>{
+                override fun onSuccess(t: List<LocationsView>) {
                    locationsEmitter.post(t)
                 }
 

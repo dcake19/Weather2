@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.presentation_location_view_model.locations.LocationsPresentation
+import com.example.presentation_location_view_model.locations.LocationsView
 import com.example.presentation_location_view_model.locations.LocationsViewModel
 import com.example.view_model.R
 
 class LocationsAdapter(private val context: Context,
                        private val viewModel: LocationsViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
-    var items = mutableListOf<LocationsPresentation>()
+    var items = mutableListOf<LocationsView>()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -35,10 +35,10 @@ class LocationsAdapter(private val context: Context,
     }
 
     inner class LocationViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
-        fun setData(locationsPresentation: LocationsPresentation){
-            itemView.findViewById<TextView>(R.id.location_text_place_name).text = locationsPresentation.name
+        fun setData(locationsView: LocationsView){
+            itemView.findViewById<TextView>(R.id.location_text_place_name).text = locationsView.name
             itemView.findViewById<TextView>(R.id.location_text_region_name).text =
-                context.getString(R.string.region_country, locationsPresentation.region,locationsPresentation.country)
+                context.getString(R.string.region_country, locationsView.region,locationsView.country)
 
         }
     }
