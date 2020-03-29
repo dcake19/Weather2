@@ -15,8 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         (application as ApplicationMain).injectMainActivity(this)
-        weatherNavigationController
-            .initialize(Navigation.findNavController(this, R.id.nav_host_fragment))
+        weatherNavigationController.initialize(Navigation.findNavController(this, R.id.nav_host_fragment))
 
 //        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 //        val navGraph = navController.navInflater.inflate(R.navigation.location_graph)

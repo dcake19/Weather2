@@ -14,7 +14,6 @@
         <action
             android:id="@+id/action_locations_to_search"
             app:destination="@id/search" />
-
     </fragment>
 
     <fragment

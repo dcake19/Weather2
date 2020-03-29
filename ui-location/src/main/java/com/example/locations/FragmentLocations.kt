@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.application.ApplicationFeatureLocation
 import com.example.presentation_location_view_model.locations.LocationsViewModel
 import com.example.view_model.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
@@ -19,6 +21,7 @@ class FragmentLocations: Fragment() {
 
     @Inject lateinit var viewModel: LocationsViewModel
     private lateinit var locationsAdapter: LocationsAdapter
+    private var edit = false
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,8 +49,12 @@ class FragmentLocations: Fragment() {
 
         }
 
-        view.findViewById<ImageButton>(R.id.button_edit).setOnClickListener{
-
+        view.findViewById<FloatingActionButton>(R.id.fab_edit).setOnClickListener{
+            edit = !edit
+            if (edit)
+                view.findViewById<FloatingActionButton>(R.id.fab_edit).setImageResource(R.drawable.ic_edit)
+            else
+                view.findViewById<FloatingActionButton>(R.id.fab_edit).setImageResource(R.drawable.ic_done_2)
         }
     }
 
@@ -62,7 +69,7 @@ class FragmentLocations: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        //viewModel.init()
+       // viewModel.init()
         viewModel.getLocationsObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { locationsAdapter.items = it.toMutableList() }
