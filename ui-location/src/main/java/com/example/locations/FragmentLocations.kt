@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,9 +51,9 @@ class FragmentLocations: Fragment() {
         view.findViewById<FloatingActionButton>(R.id.fab_edit).setOnClickListener{
             edit = !edit
             if (edit)
-                view.findViewById<FloatingActionButton>(R.id.fab_edit).setImageResource(R.drawable.ic_edit)
+                view.findViewById<FloatingActionButton>(R.id.fab_edit).setImageResource(R.drawable.ic_done)
             else
-                view.findViewById<FloatingActionButton>(R.id.fab_edit).setImageResource(R.drawable.ic_done_2)
+                view.findViewById<FloatingActionButton>(R.id.fab_edit).setImageResource(R.drawable.ic_edit)
         }
     }
 
