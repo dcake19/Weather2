@@ -18,8 +18,24 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
     //private val locationsEmitter = ViewModelEmitter<List<LocationsView>>(true)
 
     override fun init() {
-        locationInteractor.getLocation(52.2053,0.1218)
-        .observeOn(Schedulers.computation())
+//        locationInteractor.getLocation(52.2053,0.1218)
+//        .observeOn(Schedulers.computation())
+//            .subscribe(object : SingleObserver<Location>{
+//                override fun onSuccess(t: Location) {
+//                    //Log.v("view_model_remote","${t.name}  ${t.region}, ${t.country}")
+//                }
+//
+//                override fun onSubscribe(d: Disposable) {
+//
+//                }
+//
+//                override fun onError(e: Throwable) {
+//
+//                }
+//
+//            })
+        locationInteractor.getLocation(53.368491, -1.450158)
+            .observeOn(Schedulers.computation())
             .subscribe(object : SingleObserver<Location>{
                 override fun onSuccess(t: Location) {
                     //Log.v("view_model_remote","${t.name}  ${t.region}, ${t.country}")
@@ -34,39 +50,23 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
                 }
 
             })
-//        locationInteractor.getLocation(53.368491, -1.450158)
-//            .observeOn(Schedulers.computation())
-//            .subscribe(object : SingleObserver<Location>{
-//                override fun onSuccess(t: Location) {
-//                    //Log.v("view_model_remote","${t.name}  ${t.region}, ${t.country}")
-//                }
-//
-//                override fun onSubscribe(d: Disposable) {
-//
-//                }
-//
-//                override fun onError(e: Throwable) {
-//
-//                }
-//
-//            })
-//
-//        locationInteractor.getLocation(52.952804, -1.157791)
-//            .observeOn(Schedulers.computation())
-//            .subscribe(object : SingleObserver<Location>{
-//                override fun onSuccess(t: Location) {
-//                    //Log.v("view_model_remote","${t.name}  ${t.region}, ${t.country}")
-//                }
-//
-//                override fun onSubscribe(d: Disposable) {
-//
-//                }
-//
-//                override fun onError(e: Throwable) {
-//
-//                }
-//
-//            })
+
+        locationInteractor.getLocation(52.952804, -1.157791)
+            .observeOn(Schedulers.computation())
+            .subscribe(object : SingleObserver<Location>{
+                override fun onSuccess(t: Location) {
+                    //Log.v("view_model_remote","${t.name}  ${t.region}, ${t.country}")
+                }
+
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onError(e: Throwable) {
+
+                }
+
+            })
     }
 
     override fun getLocationsObservable(): Observable<List<LocationsView>> {
