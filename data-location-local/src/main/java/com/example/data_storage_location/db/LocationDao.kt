@@ -5,8 +5,12 @@ import io.reactivex.Single
 
 @Dao
 interface LocationDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(locationEntity: LocationEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(locationEntities: List<LocationEntity>)
 
     @Delete
     fun delete(locationEntity: LocationEntity)
@@ -15,11 +19,15 @@ interface LocationDao {
     fun delete(placeId: String)
 
     @Query("select * from ${LocationTables.LOCATIONS}")
-    fun getLocations(): Single<List<LocationEntity>>
+    fun getLocations(): List<LocationEntity>
+
+    @Query("select * from ${LocationTables.LOCATIONS}")
+    fun getLocationsSingle(): Single<List<LocationEntity>>
 
     @Query("select * from ${LocationTables.LOCATIONS} where ${LocationColumns.NORTHEAST_LAT} >= :lat and ${LocationColumns.SOUTHWEST_LAT} <= :lat and ${LocationColumns.NORTHEAST_LNG} >= :lng and ${LocationColumns.SOUTHWEST_LNG} <= :lng")
-    fun getLocationsBounding(lat: Double,lng: Double): Single<List<LocationEntity>>
+    fun getLocationsBoundingSingle(lat: Double, lng: Double): Single<List<LocationEntity>>
 
-    @Query("select ${LocationColumns.POSITION} from ${LocationTables.LOCATIONS} order by ${LocationColumns.POSITION} desc limit 1")
-    fun getLastPosition(): Int
+    @Query("select count(*) from ${LocationTables.LOCATIONS}")
+    fun getNumberOfLocations(): Int
+
 }

@@ -9,4 +9,5 @@ class LocationsMapper {
             LocationsView(it.placeId,it.position,it.name,it.region,it.country) }
             .sortedBy { it.position }
     }
+
 }

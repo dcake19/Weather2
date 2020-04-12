@@ -1,5 +1,6 @@
 package com.example.data_repository_location
 
+import com.example.domain.Location
 import io.reactivex.Single
 
 interface LocationDataCache {
@@ -8,4 +9,5 @@ interface LocationDataCache {
     fun getLocations(): Single<List<LocationData>>
     fun deleteLocation(placeId: String)
     fun insert(locationData: LocationData): LocationData
+    fun updateLocations(locations: List<String>)
 }

@@ -11,12 +11,12 @@ class LocationCache(private val locationDatabase: LocationDatabaseProvider) : Lo
    private val locationDao = locationDatabase.getLocationDao()
 
     override fun getLocationsBounding(lat: Double, lng: Double): Single<List<LocationData>> {
-        return locationDao.getLocationsBounding(lat, lng)
+        return locationDao.getLocationsBoundingSingle(lat, lng)
             .map { locations -> locations.map { mapToLocationData(it) } }
     }
 
     override fun getLocations(): Single<List<LocationData>> {
-        return locationDao.getLocations()
+        return locationDao.getLocationsSingle()
             .map { locations -> locations.map { mapToLocationData(it) } }
     }
 
@@ -24,8 +24,18 @@ class LocationCache(private val locationDatabase: LocationDatabaseProvider) : Lo
         locationDao.delete(placeId)
     }
 
+    override fun updateLocations(locations: List<String>){
+        val currentCachedLocations = locationDao.getLocations()
+        val updatedCachedLocations = mutableListOf<LocationEntity>()
+        for (location in locations){
+            val locationEntity = currentCachedLocations.firstOrNull { it.placeId == location }
+            if (locationEntity!=null) updatedCachedLocations.add(locationEntity)
+        }
+
+        locationDao.insert(updatedCachedLocations)
+    }
+
     override fun insert(locationData: LocationData): LocationData {
-        locationData.position = locationDao.getLastPosition()+1
         locationDao.insert(LocationEntity(locationData))
         return locationData
     }

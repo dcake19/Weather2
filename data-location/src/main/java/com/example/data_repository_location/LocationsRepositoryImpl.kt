@@ -21,12 +21,14 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
             .map { locationData -> mapToLocation(locationData) }
     }
 
-    private fun getNearestLocation(latitude: Double, longitude: Double,locations: List<LocationData>): LocationData {
+    private fun getNearestLocation(latitude: Double, longitude: Double,
+                                   locations: List<LocationData>): LocationData {
         return locations.sortedBy { Math.pow(latitude - it.latitudeNorthEast,2.0)
             + Math.pow(latitude - it.latitudeSouthWest,2.0)
             + Math.pow(longitude - it.longitudeNorthEast,2.0)
             + Math.pow(longitude - it.longitudeSouthWest,2.0) }.first()
     }
+
     override fun getLocation(placeId: String): Single<Location> {
         return locationDataNetwork
             .getLocationsByPlaceId(placeId)
@@ -45,8 +47,12 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
         locationDataCache.deleteLocation(placeId)
     }
 
+    override fun updateLocations(locations: List<String>) {
+        locationDataCache.updateLocations(locations)
+    }
+
     private fun mapToLocation(locationData: LocationData): Location{
-        return Location(locationData.placeId,locationData.position,locationData.name,
+        return Location(locationData.placeId,-1,locationData.name,
             locationData.region, locationData.country,locationData.latitude,locationData.longitude)
     }
 

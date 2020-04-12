@@ -18,7 +18,7 @@ import com.example.presentation_location_view_model.locations.LocationsViewModel
 import com.example.view_model.R
 
 class LocationsAdapter(private val context: Context,
-                       private val viewModel: LocationsViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
+                       private val viewModel: LocationsViewModel): RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
     var items = mutableListOf<LocationsView>()
     set(value) {
@@ -27,6 +27,8 @@ class LocationsAdapter(private val context: Context,
     }
 
     fun move(fromPosition: Int,toPosition: Int){
+        val movedItem = items.removeAt(fromPosition)
+        items.add(toPosition,movedItem)
         notifyItemMoved(fromPosition, toPosition)
     }
 

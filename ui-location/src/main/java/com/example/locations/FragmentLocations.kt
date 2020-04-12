@@ -27,9 +27,20 @@ class FragmentLocations: Fragment() {
     private lateinit var locationsList: RecyclerView
     private var edit = false
 
+    // used for moving items in list
+    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0) {
+        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+                            target: RecyclerView.ViewHolder): Boolean {
+            locationsAdapter.move(viewHolder.adapterPosition,target.adapterPosition)
+            return false
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        }
+    })
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         (activity!!.application as ApplicationFeatureLocation).injectLocation(this)
         return inflater.inflate(R.layout.locations_fragment,container,false)
     }
@@ -56,15 +67,12 @@ class FragmentLocations: Fragment() {
         view.findViewById<FloatingActionButton>(R.id.fab_edit).setOnClickListener{
             val layout = view.findViewById<ConstraintLayout>(R.id.location_layout)
             edit = !edit
-            //locationsAdapter.allowEditing = edit
             if (edit) {
                 editingEnabled(layout)
-               // locationsAdapter.enabledEditing = true
                 view.findViewById<FloatingActionButton>(R.id.fab_edit)
                     .setImageResource(R.drawable.ic_done)
             }else {
                 editingDisabled(layout)
-              //  locationsAdapter.enabledEditing = false
                 view.findViewById<FloatingActionButton>(R.id.fab_edit)
                     .setImageResource(R.drawable.ic_edit)
             }
@@ -73,51 +81,35 @@ class FragmentLocations: Fragment() {
 
     private fun createRecyclerView(view: View){
         locationsList = view.findViewById<RecyclerView>(R.id.list_locations)
-       // locationsList.findview
         val linearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
         locationsList.layoutManager = linearLayoutManager
         if (locationsList.adapter == null)
             locationsList.adapter = locationsAdapter
 
-        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0) {
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder): Boolean {
-               // val fromPosition = viewHolder.adapterPosition
-               // val targetPosition = viewHolder.adapterPosition
-
-                locationsAdapter.move(viewHolder.adapterPosition,target.adapterPosition)
-
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-
-            }
-        })
-
-        itemTouchHelper.attachToRecyclerView(locationsList)
-
     }
 
     override fun onResume() {
         super.onResume()
-        //viewModel.init()
+       // viewModel.init()
         viewModel.getLocationsObservable()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { locationsAdapter.items = it.toMutableList() }
+            .subscribe { locationsAdapter.items = LocationsViewList(it.toMutableList()) }
         viewModel.getStoredLocations()
     }
 
     private fun editingEnabled(layout: ConstraintLayout){
+        itemTouchHelper.attachToRecyclerView(locationsList)
         for (i in 0 until (locationsAdapter.itemCount))
-            locationsAdapter.enableEditing(
-                locationsList.findViewHolderForAdapterPosition(i))
+            locationsAdapter.enableEditing(locationsList.findViewHolderForAdapterPosition(i))
     }
 
     private fun editingDisabled(layout: ConstraintLayout){
+        viewModel.updateLocations(locationsAdapter.items)
+        itemTouchHelper.attachToRecyclerView(null)
         for (i in 0 until (locationsAdapter.itemCount))
-            locationsAdapter.disableEditing(
-                locationsList.findViewHolderForAdapterPosition(i))
+            locationsAdapter.disableEditing(locationsList.findViewHolderForAdapterPosition(i))
     }
+
+
 }

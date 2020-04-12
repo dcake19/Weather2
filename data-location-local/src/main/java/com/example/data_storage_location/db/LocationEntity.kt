@@ -16,11 +16,10 @@ data class LocationEntity(
     @ColumnInfo(name = LocationColumns.NORTHEAST_LAT)var latitudeNorthEast: Double,
     @ColumnInfo(name = LocationColumns.NORTHEAST_LNG)var longitudeNorthEast: Double,
     @ColumnInfo(name = LocationColumns.SOUTHWEST_LAT)var latitudeSouthWest: Double,
-    @ColumnInfo(name = LocationColumns.SOUTHWEST_LNG)var longitudeSouthWest: Double,
-    @ColumnInfo(name = LocationColumns.POSITION)var position: Int){
+    @ColumnInfo(name = LocationColumns.SOUTHWEST_LNG)var longitudeSouthWest: Double){
 
     constructor(locationData: LocationData): this(locationData.placeId,locationData.name,
         locationData.region,locationData.country,locationData.latitude,locationData.longitude,
         locationData.latitudeNorthEast,locationData.longitudeNorthEast,
-        locationData.latitudeSouthWest,locationData.longitudeSouthWest,locationData.position)
+        locationData.latitudeSouthWest,locationData.longitudeSouthWest)
 }

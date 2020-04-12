@@ -18,55 +18,43 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
     //private val locationsEmitter = ViewModelEmitter<List<LocationsView>>(true)
 
     override fun init() {
-//        locationInteractor.getLocation(52.2053,0.1218)
-//        .observeOn(Schedulers.computation())
-//            .subscribe(object : SingleObserver<Location>{
-//                override fun onSuccess(t: Location) {
-//                    //Log.v("view_model_remote","${t.name}  ${t.region}, ${t.country}")
-//                }
-//
-//                override fun onSubscribe(d: Disposable) {
-//
-//                }
-//
-//                override fun onError(e: Throwable) {
-//
-//                }
-//
-//            })
+        val observer = object : SingleObserver<Location>{
+            override fun onSuccess(t: Location) {}
+            override fun onSubscribe(d: Disposable) {}
+            override fun onError(e: Throwable) {}
+        }
+
+        locationInteractor.getLocation(52.2053,0.1218)
+        .observeOn(Schedulers.computation())
+            .subscribe()
         locationInteractor.getLocation(53.368491, -1.450158)
             .observeOn(Schedulers.computation())
-            .subscribe(object : SingleObserver<Location>{
-                override fun onSuccess(t: Location) {
-                    //Log.v("view_model_remote","${t.name}  ${t.region}, ${t.country}")
-                }
-
-                override fun onSubscribe(d: Disposable) {
-
-                }
-
-                override fun onError(e: Throwable) {
-
-                }
-
-            })
+            .subscribe(observer)
 
         locationInteractor.getLocation(52.952804, -1.157791)
             .observeOn(Schedulers.computation())
-            .subscribe(object : SingleObserver<Location>{
-                override fun onSuccess(t: Location) {
-                    //Log.v("view_model_remote","${t.name}  ${t.region}, ${t.country}")
-                }
+            .subscribe(observer)
 
-                override fun onSubscribe(d: Disposable) {
+        locationInteractor.getLocation(51.472101, -0.091660)
+            .observeOn(Schedulers.computation())
+            .subscribe(observer)
 
-                }
+        locationInteractor.getLocation(52.468115, -1.872855)
+            .observeOn(Schedulers.computation())
+            .subscribe(observer)
 
-                override fun onError(e: Throwable) {
 
-                }
+        locationInteractor.getLocation(53.450867, -2.231002)
+            .observeOn(Schedulers.computation())
+            .subscribe(observer)
 
-            })
+        locationInteractor.getLocation(51.462025, -2.595660)
+            .observeOn(Schedulers.computation())
+            .subscribe(observer)
+
+        locationInteractor.getLocation(53.785724, -1.516300)
+            .observeOn(Schedulers.computation())
+            .subscribe(observer)
     }
 
     override fun getLocationsObservable(): Observable<List<LocationsView>> {
@@ -78,9 +66,6 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
             .subscribeOn(scheduler.computation())
             .observeOn(scheduler.computation())
             .map {mapper.map(it)}
-//            .map { locations -> locations.map { location -> LocationsView(location.placeId,
-//                    location.position,location.name,location.region,location.country) }
-//                .sortedBy { it.position }}
             .subscribe(object : SingleObserver<List<LocationsView>>{
                 override fun onSuccess(t: List<LocationsView>) {
                    locationsEmitter.post(t)
@@ -93,11 +78,18 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
                 override fun onError(e: Throwable) {
 
                 }
-
             })
     }
 
     override fun deleteLocation(placeId: String) {
         locationInteractor.deleteLocation(placeId)
+    }
+
+    override fun updateLocations(locations: List<LocationsView>) {
+        locationInteractor.updateLocations(locations.map { it.placeId })
+    }
+
+    override fun updatePositions(locations: List<LocationsView>) {
+        locations
     }
 }
