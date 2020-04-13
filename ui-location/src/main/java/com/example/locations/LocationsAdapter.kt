@@ -72,6 +72,10 @@ class LocationsAdapter(private val context: Context,
             checkBox.visibility = View.VISIBLE
             val checkBoxAnimator = ObjectAnimator.ofFloat(checkBox,"alpha",0f,1f)
             checkBoxAnimator.start()
+            val arrowsLayout = itemView.findViewById<ConstraintLayout>(R.id.layout_arrows)
+            arrowsLayout.visibility = View.VISIBLE
+            val arrowsAnimator = ObjectAnimator.ofFloat(arrowsLayout,"alpha",0f,1f)
+            arrowsAnimator.start()
             val layout = itemView.findViewById<ConstraintLayout>(R.id.location_layout)
             val constraint = ConstraintSet()
             constraint.clone(layout)
@@ -88,26 +92,28 @@ class LocationsAdapter(private val context: Context,
 
         fun editingDisabled(){
             val checkBox = itemView.findViewById<CheckBox>(R.id.location_selected)
-            //checkBox.visibility = View.INVISIBLE
             val checkBoxAnimator = ObjectAnimator.ofFloat(checkBox,"alpha",1f,0f)
             checkBoxAnimator.addListener(object :Animator.AnimatorListener{
-                override fun onAnimationRepeat(animation: Animator?) {
-
-                }
-
+                override fun onAnimationRepeat(animation: Animator?) {}
                 override fun onAnimationEnd(animation: Animator?) {
                     checkBox.visibility = View.INVISIBLE
                 }
-
-                override fun onAnimationCancel(animation: Animator?) {
-
-                }
-
-                override fun onAnimationStart(animation: Animator?) {
-
-                }
+                override fun onAnimationCancel(animation: Animator?) {}
+                override fun onAnimationStart(animation: Animator?) {}
             })
             checkBoxAnimator.start()
+            val arrowsLayout = itemView.findViewById<ConstraintLayout>(R.id.layout_arrows)
+            val arrowsAnimator = ObjectAnimator.ofFloat(arrowsLayout,"alpha",1f,0f)
+            arrowsAnimator.start()
+            arrowsAnimator.addListener(object :Animator.AnimatorListener{
+                override fun onAnimationRepeat(animation: Animator?) {}
+                override fun onAnimationEnd(animation: Animator?) {
+                    arrowsLayout.visibility = View.INVISIBLE
+                }
+                override fun onAnimationCancel(animation: Animator?) {}
+                override fun onAnimationStart(animation: Animator?) {}
+            })
+
             val layout = itemView.findViewById<ConstraintLayout>(R.id.location_layout)
             val constraint = ConstraintSet()
             constraint.clone(layout)
