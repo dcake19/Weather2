@@ -10,7 +10,7 @@
     android:id="@+id/location_layout">
 
     <CheckBox
-        android:id="@+id/location_selected"
+        android:id="@+id/check_box_selected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"

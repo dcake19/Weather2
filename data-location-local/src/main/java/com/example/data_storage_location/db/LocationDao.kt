@@ -15,8 +15,8 @@ interface LocationDao {
     @Delete
     fun delete(locationEntity: LocationEntity)
 
-    @Query("delete from ${LocationTables.LOCATIONS} where ${LocationColumns.PLACE_ID} = :placeId")
-    fun delete(placeId: String)
+    @Query("delete from ${LocationTables.LOCATIONS} where ${LocationColumns.PLACE_ID} in (:placeIds)")
+    fun delete(placeIds: List<String>)
 
     @Query("select * from ${LocationTables.LOCATIONS}")
     fun getLocations(): List<LocationEntity>

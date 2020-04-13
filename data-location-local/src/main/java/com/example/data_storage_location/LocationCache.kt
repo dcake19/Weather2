@@ -20,8 +20,8 @@ class LocationCache(private val locationDatabase: LocationDatabaseProvider) : Lo
             .map { locations -> locations.map { mapToLocationData(it) } }
     }
 
-    override fun deleteLocation(placeId: String) {
-        locationDao.delete(placeId)
+    override fun deleteLocation(placeIds: List<String>) {
+        locationDao.delete(placeIds)
     }
 
     override fun updateLocations(locations: List<String>){

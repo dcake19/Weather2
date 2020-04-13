@@ -18,13 +18,16 @@ import com.example.presentation_location_view_model.locations.LocationsViewModel
 import com.example.view_model.R
 
 class LocationsAdapter(private val context: Context,
-                       private val viewModel: LocationsViewModel): RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
+                       private val viewModel: LocationsViewModel,
+                       private val allSelected: (allChecked: Boolean,someSelected: Boolean) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
     var items = mutableListOf<LocationsView>()
     set(value) {
         field = value
         notifyDataSetChanged()
     }
+
+    var editingEnabled = false
 
     fun move(fromPosition: Int,toPosition: Int){
         val movedItem = items.removeAt(fromPosition)
@@ -49,7 +52,7 @@ class LocationsAdapter(private val context: Context,
 
     fun enableEditing(viewHolder: RecyclerView.ViewHolder?){
         if (viewHolder!=null && viewHolder is LocationViewHolder){
-            viewHolder.editingEnabled()
+            viewHolder.editingEnabled(true)
         }
     }
 
@@ -59,39 +62,66 @@ class LocationsAdapter(private val context: Context,
         }
     }
 
+    fun allChecked(isChecked: Boolean){
+        items.forEach { it.selected = isChecked }
+        notifyDataSetChanged()
+    }
+
+    fun deleteSelected(){
+        items = items.filterNot { it.selected }.toMutableList()
+        notifyDataSetChanged()
+    }
+
     inner class LocationViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
 
         fun setData(locationsView: LocationsView){
+            if (editingEnabled) {
+                val checkBox = itemView.findViewById<CheckBox>(R.id.check_box_selected)
+                editingEnabled(false)
+                checkBox.isChecked = locationsView.selected
+            }
+            itemView.findViewById<CheckBox>(R.id.check_box_selected)
+                .setOnCheckedChangeListener { buttonView, isChecked ->
+                    locationsView.selected = isChecked
+                    allSelected(!items.any{ !it.selected } , items.any { it.selected })
+                }
             itemView.findViewById<TextView>(R.id.location_text_place_name).text = locationsView.name
             itemView.findViewById<TextView>(R.id.location_text_region_name).text =
                 context.getString(R.string.region_country, locationsView.region,locationsView.country)
         }
 
-        fun editingEnabled(){
-            val checkBox = itemView.findViewById<CheckBox>(R.id.location_selected)
+        fun editingEnabled(animate: Boolean){
+            val checkBox = itemView.findViewById<CheckBox>(R.id.check_box_selected)
             checkBox.visibility = View.VISIBLE
-            val checkBoxAnimator = ObjectAnimator.ofFloat(checkBox,"alpha",0f,1f)
-            checkBoxAnimator.start()
+
             val arrowsLayout = itemView.findViewById<ConstraintLayout>(R.id.layout_arrows)
             arrowsLayout.visibility = View.VISIBLE
-            val arrowsAnimator = ObjectAnimator.ofFloat(arrowsLayout,"alpha",0f,1f)
-            arrowsAnimator.start()
+
             val layout = itemView.findViewById<ConstraintLayout>(R.id.location_layout)
             val constraint = ConstraintSet()
             constraint.clone(layout)
             constraint.clear(R.id.location_text_place_name,ConstraintSet.START)
-            constraint.connect(R.id.location_text_place_name,ConstraintSet.START,R.id.location_selected,ConstraintSet.END)
+            constraint.connect(R.id.location_text_place_name,ConstraintSet.START,R.id.check_box_selected,ConstraintSet.END)
             constraint.clear(R.id.location_text_region_name,ConstraintSet.START)
-            constraint.connect(R.id.location_text_region_name,ConstraintSet.START,R.id.location_selected,ConstraintSet.END)
+            constraint.connect(R.id.location_text_region_name,ConstraintSet.START,R.id.check_box_selected,ConstraintSet.END)
 
-            val transition = ChangeBounds()
-            transition.duration = 300
-            TransitionManager.beginDelayedTransition(layout, transition)
+            if (animate) {
+                val checkBoxAnimator = ObjectAnimator.ofFloat(checkBox,"alpha",0f,1f)
+                checkBoxAnimator.start()
+                val arrowsAnimator = ObjectAnimator.ofFloat(arrowsLayout,"alpha",0f,1f)
+                arrowsAnimator.start()
+                val transition = ChangeBounds()
+                transition.duration = 300
+                TransitionManager.beginDelayedTransition(layout, transition)
+            }else{
+                checkBox.alpha = 1f
+                arrowsLayout.alpha = 1f
+            }
             constraint.applyTo(layout)
         }
 
         fun editingDisabled(){
-            val checkBox = itemView.findViewById<CheckBox>(R.id.location_selected)
+            val checkBox = itemView.findViewById<CheckBox>(R.id.check_box_selected)
             val checkBoxAnimator = ObjectAnimator.ofFloat(checkBox,"alpha",1f,0f)
             checkBoxAnimator.addListener(object :Animator.AnimatorListener{
                 override fun onAnimationRepeat(animation: Animator?) {}

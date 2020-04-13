@@ -81,15 +81,11 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
             })
     }
 
-    override fun deleteLocation(placeId: String) {
-        locationInteractor.deleteLocation(placeId)
-    }
-
     override fun updateLocations(locations: List<LocationsView>) {
         locationInteractor.updateLocations(locations.map { it.placeId })
     }
 
-    override fun updatePositions(locations: List<LocationsView>) {
-        locations
+    override fun deleteLocations(locations: List<LocationsView>) {
+        locationInteractor.deleteLocations(locations.filter { it.selected }.map { it.placeId })
     }
 }

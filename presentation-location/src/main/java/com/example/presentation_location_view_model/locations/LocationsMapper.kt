@@ -6,8 +6,7 @@ class LocationsMapper {
 
     fun map(locations: List<Location>): List<LocationsView>{
         return locations.map {
-            LocationsView(it.placeId,it.position,it.name,it.region,it.country) }
-            .sortedBy { it.position }
+            LocationsView(it.placeId,it.name,it.region,it.country) }
     }
 
 }
