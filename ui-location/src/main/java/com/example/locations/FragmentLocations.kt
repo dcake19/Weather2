@@ -107,7 +107,7 @@ class FragmentLocations: Fragment() {
 
     override fun onResume() {
         super.onResume()
-       // viewModel.init()
+        //viewModel.init()
         viewModel.getLocationsObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { locationsAdapter.items = it.toMutableList() }

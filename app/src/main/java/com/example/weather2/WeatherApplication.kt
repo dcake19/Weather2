@@ -3,7 +3,7 @@ package com.example.weather2
 import android.app.Application
 import android.content.Context
 import androidx.fragment.app.Fragment
-import com.example.FragmentSearch
+import com.example.search.FragmentSearch
 import com.example.application.ApplicationFeatureLocation
 import com.example.locations.FragmentLocations
 import com.example.weather2.dagger.AppComponent

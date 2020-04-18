@@ -24,35 +24,39 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
             override fun onError(e: Throwable) {}
         }
 
-        locationInteractor.getLocation(52.2053,0.1218)
-        .observeOn(Schedulers.computation())
-            .subscribe()
-        locationInteractor.getLocation(53.368491, -1.450158)
-            .observeOn(Schedulers.computation())
-            .subscribe(observer)
+//        locationInteractor.getLocation(52.2053,0.1218)
+//        .observeOn(Schedulers.computation())
+//            .subscribe()
+//        locationInteractor.getLocation(53.368491, -1.450158)
+//            .observeOn(Schedulers.computation())
+//            .subscribe(observer)
+//
+//        locationInteractor.getLocation(52.952804, -1.157791)
+//            .observeOn(Schedulers.computation())
+//            .subscribe(observer)
+//
+//        locationInteractor.getLocation(51.472101, -0.091660)
+//            .observeOn(Schedulers.computation())
+//            .subscribe(observer)
+//
+//        locationInteractor.getLocation(52.468115, -1.872855)
+//            .observeOn(Schedulers.computation())
+//            .subscribe(observer)
+//
+//
+//        locationInteractor.getLocation(53.450867, -2.231002)
+//            .observeOn(Schedulers.computation())
+//            .subscribe(observer)
+//
+//        locationInteractor.getLocation(51.462025, -2.595660)
+//            .observeOn(Schedulers.computation())
+//            .subscribe(observer)
+//
+//        locationInteractor.getLocation(53.785724, -1.516300)
+//            .observeOn(Schedulers.computation())
+//            .subscribe(observer)
 
-        locationInteractor.getLocation(52.952804, -1.157791)
-            .observeOn(Schedulers.computation())
-            .subscribe(observer)
-
-        locationInteractor.getLocation(51.472101, -0.091660)
-            .observeOn(Schedulers.computation())
-            .subscribe(observer)
-
-        locationInteractor.getLocation(52.468115, -1.872855)
-            .observeOn(Schedulers.computation())
-            .subscribe(observer)
-
-
-        locationInteractor.getLocation(53.450867, -2.231002)
-            .observeOn(Schedulers.computation())
-            .subscribe(observer)
-
-        locationInteractor.getLocation(51.462025, -2.595660)
-            .observeOn(Schedulers.computation())
-            .subscribe(observer)
-
-        locationInteractor.getLocation(53.785724, -1.516300)
+        locationInteractor.getLocation(55.945000, -3.185710)
             .observeOn(Schedulers.computation())
             .subscribe(observer)
     }

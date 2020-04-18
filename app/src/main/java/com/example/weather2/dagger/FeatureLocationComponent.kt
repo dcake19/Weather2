@@ -1,6 +1,6 @@
 package com.example.weather2.dagger
 
-import com.example.FragmentSearch
+import com.example.search.FragmentSearch
 import com.example.presentation_location_view_model.dagger.FeatureLocationModule
 import com.example.presentation_location_view_model.dagger.FeatureLocationScope
 import com.example.locations.FragmentLocations

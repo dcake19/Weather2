@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/search"
-        android:name="com.example.FragmentSearch"
+        android:name="com.example.search.FragmentSearch"
         android:label="fragment_locations"
         tools:layout="@layout/search_fragment">
         <action
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/map"
-        android:name="com.example.FragmentMap"
+        android:name="com.example.map.FragmentMap"
         android:label="fragment_map"
         tools:layout="@layout/map_fragment">
         <deepLink app:uri="weatherApp://fragmentMap"/>

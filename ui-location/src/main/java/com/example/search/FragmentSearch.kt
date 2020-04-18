@@ -1,10 +1,12 @@
-package com.example
+package com.example.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.application.ApplicationFeatureLocation
@@ -25,10 +27,18 @@ class FragmentSearch: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.searchLocation("lon")
+        //viewModel.searchLocation("lon")
 
-        view.findViewById<Button>(R.id.button).setOnClickListener{
+        view.findViewById<ImageButton>(R.id.button_back).setOnClickListener{
+            Navigation.findNavController(view).popBackStack()
+        }
+
+
+        view.findViewById<ImageButton>(R.id.button_map).setOnClickListener{
             Navigation.findNavController(view).navigate(R.id.action_search_to_map)
         }
+
+        view.findViewById<SearchView>(R.id.search_location).isSelected = true
     }
+
 }
