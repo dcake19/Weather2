@@ -27,12 +27,11 @@ class FragmentSearch: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //viewModel.searchLocation("lon")
+        viewModel.searchLocation("lon")
 
         view.findViewById<ImageButton>(R.id.button_back).setOnClickListener{
             Navigation.findNavController(view).popBackStack()
         }
-
 
         view.findViewById<ImageButton>(R.id.button_map).setOnClickListener{
             Navigation.findNavController(view).navigate(R.id.action_search_to_map)

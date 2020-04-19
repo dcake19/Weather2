@@ -15,8 +15,6 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
                              private val mapper: LocationsMapper,
                              private val locationsEmitter: ViewModelEmitter<List<LocationsView>>): LocationsViewModel {
 
-    //private val locationsEmitter = ViewModelEmitter<List<LocationsView>>(true)
-
     override fun init() {
         val observer = object : SingleObserver<Location>{
             override fun onSuccess(t: Location) {}

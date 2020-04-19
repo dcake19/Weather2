@@ -8,6 +8,7 @@ import com.example.presentation_location_view_model.locations.LocationsMapper
 import com.example.presentation_location_view_model.locations.LocationsView
 import com.example.presentation_location_view_model.locations.LocationsViewModel
 import com.example.presentation_location_view_model.locations.LocationsViewModelImpl
+import com.example.presentation_location_view_model.search.SearchLocationMapper
 import com.example.presentation_location_view_model.search.SearchLocationViewModel
 import com.example.presentation_location_view_model.search.SearchLocationViewModelImpl
 import com.example.utils.ViewModelEmitter
@@ -41,8 +42,12 @@ class FeatureLocationModule {
 
     @Provides
     @FeatureLocationScope
-    fun provideSearchLocationViewModel(interactor: PredictionInteractor): SearchLocationViewModel{
-        return SearchLocationViewModelImpl(interactor)
+    fun provideSearchLocationViewModel(interactor: PredictionInteractor,
+                                       rxSchedulerProvider: RxSchedulerProvider,
+                                       mapper: SearchLocationMapper): SearchLocationViewModel{
+        return SearchLocationViewModelImpl(interactor,rxSchedulerProvider,mapper,
+            ViewModelEmitter()
+        )
     }
 
     @Provides
@@ -50,4 +55,8 @@ class FeatureLocationModule {
     fun providePredictionInteractor(autoCompleteRepository: AutoCompleteRepository): PredictionInteractor{
         return PredictionInteractor(autoCompleteRepository)
     }
+
+    @Provides
+    @FeatureLocationScope
+    fun provideSearchLocationMapper() = SearchLocationMapper()
 }
