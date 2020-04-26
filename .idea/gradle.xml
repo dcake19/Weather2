@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/ui-location" />
             <option value="$PROJECT_DIR$/utils" />
             <option value="$PROJECT_DIR$/utils-android" />
+            <option value="$PROJECT_DIR$/utils-ui" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

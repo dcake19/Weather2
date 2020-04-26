@@ -5,4 +5,6 @@ import io.reactivex.Observable
 interface SearchLocationViewModel {
     fun searchLocation(term: String)
     fun getSearchResultsObservable(): Observable<SearchResultsView>
+    fun getLocationAddedObservable(): Observable<Boolean>
+    fun addLocation(placeId: String)
 }

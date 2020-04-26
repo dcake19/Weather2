@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/dark_item_background"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground"
+    android:id="@+id/layout_search_item">
 
     <TextView
         android:id="@+id/location_text_place_name"

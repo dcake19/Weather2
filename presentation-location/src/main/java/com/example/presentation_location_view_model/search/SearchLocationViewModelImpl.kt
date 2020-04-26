@@ -4,6 +4,7 @@ import com.example.domain.autocomplete.PredictionInteractor
 import com.example.domain.autocomplete.Predictions
 import com.example.utils.ViewModelEmitter
 import com.example.utils.schedulers.RxSchedulerProvider
+import io.reactivex.CompletableObserver
 import io.reactivex.Observable
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
@@ -12,8 +13,8 @@ import io.reactivex.schedulers.Schedulers
 class SearchLocationViewModelImpl(private val predictionInteractor: PredictionInteractor,
                                   private val scheduler: RxSchedulerProvider,
                                   private val mapper: SearchLocationMapper,
-                                  private val searchResultsEmitter: ViewModelEmitter<SearchResultsView>): SearchLocationViewModel {
-
+                                  private val searchResultsEmitter: ViewModelEmitter<SearchResultsView>,
+                                  private val locationAddedEmitter: ViewModelEmitter<Boolean>): SearchLocationViewModel {
     //search terms to be displayed
     private val searchTerms = mutableListOf<String>()
 
@@ -22,6 +23,10 @@ class SearchLocationViewModelImpl(private val predictionInteractor: PredictionIn
 
     override fun getSearchResultsObservable(): Observable<SearchResultsView> {
         return Observable.create{searchResultsEmitter.initEmitter(it)}
+    }
+
+    override fun getLocationAddedObservable(): Observable<Boolean> {
+        return Observable.create{locationAddedEmitter.initEmitter(it)}
     }
 
     override fun searchLocation(term: String) {
@@ -51,7 +56,7 @@ class SearchLocationViewModelImpl(private val predictionInteractor: PredictionIn
                         }
 
                         override fun onSubscribe(d: Disposable) {
-
+                            searchTerms.add(term)
                         }
 
                         override fun onError(e: Throwable) {
@@ -61,5 +66,25 @@ class SearchLocationViewModelImpl(private val predictionInteractor: PredictionIn
                     })
             }
         }
+    }
+
+    override fun addLocation(placeId: String) {
+        predictionInteractor.addLocation(placeId)
+            .subscribeOn(scheduler.computation())
+            .observeOn(scheduler.computation())
+            .subscribe(object :CompletableObserver{
+                override fun onComplete() {
+                    locationAddedEmitter.post(true)
+                }
+
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onError(e: Throwable) {
+
+                }
+
+            })
     }
 }

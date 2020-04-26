@@ -2,6 +2,7 @@ package com.example.data_repository_location
 
 import com.example.domain.Location
 import com.example.domain.LocationsRepository
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
@@ -29,12 +30,12 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
             + Math.pow(longitude - it.longitudeSouthWest,2.0) }.first()
     }
 
-    override fun getLocation(placeId: String): Single<Location> {
+    override fun addLocation(placeId: String): Completable {
         return locationDataNetwork
             .getLocationsByPlaceId(placeId)
             .subscribeOn(Schedulers.io())
-            .map { locationData -> locationDataCache.insert(locationData) }
-            .map { locationData -> mapToLocation(locationData) }
+            .doOnSuccess { locationData -> locationDataCache.insert(locationData) }
+            .flatMapCompletable { Completable.complete() }
     }
 
     override fun getStoredLocations(): Single<List<Location>> {

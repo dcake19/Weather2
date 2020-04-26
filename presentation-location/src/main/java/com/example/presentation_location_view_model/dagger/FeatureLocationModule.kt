@@ -46,14 +46,15 @@ class FeatureLocationModule {
                                        rxSchedulerProvider: RxSchedulerProvider,
                                        mapper: SearchLocationMapper): SearchLocationViewModel{
         return SearchLocationViewModelImpl(interactor,rxSchedulerProvider,mapper,
-            ViewModelEmitter()
+            ViewModelEmitter(),ViewModelEmitter()
         )
     }
 
     @Provides
     @FeatureLocationScope
-    fun providePredictionInteractor(autoCompleteRepository: AutoCompleteRepository): PredictionInteractor{
-        return PredictionInteractor(autoCompleteRepository)
+    fun providePredictionInteractor(autoCompleteRepository: AutoCompleteRepository,
+                                    locationsRepository: LocationsRepository): PredictionInteractor{
+        return PredictionInteractor(autoCompleteRepository,locationsRepository)
     }
 
     @Provides
