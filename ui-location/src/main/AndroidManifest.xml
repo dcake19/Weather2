@@ -1,2 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.view_model" />
+    package="com.example.view_model" >
+
+
+
+</manifest>
