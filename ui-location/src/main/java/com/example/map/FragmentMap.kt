@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.view_model.R
 import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.Marker
 
-class FragmentMap: Fragment(), OnMapReadyCallback{ //}, GoogleMap.OnMarkerClickListener{
+class FragmentMap: Fragment(){ //}, GoogleMap.OnMarkerClickListener{
 
     private lateinit var map: GoogleMap
 
@@ -27,29 +26,15 @@ class FragmentMap: Fragment(), OnMapReadyCallback{ //}, GoogleMap.OnMarkerClickL
 
     private fun setupMap(view: View){
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-       // val mapFragment = activity!!.supportFragmentManager.findFragmentById(R.id.map) //as SupportMapFragment
-        val x = 0
-
-       mapFragment.getMapAsync(this)
-      //  val googleMapView = view.findViewById<MapView>(R.id.view_map)//childFragmentManager.findFragmentById(R.id.map) as MapFragment
-     //   googleMapView.getMapAsync { mapReady(it) }
+        mapFragment.getMapAsync{onMapReady(it)}
     }
 
-    private fun mapReady(googleMap: GoogleMap){
+    private fun onMapReady(googleMap: GoogleMap){
         map = googleMap
         googleMap.mapType =  GoogleMap.MAP_TYPE_NORMAL
 
     }
 
-    override fun onMapReady(googleMap: GoogleMap?) {
-        if (googleMap!=null) {
-            map = googleMap
-            map.mapType = GoogleMap.MAP_TYPE_NORMAL
-        }
-    }
-    // override fun onMapReady(p0: GoogleMap?) {
-
-   // }
 
    // override fun onMarkerClick(p0: Marker?): Boolean {
 //       return true
