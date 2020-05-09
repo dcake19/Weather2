@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.search.FragmentSearch
 import com.example.application.ApplicationFeatureLocation
 import com.example.locations.FragmentLocations
+import com.example.map.FragmentMap
 import com.example.weather2.dagger.AppComponent
 import com.example.weather2.dagger.DaggerAppComponent
 import com.example.weather2.dagger.DaggerFeatureLocationComponent
@@ -37,12 +38,14 @@ class WeatherApplication: Application(), ApplicationMain, ApplicationFeatureLoca
     }
 
     override fun injectLocation(fragment: Fragment) {
-        if (fragment is FragmentLocations || fragment is FragmentSearch) {
-            if (locationComponent == null) locationComponent =
-                DaggerFeatureLocationComponent.builder().appComponent(appComponent).build()
+        if (fragment is FragmentLocations || fragment is FragmentSearch || fragment is FragmentMap) {
+            if (locationComponent == null)
+                locationComponent = DaggerFeatureLocationComponent.builder()
+                    .appComponent(appComponent).build()
             when(fragment){
                 is FragmentLocations -> locationComponent?.inject(fragment)
                 is FragmentSearch -> locationComponent?.inject(fragment)
+                is FragmentMap -> locationComponent?.inject(fragment)
             }
         }
     }

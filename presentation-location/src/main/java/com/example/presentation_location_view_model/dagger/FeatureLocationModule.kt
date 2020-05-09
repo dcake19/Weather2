@@ -8,6 +8,9 @@ import com.example.presentation_location_view_model.locations.LocationsMapper
 import com.example.presentation_location_view_model.locations.LocationsView
 import com.example.presentation_location_view_model.locations.LocationsViewModel
 import com.example.presentation_location_view_model.locations.LocationsViewModelImpl
+import com.example.presentation_location_view_model.map.MapLocationMapper
+import com.example.presentation_location_view_model.map.MapLocationViewModel
+import com.example.presentation_location_view_model.map.MapLocationsViewModelImpl
 import com.example.presentation_location_view_model.search.SearchLocationMapper
 import com.example.presentation_location_view_model.search.SearchLocationViewModel
 import com.example.presentation_location_view_model.search.SearchLocationViewModelImpl
@@ -60,4 +63,17 @@ class FeatureLocationModule {
     @Provides
     @FeatureLocationScope
     fun provideSearchLocationMapper() = SearchLocationMapper()
+
+    @Provides
+    @FeatureLocationScope
+    fun provideMapLocationViewModel(locationInteractor: LocationInteractor,
+                                    rxSchedulerProvider: RxSchedulerProvider,
+                                    mapper: MapLocationMapper): MapLocationViewModel{
+        return MapLocationsViewModelImpl(locationInteractor,rxSchedulerProvider,
+            mapper, ViewModelEmitter(),ViewModelEmitter())
+    }
+
+    @Provides
+    @FeatureLocationScope
+    fun provideMapLocationMapper() = MapLocationMapper()
 }
