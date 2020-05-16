@@ -1,14 +1,23 @@
 package com.example.map
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import androidx.appcompat.widget.SearchView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.application.ApplicationFeatureLocation
 import com.example.presentation_location_view_model.map.MapLocationView
 import com.example.presentation_location_view_model.map.MapLocationViewModel
+import com.example.presentation_location_view_model.map.NewMapLocationView
 import com.example.presentation_location_view_model.search.SearchLocationViewModel
+import com.example.presentation_location_view_model.search.SearchResultsView
 import com.example.view_model.R
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
@@ -20,6 +29,8 @@ class FragmentMap: Fragment(){
     @Inject lateinit var mapLocationViewModel: MapLocationViewModel
     @Inject lateinit var searchLocationViewModel: SearchLocationViewModel
 
+    private lateinit var mapSearchAdapter: MapSearchAdapter
+
     private lateinit var map: GoogleMap
    // private val markers = mutableListOf<MarkerOptions>()
 
@@ -29,9 +40,41 @@ class FragmentMap: Fragment(){
         return inflater.inflate(R.layout.map_fragment,container,false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<ImageButton>(R.id.button_back).setOnClickListener{
+            Navigation.findNavController(view).popBackStack()
+        }
+
+        if (!::mapSearchAdapter.isInitialized)
+            mapSearchAdapter = MapSearchAdapter(context,mapLocationViewModel)
+
+        view.findViewById<SearchView>(R.id.search_location).apply {
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    val term = query ?: ""
+                    if (term.isNotBlank())
+                        mapLocationViewModel.getNewLocationBySearchTerm(term)
+                    else
+                        mapSearchAdapter.clear()
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    val term = newText ?: ""
+                    if (term.isNotBlank())
+                        searchLocationViewModel.searchLocation(term)
+                    else
+                        mapSearchAdapter.clear()
+                    return false
+                }
+
+            })
+
+        }
+
+        createRecyclerView(view)
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync{onMapReady(it)}
@@ -39,10 +82,15 @@ class FragmentMap: Fragment(){
 
     override fun onResume() {
         super.onResume()
+        searchLocationViewModel.getSearchResultsObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { onSearchResultsReady(it) }
+        mapLocationViewModel.getNewLocationObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { onNewLocationReady(it) }
         mapLocationViewModel.getLocationsObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe{onLocationsReady(it)}
-
     }
 
     private fun onMapReady(googleMap: GoogleMap){
@@ -58,7 +106,6 @@ class FragmentMap: Fragment(){
             val latLng = LatLng(it.latitude,it.longitude)
             val mo = MarkerOptions().position(latLng)
             mo.title(it.placeId)
-          //  markers.add(mo)
             latLngBoundsBuilder.include(latLng)
             map.addMarker(mo)
         }
@@ -72,6 +119,25 @@ class FragmentMap: Fragment(){
                 return true
             }
         })
+
+    }
+
+    private fun createRecyclerView(view: View){
+        view.findViewById<RecyclerView>(R.id.list_map_search_items).let {
+            it.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            if (it.adapter==null) it.adapter = mapSearchAdapter
+        }
+    }
+
+    private fun onSearchResultsReady(searchResultsView: SearchResultsView){
+        view?.findViewById<CardView>(R.id.card_map_search_items)?.visibility =
+            if (searchResultsView.searchResults.isNotEmpty()) View.VISIBLE else View.GONE
+        mapSearchAdapter.searchResultsView = searchResultsView
+    }
+
+    private fun onNewLocationReady(newMapLocationView: NewMapLocationView){
+        Log.v("","")
+        view?.findViewById<CardView>(R.id.card_map_search_items)?.visibility = View.GONE
 
     }
 

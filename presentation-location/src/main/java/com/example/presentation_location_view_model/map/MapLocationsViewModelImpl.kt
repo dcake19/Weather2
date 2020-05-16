@@ -12,13 +12,13 @@ class MapLocationsViewModelImpl(private val locationInteractor: LocationInteract
                                 private val scheduler: RxSchedulerProvider,
                                 private val mapper: MapLocationMapper,
                                 private val locationsEmitter: ViewModelEmitter<List<MapLocationView>>,
-                                private val newlocationEmitter: ViewModelEmitter<MapLocationView>): MapLocationViewModel {
+                                private val newlocationEmitter: ViewModelEmitter<NewMapLocationView>): MapLocationViewModel {
 
     override fun getLocationsObservable(): Observable<List<MapLocationView>> {
         return Observable.create{locationsEmitter.initEmitter(it)}
     }
 
-    override fun getNewLocationObservable(): Observable<MapLocationView> {
+    override fun getNewLocationObservable(): Observable<NewMapLocationView> {
         return Observable.create{newlocationEmitter.initEmitter(it)}
     }
 
@@ -42,7 +42,44 @@ class MapLocationsViewModelImpl(private val locationInteractor: LocationInteract
             })
     }
 
-    override fun getNewLocation(placeId: String) {
+    override fun getNewLocationByPlaceId(placeId: String) {
+        locationInteractor.getLocationByPlaceId(placeId)
+            .subscribeOn(scheduler.computation())
+            .observeOn(scheduler.computation())
+            .map { mapper.mapNewLocation(it) }
+            .subscribe(object :SingleObserver<NewMapLocationView>{
+                override fun onSuccess(t: NewMapLocationView) {
+                    newlocationEmitter.post(t)
+                }
 
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onError(e: Throwable) {
+
+                }
+
+            })
+    }
+
+    override fun getNewLocationBySearchTerm(term: String) {
+        locationInteractor.getLocationByName(term)
+            .subscribeOn(scheduler.computation())
+            .observeOn(scheduler.computation())
+            .map { mapper.mapNewLocation(it) }
+            .subscribe(object :SingleObserver<NewMapLocationView>{
+                override fun onSuccess(t: NewMapLocationView) {
+                    newlocationEmitter.post(t)
+                }
+
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onError(e: Throwable) {
+
+                }
+            })
     }
 }

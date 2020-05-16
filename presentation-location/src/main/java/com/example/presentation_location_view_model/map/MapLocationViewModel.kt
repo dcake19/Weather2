@@ -4,7 +4,8 @@ import io.reactivex.Observable
 
 interface MapLocationViewModel {
     fun getLocationsObservable(): Observable<List<MapLocationView>>
-    fun getNewLocationObservable(): Observable<MapLocationView>
+    fun getNewLocationObservable(): Observable<NewMapLocationView>
     fun getStoredLocations()
-    fun getNewLocation(placeId: String)
+    fun getNewLocationByPlaceId(placeId: String)
+    fun getNewLocationBySearchTerm(term: String)
 }

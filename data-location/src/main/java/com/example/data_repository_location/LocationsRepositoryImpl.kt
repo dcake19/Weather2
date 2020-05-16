@@ -57,4 +57,13 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
             locationData.region, locationData.country,locationData.latitude,locationData.longitude)
     }
 
+    override fun getLocationByPlaceId(placeId: String): Single<Location> {
+        return locationDataNetwork.getLocationsByPlaceId(placeId)
+            .map { locationData -> mapToLocation(locationData) }
+    }
+
+    override fun getLocationByName(name: String): Single<Location> {
+        return locationDataNetwork.getLocations(name)
+            .map { locationData -> mapToLocation(locationData) }
+    }
 }
