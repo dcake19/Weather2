@@ -14,6 +14,6 @@ class MapLocationMapper {
 
     fun mapNewLocation(location: Location): NewMapLocationView{
         return NewMapLocationView(location.placeId,location.latitude,location.longitude,
-            location.name,location.region,location.country)
+            location.name,"${location.region}, ${location.country}")
     }
 }

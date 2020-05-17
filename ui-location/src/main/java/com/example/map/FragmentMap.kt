@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
@@ -32,7 +33,6 @@ class FragmentMap: Fragment(){
     private lateinit var mapSearchAdapter: MapSearchAdapter
 
     private lateinit var map: GoogleMap
-   // private val markers = mutableListOf<MarkerOptions>()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -69,9 +69,7 @@ class FragmentMap: Fragment(){
                         mapSearchAdapter.clear()
                     return false
                 }
-
             })
-
         }
 
         createRecyclerView(view)
@@ -85,6 +83,9 @@ class FragmentMap: Fragment(){
         searchLocationViewModel.getSearchResultsObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { onSearchResultsReady(it) }
+        searchLocationViewModel.getLocationAddedObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { onLocationAdded() }
         mapLocationViewModel.getNewLocationObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { onNewLocationReady(it) }
@@ -136,9 +137,27 @@ class FragmentMap: Fragment(){
     }
 
     private fun onNewLocationReady(newMapLocationView: NewMapLocationView){
-        Log.v("","")
         view?.findViewById<CardView>(R.id.card_map_search_items)?.visibility = View.GONE
+        val target = CameraPosition.builder()
+            .target(LatLng(newMapLocationView.latitude,newMapLocationView.longitude))
+            .zoom(10f).build()
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(target))
 
+        view?.findViewById<CardView>(R.id.card_search_location)?.visibility = View.VISIBLE
+        view?.findViewById<TextView>(R.id.text_place_name_search)?.text = newMapLocationView.placeName
+        view?.findViewById<TextView>(R.id.text_region_name_search)?.text = newMapLocationView.placeRegion
+        view?.findViewById<ImageButton>(R.id.button_add_location)?.setOnClickListener {
+            view?.findViewById<CardView>(R.id.card_search_location)?.visibility = View.INVISIBLE
+            searchLocationViewModel.addLocation(newMapLocationView.placeId)
+        }
+    }
+
+    private fun onLocationAdded(){
+        view?.findViewById<CardView>(R.id.card_search_location)?.visibility = View.INVISIBLE
+        view?.findViewById<TextView>(R.id.text_place_name_search)?.text = ""
+        view?.findViewById<TextView>(R.id.text_region_name_search)?.text = ""
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync{onMapReady(it)}
     }
 
 }
