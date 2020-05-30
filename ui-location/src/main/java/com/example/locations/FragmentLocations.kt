@@ -8,8 +8,6 @@ import android.widget.CheckBox
 import android.widget.ImageButton
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.util.rangeTo
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -136,7 +134,7 @@ class FragmentLocations: Fragment() {
         view.findViewById<ConstraintLayout>(R.id.top_bar_locations).visibility = View.VISIBLE
         view.findViewById<ConstraintLayout>(R.id.top_bar_locations_editing).visibility = View.INVISIBLE
 
-        viewModel.updateLocations(locationsAdapter.items)
+        viewModel.updateLocationsOrder(locationsAdapter.items)
         itemTouchHelper.attachToRecyclerView(null)
         for (i in 0 until (locationsAdapter.itemCount))
             locationsAdapter.disableEditing(locationsList.findViewHolderForAdapterPosition(i))

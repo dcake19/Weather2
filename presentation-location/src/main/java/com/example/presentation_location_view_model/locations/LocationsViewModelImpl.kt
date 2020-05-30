@@ -7,7 +7,6 @@ import com.example.utils.ViewModelEmitter
 import io.reactivex.SingleObserver
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 
 class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
@@ -83,8 +82,8 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
             })
     }
 
-    override fun updateLocations(locations: List<LocationsView>) {
-        locationInteractor.updateLocations(locations.map { it.placeId })
+    override fun updateLocationsOrder(locations: List<LocationsView>) {
+        locationInteractor.updateLocationsOrder(locations.map { it.placeId })
     }
 
     override fun deleteLocations(locations: List<LocationsView>) {

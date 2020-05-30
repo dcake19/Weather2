@@ -48,8 +48,8 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
         locationDataCache.deleteLocation(placeIds)
     }
 
-    override fun updateLocations(locations: List<String>) {
-        locationDataCache.updateLocations(locations)
+    override fun updateLocationsOrder(locations: List<String>) {
+        locationDataCache.updateLocationsOrder(locations)
     }
 
     private fun mapToLocation(locationData: LocationData): Location{

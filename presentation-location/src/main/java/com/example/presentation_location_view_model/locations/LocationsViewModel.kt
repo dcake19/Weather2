@@ -8,5 +8,5 @@ interface LocationsViewModel {
     fun getLocationsObservable(): Observable<List<LocationsView>>
     fun getStoredLocations()
     fun deleteLocations(locations: List<LocationsView>)
-    fun updateLocations(locations: List<LocationsView>)
+    fun updateLocationsOrder(locations: List<LocationsView>)
 }

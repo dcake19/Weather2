@@ -9,5 +9,5 @@ interface LocationDataCache {
     fun getLocations(): Single<List<LocationData>>
     fun deleteLocation(placeIds: List<String>)
     fun insert(locationData: LocationData)
-    fun updateLocations(locations: List<String>)
+    fun updateLocationsOrder(locations: List<String>)
 }

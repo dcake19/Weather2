@@ -6,7 +6,7 @@ import com.example.data_storage_location.db.LocationDatabaseProvider
 import com.example.data_storage_location.db.LocationEntity
 import io.reactivex.Single
 
-class LocationCache(private val locationDatabase: LocationDatabaseProvider) : LocationDataCache {
+class LocationCache(locationDatabase: LocationDatabaseProvider) : LocationDataCache {
 
    private val locationDao = locationDatabase.getLocationDao()
 
@@ -24,7 +24,7 @@ class LocationCache(private val locationDatabase: LocationDatabaseProvider) : Lo
         locationDao.delete(placeIds)
     }
 
-    override fun updateLocations(locations: List<String>){
+    override fun updateLocationsOrder(locations: List<String>){
         val currentCachedLocations = locationDao.getLocations()
         val updatedCachedLocations = mutableListOf<LocationEntity>()
         for (location in locations){

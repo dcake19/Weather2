@@ -9,7 +9,6 @@ import com.example.data_storage_location.db.LocationDatabase
 import com.example.data_storage_location.db.LocationEntity
 import io.reactivex.Single
 import org.junit.After
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,7 +36,7 @@ class LocationDaoTest {
     }
 
     @Test
-    fun testSingleInsertion(){
+    fun singleInsertion(){
         val location = TestUtil.createLocation()
         dao.insert(location)
 
@@ -48,6 +47,19 @@ class LocationDaoTest {
     }
 
     @Test
+    fun singleInsertionReplace(){
+        val location = TestUtil.createLocation(0)
+        dao.insert(location)
+        val locationNew = TestUtil.createLocation(0,1.0,1.0)
+        dao.insert(locationNew)
+
+        val locations = dao.getLocations()
+
+        assertThat(locations.size, `is`(1))
+        assertThat(locations[0], `is`(locationNew))
+    }
+
+    @Test
     fun multipleInsertions(){
         val locationsIn = (0..20).map { TestUtil.createLocation(it) }
         dao.insert(locationsIn)
@@ -55,6 +67,19 @@ class LocationDaoTest {
         val locationsOut = dao.getLocations()
 
         assertThat(locationsOut, `is`(locationsIn))
+    }
+
+    @Test
+    fun multipleInsertionsReplace(){
+        val locationsIn = (0..20).map { TestUtil.createLocation(it) }
+        dao.insert(locationsIn)
+
+        val locationsInNew = locationsIn.takeLast(11) + locationsIn.take(10)
+        dao.insert(locationsInNew)
+
+        val locationsOut = dao.getLocations()
+
+        assertThat(locationsOut, `is`(locationsInNew))
     }
 
     @Test
