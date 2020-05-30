@@ -16,7 +16,7 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
             .flatMap { locations ->
                 if (locations.isEmpty())
                     locationDataNetwork.getLocations(latitude, longitude)
-                    .map { locationData -> locationDataCache.insert(locationData) }
+                    .doOnSuccess { locationData -> locationDataCache.insert(locationData) }
                 else
                     Single.just(getNearestLocation(latitude, longitude, locations))}
             .map { locationData -> mapToLocation(locationData) }

@@ -8,6 +8,6 @@ interface LocationDataCache {
     fun getLocationsBounding(lat: Double,lng: Double): Single<List<LocationData>>
     fun getLocations(): Single<List<LocationData>>
     fun deleteLocation(placeIds: List<String>)
-    fun insert(locationData: LocationData): LocationData
+    fun insert(locationData: LocationData)
     fun updateLocations(locations: List<String>)
 }

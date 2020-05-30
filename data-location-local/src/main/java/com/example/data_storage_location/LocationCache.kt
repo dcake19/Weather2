@@ -35,9 +35,8 @@ class LocationCache(private val locationDatabase: LocationDatabaseProvider) : Lo
         locationDao.insert(updatedCachedLocations)
     }
 
-    override fun insert(locationData: LocationData): LocationData {
+    override fun insert(locationData: LocationData) {
         locationDao.insert(LocationEntity(locationData))
-        return locationData
     }
 
     private fun mapToLocationData(locationEntity: LocationEntity): LocationData{

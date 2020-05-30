@@ -54,9 +54,9 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
 //            .observeOn(Schedulers.computation())
 //            .subscribe(observer)
 
-        locationInteractor.getLocation(55.945000, -3.185710)
-            .observeOn(Schedulers.computation())
-            .subscribe(observer)
+        //locationInteractor.getLocation(55.945000, -3.185710)
+           // .observeOn(Schedulers.computation())
+           // .subscribe(observer)
     }
 
     override fun getLocationsObservable(): Observable<List<LocationsView>> {
