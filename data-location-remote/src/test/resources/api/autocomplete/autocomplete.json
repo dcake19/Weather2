@@ -1,0 +1,210 @@
+{
+  "predictions": [
+    {
+      "description": "London, UK",
+      "id": "b1a8b96daab5065cf4a08f953e577c34cdf769c0",
+      "matched_substrings": [
+        {
+          "length": 3,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJdd4hrwug2EcRmSrV3Vo6llI",
+      "reference": "ChIJdd4hrwug2EcRmSrV3Vo6llI",
+      "structured_formatting": {
+        "main_text": "London",
+        "main_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "UK"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "London"
+        },
+        {
+          "offset": 8,
+          "value": "UK"
+        }
+      ],
+      "types": [
+        "locality",
+        "political",
+        "geocode"
+      ]
+    },
+    {
+      "description": "Long Beach, CA, USA",
+      "id": "71b374acb987b8be875a091969db9d11158f8712",
+      "matched_substrings": [
+        {
+          "length": 3,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJWdeZQOjKwoARqo8qxPo6AKE",
+      "reference": "ChIJWdeZQOjKwoARqo8qxPo6AKE",
+      "structured_formatting": {
+        "main_text": "Long Beach",
+        "main_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "CA, USA"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "Long Beach"
+        },
+        {
+          "offset": 12,
+          "value": "CA"
+        },
+        {
+          "offset": 16,
+          "value": "USA"
+        }
+      ],
+      "types": [
+        "locality",
+        "political",
+        "geocode"
+      ]
+    },
+    {
+      "description": "Londrina, State of Paraná, Brazil",
+      "id": "c881f1a6ca415a3a87fbf553595c32631bd31337",
+      "matched_substrings": [
+        {
+          "length": 3,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJbVivV1pD65QRcfkUxqURrCM",
+      "reference": "ChIJbVivV1pD65QRcfkUxqURrCM",
+      "structured_formatting": {
+        "main_text": "Londrina",
+        "main_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "State of Paraná, Brazil"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "Londrina"
+        },
+        {
+          "offset": 10,
+          "value": "State of Paraná"
+        },
+        {
+          "offset": 27,
+          "value": "Brazil"
+        }
+      ],
+      "types": [
+        "locality",
+        "political",
+        "geocode"
+      ]
+    },
+    {
+      "description": "London, ON, Canada",
+      "id": "fab6815aadba41e81aa7bd51a445c4924317ec88",
+      "matched_substrings": [
+        {
+          "length": 3,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJC5uNqA7yLogRlWsFmmnXxyg",
+      "reference": "ChIJC5uNqA7yLogRlWsFmmnXxyg",
+      "structured_formatting": {
+        "main_text": "London",
+        "main_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "ON, Canada"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "London"
+        },
+        {
+          "offset": 8,
+          "value": "ON"
+        },
+        {
+          "offset": 12,
+          "value": "Canada"
+        }
+      ],
+      "types": [
+        "locality",
+        "political",
+        "geocode"
+      ]
+    },
+    {
+      "description": "Place 5",
+      "id": "2ab129ff2dc5e55168aeb2a14e251945cbd2b87a",
+      "matched_substrings": [
+        {
+          "length": 3,
+          "offset": 0
+        }
+      ],
+      "place_id": "ChIJUTPfl_81NoYRM1kZdPfwD7M",
+      "reference": "ChIJUTPfl_81NoYRM1kZdPfwD7M",
+      "structured_formatting": {
+        "main_text": "Place 5",
+        "main_text_matched_substrings": [
+          {
+            "length": 3,
+            "offset": 0
+          }
+        ],
+        "secondary_text": "TX, USA"
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "place_0"
+        },
+        {
+          "offset": 10,
+          "value": "place_1"
+        },
+        {
+          "offset": 14,
+          "value": "place_2"
+        },
+        {
+          "offset": 14,
+          "value": "place_3"
+        }
+      ],
+      "types": [
+        "locality",
+        "political",
+        "geocode"
+      ]
+    }
+  ],
+  "status": "OK"
+}

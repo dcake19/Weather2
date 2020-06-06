@@ -1,0 +1,982 @@
+{
+  "plus_code": {
+    "compound_code": "644C+4P Cambridge, UK",
+    "global_code": "9F42644C+4P"
+  },
+  "results": [
+    {
+      "address_components": [
+        {
+          "long_name": "3",
+          "short_name": "3",
+          "types": [
+            "street_number"
+          ]
+        },
+        {
+          "long_name": "Sidney Street",
+          "short_name": "Sidney St",
+          "types": [
+            "route"
+          ]
+        },
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "postal_town"
+          ]
+        },
+        {
+          "long_name": "Cambridgeshire",
+          "short_name": "Cambridgeshire",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        },
+        {
+          "long_name": "CB2 3BU",
+          "short_name": "CB2 3BU",
+          "types": [
+            "postal_code"
+          ]
+        }
+      ],
+      "formatted_address": "3 Sidney St, Cambridge CB2 3BU, UK",
+      "geometry": {
+        "location": {
+          "lat": 52.2052973,
+          "lng": 0.1218196
+        },
+        "location_type": "ROOFTOP",
+        "viewport": {
+          "northeast": {
+            "lat": 52.2066462802915,
+            "lng": 0.123168580291502
+          },
+          "southwest": {
+            "lat": 52.2039483197085,
+            "lng": 0.120470619708498
+          }
+        }
+      },
+      "place_id": "ChIJv6-d15Jw2EcRJWe0Ap571s4",
+      "plus_code": {
+        "compound_code": "644C+4P Cambridge, United Kingdom",
+        "global_code": "9F42644C+4P"
+      },
+      "types": [
+        "establishment",
+        "point_of_interest"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "21",
+          "short_name": "21",
+          "types": [
+            "street_number"
+          ]
+        },
+        {
+          "long_name": "Petty Cury",
+          "short_name": "Petty Cury",
+          "types": [
+            "route"
+          ]
+        },
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "postal_town"
+          ]
+        },
+        {
+          "long_name": "Cambridgeshire",
+          "short_name": "Cambridgeshire",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        },
+        {
+          "long_name": "CB2 3NA",
+          "short_name": "CB2 3NA",
+          "types": [
+            "postal_code"
+          ]
+        }
+      ],
+      "formatted_address": "21 Petty Cury, Cambridge CB2 3NA, UK",
+      "geometry": {
+        "location": {
+          "lat": 52.2052389,
+          "lng": 0.1214017
+        },
+        "location_type": "ROOFTOP",
+        "viewport": {
+          "northeast": {
+            "lat": 52.20658788029149,
+            "lng": 0.122750680291502
+          },
+          "southwest": {
+            "lat": 52.20388991970849,
+            "lng": 0.120052719708498
+          }
+        }
+      },
+      "place_id": "ChIJ9REIKJZw2EcROIaW2jZxCE8",
+      "plus_code": {
+        "compound_code": "644C+3H Cambridge, United Kingdom",
+        "global_code": "9F42644C+3H"
+      },
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "3",
+          "short_name": "3",
+          "types": [
+            "street_number"
+          ]
+        },
+        {
+          "long_name": "Sidney Street",
+          "short_name": "Sidney St",
+          "types": [
+            "route"
+          ]
+        },
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "postal_town"
+          ]
+        },
+        {
+          "long_name": "Cambridgeshire",
+          "short_name": "Cambridgeshire",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        },
+        {
+          "long_name": "CB2 3BU",
+          "short_name": "CB2 3BU",
+          "types": [
+            "postal_code"
+          ]
+        }
+      ],
+      "formatted_address": "3 Sidney St, Cambridge CB2 3BU, UK",
+      "geometry": {
+        "location": {
+          "lat": 52.2053353,
+          "lng": 0.1216361
+        },
+        "location_type": "RANGE_INTERPOLATED",
+        "viewport": {
+          "northeast": {
+            "lat": 52.2066842802915,
+            "lng": 0.122985080291502
+          },
+          "southwest": {
+            "lat": 52.20398631970851,
+            "lng": 0.120287119708498
+          }
+        }
+      },
+      "place_id": "EiIzIFNpZG5leSBTdCwgQ2FtYnJpZGdlIENCMiAzQlUsIFVLIhoSGAoUChIJHWgdOZZw2EcR2NW05mia8rYQAw",
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Saint Andrew's Street",
+          "short_name": "St Andrew's St",
+          "types": [
+            "route"
+          ]
+        },
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "postal_town"
+          ]
+        },
+        {
+          "long_name": "Cambridgeshire",
+          "short_name": "Cambridgeshire",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        },
+        {
+          "long_name": "CB2 3BU",
+          "short_name": "CB2 3BU",
+          "types": [
+            "postal_code"
+          ]
+        }
+      ],
+      "formatted_address": "St Andrew's St, Cambridge CB2 3BU, UK",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 52.205303,
+            "lng": 0.1219044
+          },
+          "southwest": {
+            "lat": 52.2052353,
+            "lng": 0.1217812
+          }
+        },
+        "location": {
+          "lat": 52.2052692,
+          "lng": 0.1218428
+        },
+        "location_type": "GEOMETRIC_CENTER",
+        "viewport": {
+          "northeast": {
+            "lat": 52.2066181302915,
+            "lng": 0.123191780291502
+          },
+          "southwest": {
+            "lat": 52.2039201697085,
+            "lng": 0.120493819708498
+          }
+        }
+      },
+      "place_id": "ChIJTZNhOJZw2EcRAFr51nDJ4Vc",
+      "types": [
+        "route"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "CB2 3BU",
+          "short_name": "CB2 3BU",
+          "types": [
+            "postal_code"
+          ]
+        },
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "postal_town"
+          ]
+        },
+        {
+          "long_name": "Cambridgeshire",
+          "short_name": "Cambridgeshire",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Cambridge CB2 3BU, UK",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 52.2060713,
+            "lng": 0.1233702
+          },
+          "southwest": {
+            "lat": 52.2047873,
+            "lng": 0.1212844
+          }
+        },
+        "location": {
+          "lat": 52.2052724,
+          "lng": 0.1217116
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 52.20677828029151,
+            "lng": 0.123676280291502
+          },
+          "southwest": {
+            "lat": 52.20408031970851,
+            "lng": 0.120978319708498
+          }
+        }
+      },
+      "place_id": "ChIJo9X0EpZw2EcRM3glF-BY8Pg",
+      "types": [
+        "postal_code"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Central Cambridge",
+          "short_name": "Central Cambridge",
+          "types": [
+            "neighborhood",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "postal_town"
+          ]
+        },
+        {
+          "long_name": "Cambridgeshire",
+          "short_name": "Cambridgeshire",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Central Cambridge, Cambridge, UK",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 52.216328,
+            "lng": 0.1375073
+          },
+          "southwest": {
+            "lat": 52.19735559999999,
+            "lng": 0.1107006
+          }
+        },
+        "location": {
+          "lat": 52.2053163,
+          "lng": 0.1217733
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 52.216328,
+            "lng": 0.1375073
+          },
+          "southwest": {
+            "lat": 52.19735559999999,
+            "lng": 0.1107006
+          }
+        }
+      },
+      "place_id": "ChIJh1CYnpZw2EcRBB2B8gLWZcw",
+      "types": [
+        "neighborhood",
+        "political"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "CB2",
+          "short_name": "CB2",
+          "types": [
+            "postal_code",
+            "postal_code_prefix"
+          ]
+        },
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "postal_town"
+          ]
+        },
+        {
+          "long_name": "Cambridgeshire",
+          "short_name": "Cambridgeshire",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Cambridge CB2, UK",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 52.2104778,
+            "lng": 0.1577353
+          },
+          "southwest": {
+            "lat": 52.1589711,
+            "lng": 0.09258600000000002
+          }
+        },
+        "location": {
+          "lat": 52.1752371,
+          "lng": 0.1262838
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 52.2104778,
+            "lng": 0.1577353
+          },
+          "southwest": {
+            "lat": 52.1589711,
+            "lng": 0.09258600000000002
+          }
+        }
+      },
+      "place_id": "ChIJlTHIBGFw2EcRpOqhXOMSsfQ",
+      "types": [
+        "postal_code",
+        "postal_code_prefix"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "administrative_area_level_3",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "postal_town"
+          ]
+        },
+        {
+          "long_name": "Cambridgeshire",
+          "short_name": "Cambridgeshire",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Cambridge, UK",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 52.237216,
+            "lng": 0.1845234
+          },
+          "southwest": {
+            "lat": 52.1579296,
+            "lng": 0.0686107
+          }
+        },
+        "location": {
+          "lat": 52.201776,
+          "lng": 0.1324319
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 52.237216,
+            "lng": 0.1845234
+          },
+          "southwest": {
+            "lat": 52.1579296,
+            "lng": 0.0686107
+          }
+        }
+      },
+      "place_id": "ChIJs4un4Ztw2EcRMOPBu6gcDgQ",
+      "types": [
+        "administrative_area_level_3",
+        "political"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "postal_town"
+          ]
+        },
+        {
+          "long_name": "Cambridgeshire",
+          "short_name": "Cambridgeshire",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Cambridge, UK",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 52.237855,
+            "lng": 0.1919273
+          },
+          "southwest": {
+            "lat": 52.1598292,
+            "lng": 0.048047
+          }
+        },
+        "location": {
+          "lat": 52.205337,
+          "lng": 0.121817
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 52.237855,
+            "lng": 0.1919273
+          },
+          "southwest": {
+            "lat": 52.1598292,
+            "lng": 0.048047
+          }
+        }
+      },
+      "place_id": "ChIJLQEq84ld2EcRIT1eo-Ego2M",
+      "types": [
+        "locality",
+        "political"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Cambridge",
+          "short_name": "Cambridge",
+          "types": [
+            "postal_town"
+          ]
+        },
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Cambridge, UK",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 52.3444616,
+            "lng": 0.4020126
+          },
+          "southwest": {
+            "lat": 52.0382356,
+            "lng": -0.1549663
+          }
+        },
+        "location": {
+          "lat": 52.23363,
+          "lng": 0.1446548
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 52.3444616,
+            "lng": 0.4020126
+          },
+          "southwest": {
+            "lat": 52.0382356,
+            "lng": -0.1549663
+          }
+        }
+      },
+      "place_id": "ChIJOdwAK55w2EcRXlkikQCugFI",
+      "types": [
+        "postal_town"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Cambridgeshire",
+          "short_name": "Cambridgeshire",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Cambridgeshire, UK",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 52.7399809,
+            "lng": 0.5144548
+          },
+          "southwest": {
+            "lat": 52.005779,
+            "lng": -0.4999075
+          }
+        },
+        "location": {
+          "lat": 52.2052973,
+          "lng": 0.1218195
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 52.7399809,
+            "lng": 0.5144548
+          },
+          "southwest": {
+            "lat": 52.005779,
+            "lng": -0.4999075
+          }
+        }
+      },
+      "place_id": "ChIJofUImRD210cR-iJr8SWphk4",
+      "types": [
+        "administrative_area_level_2",
+        "political"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "England",
+          "short_name": "England",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "England, UK",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 55.81165979999999,
+            "lng": 1.7629159
+          },
+          "southwest": {
+            "lat": 49.8647411,
+            "lng": -6.4185458
+          }
+        },
+        "location": {
+          "lat": 52.3555177,
+          "lng": -1.1743197
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 55.81165979999999,
+            "lng": 1.7629159
+          },
+          "southwest": {
+            "lat": 49.8647411,
+            "lng": -6.4185458
+          }
+        }
+      },
+      "place_id": "ChIJ39UebIqp0EcRqI4tMyWV4fQ",
+      "types": [
+        "administrative_area_level_1",
+        "political"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Great Britain",
+          "short_name": "Great Britain",
+          "types": [
+            "establishment",
+            "natural_feature"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Great Britain, United Kingdom",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 58.6721945,
+            "lng": 1.7561726
+          },
+          "southwest": {
+            "lat": 49.9588004,
+            "lng": -6.2279292
+          }
+        },
+        "location": {
+          "lat": 53.8337367,
+          "lng": -2.4290148
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 58.6721945,
+            "lng": 1.7561726
+          },
+          "southwest": {
+            "lat": 49.9588004,
+            "lng": -6.2279292
+          }
+        }
+      },
+      "place_id": "ChIJAc8Rblc_YkgRBbyOF5ySMQs",
+      "types": [
+        "establishment",
+        "natural_feature"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "United Kingdom",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 60.91569999999999,
+            "lng": 33.9165549
+          },
+          "southwest": {
+            "lat": 34.5614,
+            "lng": -8.8988999
+          }
+        },
+        "location": {
+          "lat": 55.378051,
+          "lng": -3.435973
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 60.91569999999999,
+            "lng": 33.9165549
+          },
+          "southwest": {
+            "lat": 34.5614,
+            "lng": -8.8988999
+          }
+        }
+      },
+      "place_id": "ChIJqZHHQhE7WgIReiWIMkOg-MQ",
+      "types": [
+        "country",
+        "political"
+      ]
+    }
+  ],
+  "status": "OK"
+}
