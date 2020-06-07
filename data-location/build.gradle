@@ -15,6 +15,9 @@ dependencies {
    //implementation "com.google.dagger:dagger:$dagger_version"
    // annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:2.25.2"
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation'org.mockito:mockito-core:3.3.3'
 }
 
 sourceCompatibility = "7"

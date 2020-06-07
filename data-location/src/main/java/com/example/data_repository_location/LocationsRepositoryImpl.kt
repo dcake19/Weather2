@@ -12,7 +12,7 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
     override fun getLocation(latitude: Double, longitude: Double): Single<Location> {
         return locationDataCache
             .getLocationsBounding(latitude,longitude)
-            .subscribeOn(Schedulers.io())
+           // .subscribeOn(Schedulers.io())
             .flatMap { locations ->
                 if (locations.isEmpty())
                     locationDataNetwork.getLocations(latitude, longitude)
@@ -24,10 +24,10 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
 
     private fun getNearestLocation(latitude: Double, longitude: Double,
                                    locations: List<LocationData>): LocationData {
-        return locations.sortedBy { Math.pow(latitude - it.latitudeNorthEast,2.0)
-            + Math.pow(latitude - it.latitudeSouthWest,2.0)
-            + Math.pow(longitude - it.longitudeNorthEast,2.0)
-            + Math.pow(longitude - it.longitudeSouthWest,2.0) }.first()
+        return locations.sortedBy { Math.sqrt(Math.pow(latitude - it.latitudeNorthEast,2.0)
+            + Math.pow(latitude - it.latitudeSouthWest,2.0))
+            + Math.sqrt(Math.pow(longitude - it.longitudeNorthEast,2.0)
+            + Math.pow(longitude - it.longitudeSouthWest,2.0)) }.first()
     }
 
     override fun addLocation(placeId: String): Completable {
@@ -53,7 +53,7 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
     }
 
     private fun mapToLocation(locationData: LocationData): Location{
-        return Location(locationData.placeId,-1,locationData.name,
+        return Location(locationData.placeId,locationData.name,
             locationData.region, locationData.country,locationData.latitude,locationData.longitude)
     }
 
