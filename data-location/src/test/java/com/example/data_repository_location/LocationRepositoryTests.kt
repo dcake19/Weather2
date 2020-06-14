@@ -113,7 +113,7 @@ class LocationRepositoryTests {
 
         assertThat(actualLocation, `is`(location))
     }
-    
+
     @Test
     fun getLocationsByName(){
         val name = "name_0"

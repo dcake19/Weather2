@@ -7,6 +7,7 @@ import com.example.presentation_location_view_model.locations.LocationsView
 import com.example.presentation_location_view_model.locations.LocationsViewModelImpl
 import com.example.utils.schedulers.RxSchedulerProviderTrampoline
 import com.example.utils.ViewModelEmitter
+import com.nhaarman.mockitokotlin2.verify
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -38,18 +39,38 @@ class ViewModelTests {
 
     @Test
     fun getStoredLocations(){
-        val locationsCache = listOf(Location("place-id-1",2,
-            "Location 1","Region 1","Country 1",0.0,0.0),
-            Location("place-id-2",1,
-                "Location 2","Region 2","Country 2",0.0,0.0))
+        val locations = (0..9).map { PresentationTetUtil.createLocation(it) }
 
-        val locationsView = listOf(LocationsView(locationsCache[1]),LocationsView(locationsCache[0]))
+        val locationsView = locations.map { LocationsView(it) }
 
-        Mockito.`when`(interactor.getStoredLocations()).thenReturn(Single.just(locationsCache))
+        Mockito.`when`(interactor.getStoredLocations()).thenReturn(Single.just(locations))
 
         viewModel.getStoredLocations()
 
         Mockito.verify(emitter).post(locationsView)
+    }
+
+    @Test
+    fun updateLocations(){
+        val locationsView = (0..9).map { LocationsView(PresentationTetUtil.createLocation(it)) }
+        val placeIds = locationsView.map { it.placeId }
+
+        viewModel.updateLocationsOrder(locationsView)
+
+        verify(interactor).updateLocationsOrder(placeIds)
+    }
+
+    @Test
+    fun deleteLocations(){
+        val selected = listOf(3,4,5,8)
+        val locationsView = (0..9).map { LocationsView(PresentationTetUtil.createLocation(it)) }
+        selected.forEach { locationsView[it].selected = true }
+
+        val placeIds = locationsView.filter { it.selected }.map { it.placeId }
+
+        viewModel.deleteLocations(locationsView)
+
+        verify(interactor).deleteLocations(placeIds)
     }
 
 }
