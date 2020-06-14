@@ -33,7 +33,7 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
     override fun addLocation(placeId: String): Completable {
         return locationDataNetwork
             .getLocationsByPlaceId(placeId)
-            .subscribeOn(Schedulers.io())
+         //   .subscribeOn(Schedulers.io())
             .doOnSuccess { locationData -> locationDataCache.insert(locationData) }
             .flatMapCompletable { Completable.complete() }
     }

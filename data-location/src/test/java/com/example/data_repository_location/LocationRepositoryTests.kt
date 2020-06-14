@@ -58,4 +58,74 @@ class LocationRepositoryTests {
         assertThat(location, `is`(RepositoryTestUtil.createLocation(1,-1.0,-1.0)))
     }
 
+    @Test
+    fun addLocation(){
+        val placeId = "place_0"
+        val location = RepositoryTestUtil.createLocationData(0)
+        `when`(locationDataNetwork.getLocationsByPlaceId(placeId)).thenReturn(Single.just(location))
+
+        val completable = repository.addLocation(placeId)
+
+        completable.test()
+        verify(locationDataCache).insert(location)
+    }
+
+    @Test
+    fun getStoredLocations(){
+        val locationsData = (0..9).map { RepositoryTestUtil.createLocationData(it) }
+        val locations = (0..9).map { RepositoryTestUtil.createLocation(it) }
+
+        `when`(locationDataCache.getLocations()).thenReturn(Single.just(locationsData))
+
+        val locationsActual = repository.getStoredLocations().test().values()[0]
+
+        assertThat(locationsActual, `is`(locations))
+    }
+
+    @Test
+    fun delete(){
+        val placeIds = (0..9).map { "place_$it" }
+
+        repository.deleteLocations(placeIds)
+
+        verify(locationDataCache).deleteLocation(placeIds)
+    }
+
+    @Test
+    fun updateOrder(){
+        val placeIds = (0..9).map { "place_$it" }
+
+        repository.updateLocationsOrder(placeIds)
+
+        verify(locationDataCache).updateLocationsOrder(placeIds)
+    }
+
+    @Test
+    fun getLocationByPlaceId(){
+        val placeId = "place_0"
+
+        val location = RepositoryTestUtil.createLocation(0)
+        val locationData = RepositoryTestUtil.createLocationData(0)
+
+        `when`(locationDataNetwork.getLocationsByPlaceId(placeId)).thenReturn(Single.just(locationData))
+
+        val actualLocation = repository.getLocationByPlaceId(placeId).test().values()[0]
+
+        assertThat(actualLocation, `is`(location))
+    }
+    
+    @Test
+    fun getLocationsByName(){
+        val name = "name_0"
+
+        val location = RepositoryTestUtil.createLocation(0)
+        val locationData = RepositoryTestUtil.createLocationData(0)
+
+        `when`(locationDataNetwork.getLocations(name)).thenReturn(Single.just(locationData))
+
+        val actualLocation = repository.getLocationByName(name).test().values()[0]
+
+        assertThat(actualLocation, `is`(location))
+    }
+
 }
