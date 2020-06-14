@@ -1,6 +1,5 @@
 package com.example.presentation_location
 
-import com.example.domain.Location
 import com.example.domain.LocationInteractor
 import com.example.presentation_location_view_model.locations.LocationsMapper
 import com.example.presentation_location_view_model.locations.LocationsView
@@ -15,12 +14,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-class ViewModelTests {
-
-//    @Test
-//    fun addition_isCorrect() {
-//        Assert.assertEquals(4, 2 + 2)
-//    }
+class LocationViewModelTests {
 
     @Mock lateinit var interactor: LocationInteractor
     @Mock lateinit var emitter: ViewModelEmitter<List<LocationsView>>

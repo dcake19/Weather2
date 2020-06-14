@@ -9,8 +9,6 @@ import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.*
-import org.mockito.ArgumentMatchers
-import org.mockito.Mockito
 
 class LocationRepositoryTests {
 
