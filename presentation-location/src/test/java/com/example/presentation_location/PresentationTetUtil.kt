@@ -3,6 +3,7 @@ package com.example.presentation_location
 import com.example.domain.Location
 import com.example.presentation_location_view_model.map.MapLocationView
 import com.example.presentation_location_view_model.map.NewMapLocationView
+import com.example.presentation_location_view_model.search.SearchResultView
 
 object PresentationTetUtil {
 
@@ -15,4 +16,8 @@ object PresentationTetUtil {
     fun createNewMapLocationView(i: Int=0,lat: Double=0.0,lng: Double=0.0)
             = NewMapLocationView("place_id_$i",lat,lng,"name_$i","region_$i, country_$i")
 
+    fun createSearchResult(i: Int=0,term: String = "") = SearchResultView("place_id_$i",
+        "$term-name_$i", "region_$i, country_$i")
+
+    fun createPrediction()
 }

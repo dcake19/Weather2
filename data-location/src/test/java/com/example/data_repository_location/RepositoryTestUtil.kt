@@ -1,6 +1,8 @@
 package com.example.data_repository_location
 
+import com.example.data_repository_location.auto_complete.LocationPredictionData
 import com.example.domain.Location
+import com.example.domain.autocomplete.Prediction
 
 object RepositoryTestUtil {
 
@@ -12,5 +14,10 @@ object RepositoryTestUtil {
             "region_$i","country_$i",lat,lng,
             lat+boundingSize,lng+boundingSize,
             lat-boundingSize,lng-boundingSize)
+
+    fun createPredictionData(i: Int=0,terms: Int=1)
+            = LocationPredictionData("place_id_$i",(1..terms).map { "term_$it" })
+
+    fun createPrediction(i: Int=0,terms: Int=1) = Prediction("place_id_$i",(1..terms).map { "term_$it" })
 
 }
