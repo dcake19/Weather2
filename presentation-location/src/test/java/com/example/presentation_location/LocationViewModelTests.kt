@@ -33,7 +33,7 @@ class LocationViewModelTests {
 
     @Test
     fun getStoredLocations(){
-        val locations = (0..9).map { PresentationTetUtil.createLocation(it) }
+        val locations = (0..9).map { PresentationTestUtil.createLocation(it) }
 
         val locationsView = locations.map { LocationsView(it) }
 
@@ -46,7 +46,7 @@ class LocationViewModelTests {
 
     @Test
     fun updateLocations(){
-        val locationsView = (0..9).map { LocationsView(PresentationTetUtil.createLocation(it)) }
+        val locationsView = (0..9).map { LocationsView(PresentationTestUtil.createLocation(it)) }
         val placeIds = locationsView.map { it.placeId }
 
         viewModel.updateLocationsOrder(locationsView)
@@ -57,7 +57,7 @@ class LocationViewModelTests {
     @Test
     fun deleteLocations(){
         val selected = listOf(3,4,5,8)
-        val locationsView = (0..9).map { LocationsView(PresentationTetUtil.createLocation(it)) }
+        val locationsView = (0..9).map { LocationsView(PresentationTestUtil.createLocation(it)) }
         selected.forEach { locationsView[it].selected = true }
 
         val placeIds = locationsView.filter { it.selected }.map { it.placeId }

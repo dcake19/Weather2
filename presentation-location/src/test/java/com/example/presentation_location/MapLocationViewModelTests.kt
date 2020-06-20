@@ -33,8 +33,8 @@ class MapLocationViewModelTests {
 
     @Test
     fun getStoredLocations(){
-        val storedLocations = (0..9).map { PresentationTetUtil.createLocation(it)}
-        val mapLocations = (0..9).map { PresentationTetUtil.createMapLocationView(it)}
+        val storedLocations = (0..9).map { PresentationTestUtil.createLocation(it)}
+        val mapLocations = (0..9).map { PresentationTestUtil.createMapLocationView(it)}
         `when`(interactor.getStoredLocations()).thenReturn(Single.just(storedLocations))
 
         viewModel.getStoredLocations()
@@ -45,9 +45,9 @@ class MapLocationViewModelTests {
     @Test
     fun getNewLocationByPlaceId(){
         val placeId = "place_0"
-        val location = PresentationTetUtil.createLocation()
+        val location = PresentationTestUtil.createLocation()
 
-        val newMapLocation = PresentationTetUtil.createNewMapLocationView()
+        val newMapLocation = PresentationTestUtil.createNewMapLocationView()
 
         `when`(interactor.getLocationByPlaceId(placeId)).thenReturn(Single.just(location))
 
@@ -59,8 +59,8 @@ class MapLocationViewModelTests {
     @Test
     fun getNewLocationBySearchTerm(){
         val term = "term"
-        val location = PresentationTetUtil.createLocation()
-        val newMapLocation = PresentationTetUtil.createNewMapLocationView()
+        val location = PresentationTestUtil.createLocation()
+        val newMapLocation = PresentationTestUtil.createNewMapLocationView()
 
         `when`(interactor.getLocationByName(term)).thenReturn(Single.just(location))
 
