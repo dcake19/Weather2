@@ -27,6 +27,6 @@ object PresentationTestUtil {
     fun createPrediction(i: Int=0,term: String = "",termsNumber: Int=1)
             = Prediction("place_id_$i",(0 until termsNumber).map { "$term${terms[it]}$i" })
 
-    private val terms = listOf("-name_","-region_","-country_","x")
+    val terms = listOf("-name_","-region_","-country_","x")
 
 }

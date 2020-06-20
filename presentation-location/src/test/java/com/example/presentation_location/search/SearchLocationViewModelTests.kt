@@ -148,6 +148,4 @@ class SearchLocationViewModelTests {
         verify(searchResultsEmitter, times(1)).post(any()?:predictionsExpected1)
     }
 
-    
-
 }
