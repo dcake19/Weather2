@@ -36,7 +36,7 @@ class FragmentMap: Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (activity!!.application as ApplicationFeatureLocation).injectLocation(this)
+        (requireActivity().application as ApplicationFeatureLocation).injectLocation(this)
         return inflater.inflate(R.layout.map_fragment,container,false)
     }
 

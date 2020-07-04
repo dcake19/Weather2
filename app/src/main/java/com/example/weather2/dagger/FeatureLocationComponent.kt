@@ -7,7 +7,7 @@ import com.example.locations.FragmentLocations
 import com.example.map.FragmentMap
 import dagger.Component
 
-@Component(modules = [FeatureLocationModule::class],dependencies = [AppComponent::class])
+@Component(modules = [FeatureLocationModule::class], dependencies = [AppComponent::class])
 @FeatureLocationScope
 interface FeatureLocationComponent {
     fun inject(fragmentLocations: FragmentLocations)

@@ -45,14 +45,14 @@ class FragmentLocations: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (activity!!.application as ApplicationFeatureLocation).injectLocation(this)
+        (requireActivity().application as ApplicationFeatureLocation).injectLocation(this)
         return inflater.inflate(R.layout.locations_fragment,container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!::locationsAdapter.isInitialized){
-            locationsAdapter = LocationsAdapter(activity!!,viewModel,::selectedUpdated)
+            locationsAdapter = LocationsAdapter(requireActivity(),viewModel,::selectedUpdated)
         }
         createRecyclerView(view)
 
@@ -83,14 +83,14 @@ class FragmentLocations: Fragment() {
                 }
             }
 
-        view.findViewById<FloatingActionButton>(R.id.fab_edit).setOnClickListener{
-            edit = !edit
-            if (edit) {
-                editingEnabled(view)
-            }else {
-                editingDisabled(view)
-            }
-        }
+//        view.findViewById<FloatingActionButton>(R.id.fab_edit).setOnClickListener{
+//            edit = !edit
+//            if (edit) {
+//                editingEnabled(view)
+//            }else {
+//                editingDisabled(view)
+//            }
+//        }
     }
 
     private fun createRecyclerView(view: View){

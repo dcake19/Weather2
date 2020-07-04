@@ -12,7 +12,7 @@ import com.example.weather2.WeatherNavigationController
 import com.example.weather2.locations.ViewModelProvider
 //import com.example.utils.ViewModelEmitter
 
-class WeatherApplicationTest: Application(), ApplicationMain,ApplicationFeatureLocation {
+class WeatherApplicationTest: Application(), ApplicationMain, ApplicationFeatureLocation {
 
     override fun injectMainActivity(mainActivity: MainActivity) {
         mainActivity.weatherNavigationController = object : WeatherNavigationController {

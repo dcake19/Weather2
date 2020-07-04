@@ -15,7 +15,6 @@ import com.example.weather2.dagger.FeatureLocationComponent
 class WeatherApplication: Application(), ApplicationMain, ApplicationFeatureLocation {
 
     companion object{
-
         var application: WeatherApplication? = null
 
         fun getContext(): Context? {
