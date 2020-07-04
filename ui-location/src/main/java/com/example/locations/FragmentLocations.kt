@@ -83,14 +83,14 @@ class FragmentLocations: Fragment() {
                 }
             }
 
-//        view.findViewById<FloatingActionButton>(R.id.fab_edit).setOnClickListener{
-//            edit = !edit
-//            if (edit) {
-//                editingEnabled(view)
-//            }else {
-//                editingDisabled(view)
-//            }
-//        }
+        view.findViewById<FloatingActionButton>(R.id.fab_edit).setOnClickListener{
+            edit = !edit
+            if (edit) {
+                editingEnabled(view)
+            }else {
+                editingDisabled(view)
+            }
+        }
     }
 
     private fun createRecyclerView(view: View){
@@ -150,6 +150,5 @@ class FragmentLocations: Fragment() {
         checkBoxSelectAll.isChecked = allChecked
         buttonDelete.isEnabled = someChecked
     }
-
 
 }
