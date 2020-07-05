@@ -20,8 +20,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-
-
 class FragmentLocations: Fragment() {
 
     @Inject lateinit var viewModel: LocationsViewModel
