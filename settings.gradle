@@ -1,2 +1,3 @@
+include ':data-open-weather-remote'
 include ':app', ':data-dark-sky-remote', ':data-location-remote', ':ui-location', ':data-location-local', ':data-location', ':domain', ':presentation-weather', ':utils-android', ':presentation-location', ':buildSrc', ':utils', ':utils-ui'
 rootProject.name='Weather'

@@ -30,7 +30,9 @@ class FragmentLocations: Fragment() {
     private var edit = false
 
     // used for moving items in list
-    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0) {
+    private val itemTouchHelper = ItemTouchHelper(
+        object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0) {
+
         override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
                             target: RecyclerView.ViewHolder): Boolean {
             locationsAdapter.move(viewHolder.adapterPosition,target.adapterPosition)

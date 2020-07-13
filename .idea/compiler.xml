@@ -35,6 +35,7 @@
     <bytecodeTargetLevel>
       <module name="data-location" target="1.7" />
       <module name="data-location-remote" target="1.7" />
+      <module name="data-open-weather-remote" target="1.7" />
       <module name="domain" target="1.7" />
       <module name="presentation-location" target="1.7" />
       <module name="utils" target="1.7" />

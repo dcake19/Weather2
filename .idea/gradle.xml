@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/data-location" />
             <option value="$PROJECT_DIR$/data-location-local" />
             <option value="$PROJECT_DIR$/data-location-remote" />
+            <option value="$PROJECT_DIR$/data-open-weather-remote" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/presentation-location" />
             <option value="$PROJECT_DIR$/presentation-weather" />
