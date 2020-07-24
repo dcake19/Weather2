@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="locations">Locations</string>
+    <string name="rain">Rain</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="wind_deg">Wind Direction</string>
+    <string name="cloud_coverage">Cloud Coverage</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="daily">Daily</string>
+    <string name="hourly">Hourly</string>
+</resources>

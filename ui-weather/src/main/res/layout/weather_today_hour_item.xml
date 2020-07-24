@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:background="@color/dark_item_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/text_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_text_1"
+        android:textSize="24sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="19:00"/>
+
+    <ImageView
+        android:id="@+id/image_weather_icon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintTop_toBottomOf="@id/text_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:background="@drawable/ic_wi_day_sunny"/>
+
+
+    <ImageView
+        android:id="@+id/image_rain_drop"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_wi_raindrop"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/image_weather_icon"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_text_1"
+        app:layout_constraintTop_toTopOf="@id/image_rain_drop"
+        app:layout_constraintBottom_toBottomOf="@id/image_rain_drop"
+        app:layout_constraintStart_toEndOf="@+id/image_rain_drop"
+        app:layout_constraintEnd_toEndOf="@id/image_weather_icon"
+        tools:text="6 mm"/>
+
+    <TextView
+        android:id="@+id/text_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_text_1"
+        app:layout_constraintTop_toBottomOf="@id/image_rain_drop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="26\u00B0C"/>
+
+    <View
+        android:id="@+id/temp_range"
+        android:layout_width="20dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/text_temp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

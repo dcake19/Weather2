@@ -7,4 +7,5 @@
     <string name="all">All</string>
     <string name="region_country">%1$s, %2$s</string>
     <string name="search_instructions">Enter a location name</string>
+
 </resources>
