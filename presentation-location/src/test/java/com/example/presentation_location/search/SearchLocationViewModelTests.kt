@@ -1,7 +1,7 @@
 package com.example.presentation_location.search
 
-import com.example.domain.autocomplete.PredictionInteractor
-import com.example.domain.autocomplete.Predictions
+import com.example.domain.use_cases.autocomplete.PredictionInteractor
+import com.example.domain.use_cases.autocomplete.Predictions
 import com.example.presentation_location.PresentationTestUtil
 import com.example.presentation_location_view_model.search.SearchLocationMapper
 import com.example.presentation_location_view_model.search.SearchLocationViewModelImpl

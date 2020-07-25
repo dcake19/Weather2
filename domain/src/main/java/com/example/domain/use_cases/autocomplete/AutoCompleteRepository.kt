@@ -1,4 +1,4 @@
-package com.example.domain.autocomplete
+package com.example.domain.use_cases.autocomplete
 
 import io.reactivex.Single
 

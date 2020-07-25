@@ -17,13 +17,15 @@
             <option value="$PROJECT_DIR$/data-location-local" />
             <option value="$PROJECT_DIR$/data-location-remote" />
             <option value="$PROJECT_DIR$/data-open-weather-remote" />
+            <option value="$PROJECT_DIR$/data-weather" />
+            <option value="$PROJECT_DIR$/data-weather-local" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/presentation-location" />
-            <option value="$PROJECT_DIR$/presentation-weather" />
+            <option value="$PROJECT_DIR$/presentation-weather-2" />
             <option value="$PROJECT_DIR$/ui-location" />
             <option value="$PROJECT_DIR$/ui-weather" />
+            <option value="$PROJECT_DIR$/ui-weather-2" />
             <option value="$PROJECT_DIR$/utils" />
-            <option value="$PROJECT_DIR$/utils-android" />
             <option value="$PROJECT_DIR$/utils-ui" />
           </set>
         </option>

@@ -1,6 +1,6 @@
 package com.example.presentation_location_view_model.search
 
-import com.example.domain.autocomplete.Predictions
+import com.example.domain.use_cases.autocomplete.Predictions
 
 class SearchLocationMapper {
 

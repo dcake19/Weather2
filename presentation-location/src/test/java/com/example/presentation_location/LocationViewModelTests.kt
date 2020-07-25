@@ -1,6 +1,6 @@
 package com.example.presentation_location
 
-import com.example.domain.LocationInteractor
+import com.example.domain.use_cases.location.LocationInteractor
 import com.example.presentation_location_view_model.locations.LocationsMapper
 import com.example.presentation_location_view_model.locations.LocationsView
 import com.example.presentation_location_view_model.locations.LocationsViewModelImpl

@@ -7,8 +7,8 @@ import com.example.data_repository_location.auto_complete.AutoCompleteDataNetwor
 import com.example.data_repository_location.auto_complete.AutoCompleteRepositoryImpl
 import com.example.data_storage_location.LocationCache
 import com.example.data_storage_location.db.LocationDatabaseProvider
-import com.example.domain.LocationsRepository
-import com.example.domain.autocomplete.AutoCompleteRepository
+import com.example.domain.use_cases.location.LocationsRepository
+import com.example.domain.use_cases.autocomplete.AutoCompleteRepository
 import com.example.weather2.WeatherApplication
 import dagger.Module
 import dagger.Provides
@@ -20,7 +20,7 @@ class LocationDataModule {
     @Provides
     @Singleton
     fun provideLocationRepository(locationApi: LocationDataNetwork,
-                                  locationDataCache: LocationDataCache): LocationsRepository{
+                                  locationDataCache: LocationDataCache): LocationsRepository {
         return LocationsRepositoryImpl(locationApi, locationDataCache)
     }
 
@@ -38,7 +38,7 @@ class LocationDataModule {
 
     @Provides
     @Singleton
-    fun provideAutoCompleteRepository(autoCompleteDataNetwork: AutoCompleteDataNetwork): AutoCompleteRepository{
+    fun provideAutoCompleteRepository(autoCompleteDataNetwork: AutoCompleteDataNetwork): AutoCompleteRepository {
         return AutoCompleteRepositoryImpl(autoCompleteDataNetwork)
     }
 

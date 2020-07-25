@@ -1,5 +1,6 @@
-package com.example.domain
+package com.example.domain.use_cases.location
 
+import com.example.domain.use_cases.location.Location
 import io.reactivex.Completable
 import io.reactivex.Single
 

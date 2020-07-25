@@ -41,10 +41,14 @@ dependencies {
     implementation project(':data-location')
     implementation project(':data-location-local')
     implementation project(':data-location-remote')
+    implementation project(':data-weather')
+    implementation project(':data-weather-local')
+    implementation project(':data-open-weather-remote')
     implementation project(':data-dark-sky-remote')
     implementation project(':ui-location')
+    implementation project(':ui-weather-2')
     implementation project(':presentation-location')
-    implementation project(':presentation-weather')
+    implementation project(':presentation-weather-2')
    // androidTestImplementation project(':ui-location:androidTest')
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'

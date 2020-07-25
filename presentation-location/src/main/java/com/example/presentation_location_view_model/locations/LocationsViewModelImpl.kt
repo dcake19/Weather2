@@ -1,7 +1,7 @@
 package com.example.presentation_location_view_model.locations
 
-import com.example.domain.Location
-import com.example.domain.LocationInteractor
+import com.example.domain.use_cases.location.Location
+import com.example.domain.use_cases.location.LocationInteractor
 import com.example.utils.schedulers.RxSchedulerProvider
 import com.example.utils.ViewModelEmitter
 import io.reactivex.SingleObserver

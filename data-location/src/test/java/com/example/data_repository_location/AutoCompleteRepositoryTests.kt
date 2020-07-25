@@ -2,7 +2,7 @@ package com.example.data_repository_location
 
 import com.example.data_repository_location.auto_complete.AutoCompleteDataNetwork
 import com.example.data_repository_location.auto_complete.AutoCompleteRepositoryImpl
-import com.example.domain.autocomplete.Predictions
+import com.example.domain.use_cases.autocomplete.Predictions
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test

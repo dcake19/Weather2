@@ -1,9 +1,9 @@
 package com.example.presentation_location_view_model.dagger
 
-import com.example.domain.LocationInteractor
-import com.example.domain.LocationsRepository
-import com.example.domain.autocomplete.AutoCompleteRepository
-import com.example.domain.autocomplete.PredictionInteractor
+import com.example.domain.use_cases.location.LocationInteractor
+import com.example.domain.use_cases.location.LocationsRepository
+import com.example.domain.use_cases.autocomplete.AutoCompleteRepository
+import com.example.domain.use_cases.autocomplete.PredictionInteractor
 import com.example.presentation_location_view_model.locations.LocationsMapper
 import com.example.presentation_location_view_model.locations.LocationsView
 import com.example.presentation_location_view_model.locations.LocationsViewModel
@@ -39,8 +39,10 @@ class FeatureLocationModule {
 
     @Provides
     @FeatureLocationScope
-    fun provideLocationInteractor(locationsRepository: LocationsRepository): LocationInteractor{
-        return LocationInteractor(locationsRepository)
+    fun provideLocationInteractor(locationsRepository: LocationsRepository): LocationInteractor {
+        return LocationInteractor(
+            locationsRepository
+        )
     }
 
     @Provides
@@ -56,7 +58,8 @@ class FeatureLocationModule {
     @Provides
     @FeatureLocationScope
     fun providePredictionInteractor(autoCompleteRepository: AutoCompleteRepository,
-                                    locationsRepository: LocationsRepository): PredictionInteractor{
+                                    locationsRepository: LocationsRepository
+    ): PredictionInteractor{
         return PredictionInteractor(autoCompleteRepository,locationsRepository)
     }
 

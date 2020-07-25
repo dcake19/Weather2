@@ -1,4 +1,4 @@
-package com.example.domain.autocomplete
+package com.example.domain.use_cases.autocomplete
 
 data class Predictions(val searchTerm: String,val locations: List<Prediction>)
 

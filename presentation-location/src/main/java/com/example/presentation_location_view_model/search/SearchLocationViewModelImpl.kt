@@ -1,14 +1,12 @@
 package com.example.presentation_location_view_model.search
 
-import com.example.domain.autocomplete.PredictionInteractor
-import com.example.domain.autocomplete.Predictions
+import com.example.domain.use_cases.autocomplete.PredictionInteractor
 import com.example.utils.ViewModelEmitter
 import com.example.utils.schedulers.RxSchedulerProvider
 import io.reactivex.CompletableObserver
 import io.reactivex.Observable
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class SearchLocationViewModelImpl(private val predictionInteractor: PredictionInteractor,
                                   private val scheduler: RxSchedulerProvider,

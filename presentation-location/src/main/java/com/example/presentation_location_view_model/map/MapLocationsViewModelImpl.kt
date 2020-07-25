@@ -1,6 +1,6 @@
 package com.example.presentation_location_view_model.map
 
-import com.example.domain.LocationInteractor
+import com.example.domain.use_cases.location.LocationInteractor
 
 import com.example.utils.ViewModelEmitter
 import com.example.utils.schedulers.RxSchedulerProvider

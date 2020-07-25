@@ -1,13 +1,20 @@
 package com.example.data_repository_location
 
 import com.example.data_repository_location.auto_complete.LocationPredictionData
-import com.example.domain.Location
-import com.example.domain.autocomplete.Prediction
+import com.example.domain.use_cases.location.Location
+import com.example.domain.use_cases.autocomplete.Prediction
 
 object RepositoryTestUtil {
 
     fun createLocation(i: Int=0,lat: Double=0.0,lng: Double=0.0) =
-        Location("place_id_$i","name_$i","region_$i","country_$i",lat,lng)
+        Location(
+            "place_id_$i",
+            "name_$i",
+            "region_$i",
+            "country_$i",
+            lat,
+            lng
+        )
 
     fun createLocationData(i: Int=0,lat: Double=0.0,lng: Double=0.0,boundingSize: Double=0.5) =
         LocationData("place_id_$i","name_$i",
