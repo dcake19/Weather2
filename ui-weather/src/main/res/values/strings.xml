@@ -11,4 +11,6 @@
     <string name="humidity">Humidity</string>
     <string name="daily">Daily</string>
     <string name="hourly">Hourly</string>
+    <string name="high">High:</string>
+    <string name="low">Low:</string>
 </resources>
