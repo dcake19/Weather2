@@ -19,7 +19,7 @@ data class WeatherHourForecast(val placeId: String, val placeName: String, val t
                                val rain: Float, val windSpeed: Float,
                                val windDirection: Int,val cloudCoverage: Int)
 
-data class WeatherDayForecast(val placeId: String, val placeName: String, val timestamp: Int,
+data class WeatherDayForecast(val placeId: String, val placeName: String,val timestamp: Int,
                               val weatherId:Int, val temperatureHigh: Float,val temperatureLow: Float,
                               val rain: Float,val sunriseTimestamp: Int,val sunsetTimestamp: Int,
                               val windSpeed: Float, val windDirection: Int,val cloudCoverage: Int,
