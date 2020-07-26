@@ -23,7 +23,7 @@ const val DRIZZLE_SHOWER = 321
 
 const val RAIN_LIGHT = 500
 const val RAIN_MODERATE = 501
-const val RAIN_hEAVY = 502
+const val RAIN_HEAVY = 502
 const val RAIN_VERY_HEAVY = 503
 const val RAIN_EXTREME = 504
 const val RAIN_FREEZING = 511
@@ -34,8 +34,8 @@ const val RAIN_RAGGED_SHOWER = 531
 
 const val SNOW_LIGHT = 600
 const val SNOW = 601
-const val SNOW_HEAVY_ = 602
-const val SNOW_SLEET_ = 611
+const val SNOW_HEAVY = 602
+const val SNOW_SLEET = 611
 const val SNOW_LIGHT_SHOWER_SLEET = 612
 const val SNOW_SHOWER_SLEET = 613
 const val SNOW_LIGHT_RAIN = 615
