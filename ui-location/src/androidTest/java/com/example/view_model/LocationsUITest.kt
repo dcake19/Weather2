@@ -153,7 +153,7 @@ class LocationsUITest {
     }
 
     //change order test incomplete need to learn how to test drag and drop in recyclerview
-    @Test
+    //@Test
     fun changeOrder(){
         val moveIndex = 5
 

@@ -114,12 +114,10 @@ class FragmentLocations: Fragment() {
 
     private fun editingEnabled(view: View){
         view.findViewById<FloatingActionButton>(R.id.fab_edit).setImageResource(R.drawable.ic_done)
-        locationsAdapter.editingEnabled = true
+        locationsAdapter.toggleEditable()
         view.findViewById<ConstraintLayout>(R.id.top_bar_locations).visibility = View.INVISIBLE
         view.findViewById<ConstraintLayout>(R.id.top_bar_locations_editing).visibility = View.VISIBLE
         itemTouchHelper.attachToRecyclerView(locationsList)
-        for (i in 0 until (locationsAdapter.itemCount))
-            locationsAdapter.enableEditing(locationsList.findViewHolderForAdapterPosition(i))
 
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
@@ -130,14 +128,12 @@ class FragmentLocations: Fragment() {
 
     private fun editingDisabled(view: View){
         view.findViewById<FloatingActionButton>(R.id.fab_edit).setImageResource(R.drawable.ic_edit)
-        locationsAdapter.editingEnabled = false
+        locationsAdapter.toggleEditable()
         view.findViewById<ConstraintLayout>(R.id.top_bar_locations).visibility = View.VISIBLE
         view.findViewById<ConstraintLayout>(R.id.top_bar_locations_editing).visibility = View.INVISIBLE
 
         viewModel.updateLocationsOrder(locationsAdapter.items)
         itemTouchHelper.attachToRecyclerView(null)
-        for (i in 0 until (locationsAdapter.itemCount))
-            locationsAdapter.disableEditing(locationsList.findViewHolderForAdapterPosition(i))
 
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
