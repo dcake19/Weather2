@@ -1,9 +1,7 @@
 package com.example.api_location
 
-import com.example.api_location.autocomplete.LocationAutocompleteResponse
 import com.example.api_location.key.GEOCODING_API_KEY
 import com.example.api_location.locations.AddressComponent
-import com.example.api_location.locations.LocationResponse
 import com.example.api_location.locations.Result
 import com.example.data_repository_location.LocationData
 import com.example.data_repository_location.LocationDataNetwork
@@ -32,7 +30,6 @@ class LocationGeocodeApi(private val retrofitLocationApi: RetrofitLocationApi): 
     override fun getLocationsByPlaceId(placeId: String): Single<LocationData> {
         return retrofitLocationApi.getLocationsByPlaceId(placeId,GEOCODING_API_KEY)
             .map { locationResponse -> mapToLocationData(locationResponse.results[0]) }
-
     }
 
 //    override fun getAutocompleteLocation(searchTerm: String): Single<LocationAutocompleteResponse> {
