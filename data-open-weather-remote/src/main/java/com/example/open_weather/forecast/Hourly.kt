@@ -18,10 +18,16 @@ data class Hourly(
     val dewPoint: Double?,
     @SerializedName("clouds")
     val clouds: Int?,
+    @SerializedName("visibility")
+    val visibility: Int?,
     @SerializedName("wind_speed")
-    val windSpeed: Double?,
+    val windSpeed: Int?,
     @SerializedName("wind_deg")
     val windDeg: Int?,
     @SerializedName("weather")
-    val weather: List<WeatherX>?
+    val weather: List<WeatherX>?,
+    @SerializedName("pop")
+    val pop: Int?,
+    @SerializedName("rain")
+    val rain: Rain?
 )

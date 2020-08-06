@@ -28,8 +28,10 @@ data class Daily(
     val weather: List<WeatherXX>?,
     @SerializedName("clouds")
     val clouds: Int?,
-    @SerializedName("uvi")
-    val uvi: Double?,
+    @SerializedName("pop")
+    val pop: Int?,
     @SerializedName("rain")
-    val rain: Double?
+    val rain: Double?,
+    @SerializedName("uvi")
+    val uvi: Double?
 )
