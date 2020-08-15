@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
         (application as ApplicationMain).injectMainActivity(this)
         weatherNavigationController.initialize(Navigation.findNavController(this, R.id.nav_host_fragment))
 
-        val testOpenWeather = TestOpenWeather().get()
-
 //        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 //        val navGraph = navController.navInflater.inflate(R.navigation.location_graph)
 //        navGraph.startDestination = R.id.locations

@@ -13,6 +13,4 @@ interface OpenWeatherApi {
     fun getForecast(@Query("lat") lat: Double,
                     @Query("lon") long: Double): Single<Forecast>
 
-    @GET("/data/2.5/onecall?lat=52.227711&lon=0.282959&units=metric&appid=${OPEN_WEATHER_API_KEY}")
-    fun getForecast2(): Single<Forecast>
 }
