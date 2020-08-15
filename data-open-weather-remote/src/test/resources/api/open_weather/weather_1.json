@@ -1,0 +1,215 @@
+{
+  "lat": 52.23,
+  "lon": 0.28,
+  "timezone": "Europe/London",
+  "timezone_offset": 3600,
+  "current": {
+    "dt": 1597484140,
+    "sunrise": 1597466577,
+    "sunset": 1597519434,
+    "temp": 16.93,
+    "feels_like": 15.91,
+    "pressure": 1016,
+    "humidity": 93,
+    "dew_point": 15.79,
+    "uvi": 5.78,
+    "clouds": 90,
+    "visibility": 6000,
+    "wind_speed": 4.1,
+    "wind_deg": 20,
+    "weather": [
+      {
+        "id": 500,
+        "main": "Rain",
+        "description": "light rain",
+        "icon": "10d"
+      }
+    ],
+    "rain": {
+      "1h": 0.26
+    }
+  },
+  "minutely": [
+    {
+      "dt": 1597484160,
+      "precipitation": 0.2626
+    },
+    {
+      "dt": 1597484220,
+      "precipitation": 0.2882
+    },
+    {
+      "dt": 1597484280,
+      "precipitation": 0.31379999999999997
+    },
+    {
+      "dt": 1597484340,
+      "precipitation": 0.3394
+    }
+  ],
+  "hourly": [
+    {
+      "dt": 1597482000,
+      "temp": 16.93,
+      "feels_like": 15.79,
+      "pressure": 1016,
+      "humidity": 93,
+      "dew_point": 15.79,
+      "clouds": 90,
+      "visibility": 10000,
+      "wind_speed": 4.27,
+      "wind_deg": 44,
+      "weather": [
+        {
+          "id": 804,
+          "main": "Clouds",
+          "description": "overcast clouds",
+          "icon": "04d"
+        }
+      ],
+      "pop": 0.18
+    },
+    {
+      "dt": 1597485600,
+      "temp": 18.94,
+      "feels_like": 18.11,
+      "pressure": 1016,
+      "humidity": 86,
+      "dew_point": 16.55,
+      "clouds": 93,
+      "visibility": 10000,
+      "wind_speed": 4.24,
+      "wind_deg": 46,
+      "weather": [
+        {
+          "id": 500,
+          "main": "Rain",
+          "description": "light rain",
+          "icon": "10d"
+        }
+      ],
+      "pop": 0.26,
+      "rain": {
+        "1h": 0.37
+      }
+    },
+    {
+      "dt": 1597489200,
+      "temp": 19.36,
+      "feels_like": 18.67,
+      "pressure": 1015,
+      "humidity": 82,
+      "dew_point": 17.19,
+      "clouds": 95,
+      "visibility": 10000,
+      "wind_speed": 4.41,
+      "wind_deg": 40,
+      "weather": [
+        {
+          "id": 804,
+          "main": "Clouds",
+          "description": "overcast clouds",
+          "icon": "04d"
+        }
+      ],
+      "pop": 0.39
+    },
+    {
+      "dt": 1597492800,
+      "temp": 21.84,
+      "feels_like": 21.08,
+      "pressure": 1015,
+      "humidity": 77,
+      "dew_point": 17.63,
+      "clouds": 96,
+      "visibility": 10000,
+      "wind_speed": 4.77,
+      "wind_deg": 40,
+      "weather": [
+        {
+          "id": 500,
+          "main": "Rain",
+          "description": "light rain",
+          "icon": "10d"
+        }
+      ],
+      "pop": 0.54,
+      "rain": {
+        "1h": 0.67
+      }
+    }
+  ],
+  "daily": [
+    {
+      "dt": 1597492800,
+      "sunrise": 1597466577,
+      "sunset": 1597519434,
+      "temp": {
+        "day": 19.49,
+        "min": 17.93,
+        "max": 20.77,
+        "night": 18.67,
+        "eve": 19.14,
+        "morn": 16.93
+      },
+      "feels_like": {
+        "day": 18.36,
+        "night": 17.05,
+        "eve": 17.76,
+        "morn": 15.79
+      },
+      "pressure": 1016,
+      "humidity": 84,
+      "dew_point": 16.72,
+      "wind_speed": 4.77,
+      "wind_deg": 40,
+      "weather": [
+        {
+          "id": 501,
+          "main": "Rain",
+          "description": "moderate rain",
+          "icon": "10d"
+        }
+      ],
+      "clouds": 93,
+      "pop": 0.62,
+      "rain": 5.02,
+      "uvi": 5.78
+    },
+    {
+      "dt": 1597579200,
+      "sunrise": 1597553076,
+      "sunset": 1597605711,
+      "temp": {
+        "day": 21.37,
+        "min": 16.91,
+        "max": 21.53,
+        "night": 16.91,
+        "eve": 20.54,
+        "morn": 17.73
+      },
+      "feels_like": {
+        "day": 21.54,
+        "night": 18.05,
+        "eve": 21.2,
+        "morn": 17.61
+      },
+      "pressure": 1011,
+      "humidity": 77,
+      "dew_point": 17.36,
+      "wind_speed": 3.17,
+      "wind_deg": 30,
+      "weather": [
+        {
+          "id": 502,
+          "main": "Rain",
+          "description": "heavy intensity rain",
+          "icon": "10d"
+        }
+      ],
+      "clouds": 100,
+      "pop": 1,
+      "uvi": 5.13
+    }
+  ]
+}

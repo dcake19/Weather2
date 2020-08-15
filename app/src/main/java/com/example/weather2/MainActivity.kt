@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.navigation.Navigation
+import com.example.open_weather.TestOpenWeather
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         (application as ApplicationMain).injectMainActivity(this)
         weatherNavigationController.initialize(Navigation.findNavController(this, R.id.nav_host_fragment))
+
+        val testOpenWeather = TestOpenWeather().get()
 
 //        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 //        val navGraph = navController.navInflater.inflate(R.navigation.location_graph)

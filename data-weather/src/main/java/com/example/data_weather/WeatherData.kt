@@ -1,7 +1,7 @@
 package com.example.data_weather
 
-data class WeatherData(val placeId: String,val timestamp: Int,
-                       val weatherId:Int, val temperature: Float,val feelsLike: Float,
+data class WeatherData(val timestamp: Int, val weatherId:Int,
+                       val temperature: Float,val feelsLike: Float,
                        val rain: Float,val sunriseTimestamp: Int,val sunsetTimestamp: Int,
                        val windSpeed: Float, val windDirection: Int,val cloudCoverage: Int,
                        val pressure: Int, val humidity: Int,
