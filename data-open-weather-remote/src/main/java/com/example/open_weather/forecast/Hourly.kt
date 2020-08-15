@@ -27,7 +27,7 @@ data class Hourly(
     @SerializedName("weather")
     val weather: List<WeatherX>?,
     @SerializedName("pop")
-    val pop: Int?,
+    val pop: Double?,
     @SerializedName("rain")
     val rain: Rain?
 )

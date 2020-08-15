@@ -17,7 +17,7 @@ object WeatherNetworkTestUtil {
             15.79f,0f,4.27f,44,90),
             WeatherHourlyForecastData(1597485600,500,18.94f,18.11f,
             0.37f,4.24f,46,93),
-            WeatherHourlyForecastData(1597489200,804,19.67f,18.67f,
+            WeatherHourlyForecastData(1597489200,804,19.36f,18.67f,
             0f,4.41f,40,95),
             WeatherHourlyForecastData(1597492800,500,21.84f,
                 21.08f,0.67f,4.77f,40,96)
@@ -36,7 +36,7 @@ object WeatherNetworkTestUtil {
     }
 
     fun getWeatherData2(): WeatherData{
-        return WeatherData(1597484140,500,16.93f,
+        return WeatherData(1597484140,804,16.93f,
             15.91f,0f,1597466577,1597519434,
             4.1f, 20,90,1016,93,
             getWeatherHourlyForecastData1(), getWeatherDailyForecastData1())

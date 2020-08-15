@@ -29,7 +29,7 @@ data class Daily(
     @SerializedName("clouds")
     val clouds: Int?,
     @SerializedName("pop")
-    val pop: Int?,
+    val pop: Double?,
     @SerializedName("rain")
     val rain: Double?,
     @SerializedName("uvi")

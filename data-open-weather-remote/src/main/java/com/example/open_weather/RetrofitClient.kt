@@ -21,11 +21,11 @@ class RetrofitClient {
         okHttpClientBuilder.callTimeout(10,TimeUnit.SECONDS)
 
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BASIC
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
         okHttpClientBuilder.addInterceptor(interceptor)
 
         val r = Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .baseUrl("https://api.openweathermap.org/")
             .client(okHttpClientBuilder.build())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
@@ -36,6 +36,5 @@ class RetrofitClient {
         }
 
         return retrofit ?:r
-
     }
 }

@@ -51,7 +51,7 @@ class WeatherApiTests {
 
         val dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
-                return if (request.method == "GET" && request.path == "/onecall?lat=$lat&lon=$lon&units=metric&appid=$OPEN_WEATHER_API_KEY") {
+                return if (request.method == "GET" && request.path == "/data/2.5/onecall?units=metric&appid=$OPEN_WEATHER_API_KEY&lat=$lat&lon=$lon") {
                     response
                 } else {
                     MockResponse().setResponseCode(404)
@@ -63,4 +63,30 @@ class WeatherApiTests {
 
         weatherApi.getWeather(lat,lon).test().assertValues(expected)
     }
+
+    @Test
+    fun getWeather2(){
+        val lat = 41.992764
+        val lon = 21.438682
+        val expected = WeatherNetworkTestUtil.getWeatherData2()
+
+        val response = MockResponse()
+            .setResponseCode(HttpURLConnection.HTTP_OK)
+            .setBody(TestUtils.getJsonPath("api/open_weather/weather_2.json"))
+
+        val dispatcher = object : Dispatcher() {
+            override fun dispatch(request: RecordedRequest): MockResponse {
+                return if (request.method == "GET" && request.path == "/data/2.5/onecall?units=metric&appid=$OPEN_WEATHER_API_KEY&lat=$lat&lon=$lon") {
+                    response
+                } else {
+                    MockResponse().setResponseCode(404)
+                }
+            }
+        }
+
+        mockWebServer.dispatcher = dispatcher
+
+        weatherApi.getWeather(lat,lon).test().assertValues(expected)
+    }
+
 }

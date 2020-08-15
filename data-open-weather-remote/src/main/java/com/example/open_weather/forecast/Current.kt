@@ -27,7 +27,7 @@ data class Current(
     @SerializedName("visibility")
     val visibility: Int?,
     @SerializedName("wind_speed")
-    val windSpeed: Int?,
+    val windSpeed: Double?,
     @SerializedName("wind_deg")
     val windDeg: Int?,
     @SerializedName("weather")
