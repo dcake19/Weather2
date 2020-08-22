@@ -1,9 +1,6 @@
 package com.example.data_weather_local.db
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(tableName = WeatherTables.CURRENT_WEATHER)
 data class WeatherEntity(
@@ -61,4 +58,12 @@ data class DailyForecastEntity(
     @ColumnInfo(name = DailyForecastColumns.HUMIDITY)var humidity: Int){
     @PrimaryKey(autoGenerate = true) var id:Long = 0
 }
+
+class WeatherAllForLocation(@Embedded val weather: WeatherEntity? = null,
+                            @Relation(parentColumn = CurrentWeatherColumns.PLACE_ID,
+                     entityColumn = CurrentWeatherColumns.PLACE_ID)
+                 val hourlyForecast: List<HourlyForecastEntity> = emptyList(),
+                            @Relation(parentColumn = CurrentWeatherColumns.PLACE_ID,
+                     entityColumn = CurrentWeatherColumns.PLACE_ID)
+                 val dailyForecast: List<DailyForecastEntity> = emptyList())
 
