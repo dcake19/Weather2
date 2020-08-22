@@ -69,4 +69,32 @@ class WeatherDaoTest {
         assertThat(weatherAll.hourlyForecast, `is`(hourlyForecast))
         assertThat(weatherAll.dailyForecast, `is`(dailyForecast))
     }
+
+    @Test
+    fun getHourlyForecast(){
+        val placeId = "place_id"
+        val weather = WeatherDaoTestUtil.createWeather(placeId)
+        val hourlyForecast = WeatherDaoTestUtil.createHourlyForecast(placeId)
+        val dailyForecast = WeatherDaoTestUtil.createDailyForecast(placeId)
+
+        dao.insertFullForecast(weather,hourlyForecast,dailyForecast)
+
+        val hourlyForecastFromDb = dao.getHourlyForecast(placeId).test().values()[0]
+
+        assertThat(hourlyForecastFromDb, `is`(hourlyForecast))
+    }
+
+    @Test
+    fun getDailylyForecast(){
+        val placeId = "place_id"
+        val weather = WeatherDaoTestUtil.createWeather(placeId)
+        val hourlyForecast = WeatherDaoTestUtil.createHourlyForecast(placeId)
+        val dailyForecast = WeatherDaoTestUtil.createDailyForecast(placeId)
+
+        dao.insertFullForecast(weather,hourlyForecast,dailyForecast)
+
+        val dailyForecastFromDb = dao.getDailyForecast(placeId).test().values()[0]
+
+        assertThat(dailyForecastFromDb, `is`(dailyForecast))
+    }
 }

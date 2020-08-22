@@ -12,6 +12,12 @@ interface WeatherDao {
     @Query("select * from ${WeatherTables.CURRENT_WEATHER} where ${CurrentWeatherColumns.PLACE_ID} = :placeId")
     fun getWeather(placeId: String): Single<WeatherAllForLocation>
 
+    @Query("select * from ${WeatherTables.HOURLY_FORECAST} where ${CurrentWeatherColumns.PLACE_ID} = :placeId")
+    fun getHourlyForecast(placeId: String): Single<List<HourlyForecastEntity>>
+
+    @Query("select * from ${WeatherTables.DAILY_FORECAST} where ${CurrentWeatherColumns.PLACE_ID} = :placeId")
+    fun getDailyForecast(placeId: String): Single<List<DailyForecastEntity>>
+
     @Insert
     fun insertHourlyForecast(hourly: List<HourlyForecastEntity>)
 
@@ -45,5 +51,7 @@ interface WeatherDao {
         insertHourlyForecast(hourly)
         insertDailyForecast(daily)
     }
+
+
 
 }
