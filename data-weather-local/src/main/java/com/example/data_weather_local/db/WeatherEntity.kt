@@ -12,7 +12,7 @@ data class WeatherEntity(
     @ColumnInfo(name = CurrentWeatherColumns.RAIN)var rain: Float,
     @ColumnInfo(name = CurrentWeatherColumns.SUNRISE_TIMESTAMP)var sunriseTimestamp: Int,
     @ColumnInfo(name = CurrentWeatherColumns.SUNSET_TIMESTAMP)var sunsetTimestamp: Int,
-    @ColumnInfo(name = CurrentWeatherColumns.WIND_SPEED)var WindSpeed: Float,
+    @ColumnInfo(name = CurrentWeatherColumns.WIND_SPEED)var windSpeed: Float,
     @ColumnInfo(name = CurrentWeatherColumns.WIND_DIRECTION)var windDirection: Int,
     @ColumnInfo(name = CurrentWeatherColumns.CLOUD_COVERAGE)var cloudCoverage: Int,
     @ColumnInfo(name = CurrentWeatherColumns.PRESSURE)var pressure: Int,
@@ -31,7 +31,7 @@ data class HourlyForecastEntity(
     @ColumnInfo(name = HourlyForecastColumns.TEMPERATURE)var temperature: Float,
     @ColumnInfo(name = HourlyForecastColumns.FEELS_LIKE)var feelsLike: Float,
     @ColumnInfo(name = HourlyForecastColumns.RAIN)var rain: Float,
-    @ColumnInfo(name = HourlyForecastColumns.WIND_SPEED)var WindSpeed: Float,
+    @ColumnInfo(name = HourlyForecastColumns.WIND_SPEED)var windSpeed: Float,
     @ColumnInfo(name = HourlyForecastColumns.WIND_DIRECTION)var windDirection: Int,
     @ColumnInfo(name = HourlyForecastColumns.CLOUD_COVERAGE)var cloudCoverage: Int){
     @PrimaryKey(autoGenerate = true) var id:Long = 0
@@ -51,7 +51,7 @@ data class DailyForecastEntity(
     @ColumnInfo(name = DailyForecastColumns.RAIN)var rain: Float,
     @ColumnInfo(name = DailyForecastColumns.SUNRISE_TIMESTAMP)var sunriseTimestamp: Int,
     @ColumnInfo(name = DailyForecastColumns.SUNSET_TIMESTAMP)var sunsetTimestamp: Int,
-    @ColumnInfo(name = DailyForecastColumns.WIND_SPEED)var WindSpeed: Float,
+    @ColumnInfo(name = DailyForecastColumns.WIND_SPEED)var windSpeed: Float,
     @ColumnInfo(name = DailyForecastColumns.WIND_DIRECTION)var windDirection: Int,
     @ColumnInfo(name = DailyForecastColumns.CLOUD_COVERAGE)var cloudCoverage: Int,
     @ColumnInfo(name = DailyForecastColumns.PRESSURE)var pressure: Int,
@@ -59,7 +59,7 @@ data class DailyForecastEntity(
     @PrimaryKey(autoGenerate = true) var id:Long = 0
 }
 
-class WeatherAllForLocation(@Embedded val weather: WeatherEntity? = null,
+class WeatherAllForLocation(@Embedded val weather: WeatherEntity,
                             @Relation(parentColumn = CurrentWeatherColumns.PLACE_ID,
                      entityColumn = CurrentWeatherColumns.PLACE_ID)
                  val hourlyForecast: List<HourlyForecastEntity> = emptyList(),

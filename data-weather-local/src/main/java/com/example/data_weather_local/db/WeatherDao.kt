@@ -9,6 +9,9 @@ interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(weatherEntity: WeatherEntity)
 
+    @Query("delete from ${WeatherTables.CURRENT_WEATHER} where ${CurrentWeatherColumns.PLACE_ID} = :placeId")
+    fun deleteWeather(placeId: String)
+
     @Query("select * from ${WeatherTables.CURRENT_WEATHER} where ${CurrentWeatherColumns.PLACE_ID} = :placeId")
     fun getWeather(placeId: String): Single<WeatherAllForLocation>
 
@@ -52,6 +55,11 @@ interface WeatherDao {
         insertDailyForecast(daily)
     }
 
-
+    @Transaction
+    fun deleteWeatherForLocation(placeId: String){
+        deleteWeather(placeId)
+        deleteHourlyForecast(placeId)
+        deleteDailyForecast(placeId)
+    }
 
 }

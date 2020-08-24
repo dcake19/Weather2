@@ -85,7 +85,7 @@ class WeatherDaoTest {
     }
 
     @Test
-    fun getDailylyForecast(){
+    fun getDailyForecast(){
         val placeId = "place_id"
         val weather = WeatherDaoTestUtil.createWeather(placeId)
         val hourlyForecast = WeatherDaoTestUtil.createHourlyForecast(placeId)
