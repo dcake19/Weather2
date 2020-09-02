@@ -11,6 +11,14 @@ class WeatherCache(weatherDatabase: WeatherDatabaseProvider): WeatherDataCache {
 
     private val weatherDao = weatherDatabase.getWeatherDao()
 
+    override fun insertWeatherForecast(placeId: String,weatherData: WeatherData,
+        weatherHourlyForecastData: List<WeatherHourlyForecastData>,
+        weatherDailyForecastData: List<WeatherDailyForecastData>) {
+        weatherDao.insertFullForecast(map(placeId,weatherData),
+            weatherHourlyForecastData.map{map(placeId,it)},
+            weatherDailyForecastData.map{map(placeId,it)})
+    }
+
     override fun getForecast(placeId: String): Single<WeatherData> {
         return weatherDao.getWeather(placeId).map { map(it) }
     }
@@ -21,6 +29,28 @@ class WeatherCache(weatherDatabase: WeatherDatabaseProvider): WeatherDataCache {
 
     override fun getDailyForecast(placeId: String): Single<List<WeatherDailyForecastData>> {
         return weatherDao.getDailyForecast(placeId).map { list -> list.map{map(it)} }
+    }
+
+    override fun deleteForecast(placeId: String) {
+        weatherDao.deleteWeatherForLocation(placeId)
+    }
+
+    private fun map(placeId: String, wd: WeatherData): WeatherEntity{
+        return WeatherEntity(placeId,wd.timestamp,wd.weatherId,wd.temperature,wd.feelsLike,wd.rain,
+            wd.sunriseTimestamp,wd.sunsetTimestamp,wd.windSpeed,wd.windDirection,
+            wd.cloudCoverage,wd.pressure,wd.humidity)
+    }
+
+    private fun map(placeId: String,hf: WeatherHourlyForecastData): HourlyForecastEntity{
+        return HourlyForecastEntity(placeId,hf.timestamp,hf.weatherId,hf.temperature,hf.feelsLike,
+            hf.rain,hf.windSpeed,hf.windDirection,hf.cloudCoverage)
+    }
+
+    private fun map(placeId: String,df: WeatherDailyForecastData): DailyForecastEntity{
+        return DailyForecastEntity(placeId,df.timestamp,df.weatherId,
+            df.temperatureHigh,df.temperatureLow,df.rain,
+            df.sunriseTimestamp,df.sunsetTimestamp,
+            df.windSpeed,df.windDirection,df.cloudCoverage,df.pressure,df.humidity)
     }
 
     private fun map(forecast: WeatherAllForLocation): WeatherData{
@@ -41,4 +71,6 @@ class WeatherCache(weatherDatabase: WeatherDatabaseProvider): WeatherDataCache {
             dfe.temperatureLow,dfe.rain,dfe.sunriseTimestamp,dfe.sunsetTimestamp,dfe.windSpeed,
             dfe.windDirection,dfe.cloudCoverage,dfe.pressure,dfe.humidity)
     }
+
+
 }

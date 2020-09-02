@@ -1,6 +1,7 @@
 package com.example.data_weather_local
 
 import android.content.Context
+import androidx.room.EmptyResultSetException
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -96,5 +97,23 @@ class WeatherDaoTest {
         val dailyForecastFromDb = dao.getDailyForecast(placeId).test().values()[0]
 
         assertThat(dailyForecastFromDb, `is`(dailyForecast))
+    }
+
+    @Test
+    fun deleteWeatherForLocation(){
+        val placeId = "place_id"
+
+        val weather = WeatherDaoTestUtil.createWeather(placeId)
+        val hourlyForecast = WeatherDaoTestUtil.createHourlyForecast(placeId)
+        val dailyForecast = WeatherDaoTestUtil.createDailyForecast(placeId)
+
+        dao.insertFullForecast(weather,hourlyForecast,dailyForecast)
+
+        dao.deleteWeatherForLocation(placeId)
+
+        val error = dao.getWeather(placeId).test().errors()[0]
+        val empty = error is EmptyResultSetException
+
+        assertThat(empty, `is`(true))
     }
 }

@@ -35,6 +35,20 @@ class WeatherCacheTests {
     }
 
     @Test
+    fun insertForecast(){
+        val weatherData = WeatherCacheTestUtil.createWeatherData()
+        val weatherHourlyForecastData = WeatherCacheTestUtil.createHourlyForecastDataList()
+        val weatherDailyForecastData = WeatherCacheTestUtil.createDailyForecastDataList()
+        val weatherEntity = WeatherCacheTestUtil.createWeatherEntity(placeId)
+        val hourlyForecastEntity = WeatherCacheTestUtil.createHourlyForecastEntityList(placeId)
+        val dailyForecastEntity = WeatherCacheTestUtil.createDailyForecastEntityList(placeId)
+
+        cache.insertWeatherForecast(placeId,weatherData,weatherHourlyForecastData,weatherDailyForecastData)
+
+        Mockito.verify(dao).insertFullForecast(weatherEntity,hourlyForecastEntity,dailyForecastEntity)
+    }
+
+    @Test
     fun getForecast(){
         val weatherAllForLocation = WeatherAllForLocation(
             WeatherCacheTestUtil.createWeatherEntity(placeId),
@@ -70,4 +84,9 @@ class WeatherCacheTests {
         assertThat(dailyForecastActual, `is`(dailyForecastExpected))
     }
 
+    @Test
+    fun deleteForecast(){
+        cache.deleteForecast(placeId)
+        Mockito.verify(dao).deleteWeatherForLocation(placeId)
+    }
 }
