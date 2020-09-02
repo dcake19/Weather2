@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.data_weather_local.db.WeatherAllForLocation
 import com.example.data_weather_local.db.WeatherDao
 import com.example.data_weather_local.db.WeatherDatabaseProvider
+import io.reactivex.Maybe
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Rule
@@ -54,12 +55,19 @@ class WeatherCacheTests {
             WeatherCacheTestUtil.createWeatherEntity(placeId),
             WeatherCacheTestUtil.createHourlyForecastEntityList(placeId),
             WeatherCacheTestUtil.createDailyForecastEntityList(placeId))
-        Mockito.`when`(dao.getWeather(placeId)).thenReturn(Single.just(weatherAllForLocation))
+        Mockito.`when`(dao.getWeather(placeId)).thenReturn(Maybe.just(weatherAllForLocation))
 
         val forecastExpected = WeatherCacheTestUtil.createWeatherData()
         val forecastActual = cache.getForecast(placeId).test().values()[0]
 
         assertThat(forecastActual, `is`(forecastExpected))
+    }
+
+    @Test
+    fun emptyForecast(){
+        Mockito.`when`(dao.getWeather(placeId)).thenReturn(Maybe.empty())
+        val empty = cache.getForecast(placeId).isEmpty.test().values()[0]
+        assertThat(empty, `is`(true))
     }
 
     @Test

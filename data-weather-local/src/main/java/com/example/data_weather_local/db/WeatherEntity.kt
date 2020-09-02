@@ -61,9 +61,9 @@ data class DailyForecastEntity(
 
 class WeatherAllForLocation(@Embedded val weather: WeatherEntity,
                             @Relation(parentColumn = CurrentWeatherColumns.PLACE_ID,
-                     entityColumn = CurrentWeatherColumns.PLACE_ID)
-                 val hourlyForecast: List<HourlyForecastEntity> = emptyList(),
+                                entityColumn = CurrentWeatherColumns.PLACE_ID)
+                            val hourlyForecast: List<HourlyForecastEntity> = emptyList(),
                             @Relation(parentColumn = CurrentWeatherColumns.PLACE_ID,
-                     entityColumn = CurrentWeatherColumns.PLACE_ID)
-                 val dailyForecast: List<DailyForecastEntity> = emptyList())
+                                entityColumn = CurrentWeatherColumns.PLACE_ID)
+                            val dailyForecast: List<DailyForecastEntity> = emptyList())
 

@@ -1,6 +1,7 @@
 package com.example.data_weather_local.db
 
 import androidx.room.*
+import io.reactivex.Maybe
 import io.reactivex.Single
 
 @Dao
@@ -13,7 +14,7 @@ interface WeatherDao {
     fun deleteWeather(placeId: String)
 
     @Query("select * from ${WeatherTables.CURRENT_WEATHER} where ${CurrentWeatherColumns.PLACE_ID} = :placeId")
-    fun getWeather(placeId: String): Single<WeatherAllForLocation>
+    fun getWeather(placeId: String): Maybe<WeatherAllForLocation>
 
     @Query("select * from ${WeatherTables.HOURLY_FORECAST} where ${CurrentWeatherColumns.PLACE_ID} = :placeId")
     fun getHourlyForecast(placeId: String): Single<List<HourlyForecastEntity>>

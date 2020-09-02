@@ -5,6 +5,7 @@ import com.example.data_weather.WeatherData
 import com.example.data_weather.WeatherDataCache
 import com.example.data_weather.WeatherHourlyForecastData
 import com.example.data_weather_local.db.*
+import io.reactivex.Maybe
 import io.reactivex.Single
 
 class WeatherCache(weatherDatabase: WeatherDatabaseProvider): WeatherDataCache {
@@ -19,7 +20,7 @@ class WeatherCache(weatherDatabase: WeatherDatabaseProvider): WeatherDataCache {
             weatherDailyForecastData.map{map(placeId,it)})
     }
 
-    override fun getForecast(placeId: String): Single<WeatherData> {
+    override fun getForecast(placeId: String): Maybe<WeatherData> {
         return weatherDao.getWeather(placeId).map { map(it) }
     }
 
@@ -71,6 +72,5 @@ class WeatherCache(weatherDatabase: WeatherDatabaseProvider): WeatherDataCache {
             dfe.temperatureLow,dfe.rain,dfe.sunriseTimestamp,dfe.sunsetTimestamp,dfe.windSpeed,
             dfe.windDirection,dfe.cloudCoverage,dfe.pressure,dfe.humidity)
     }
-
 
 }

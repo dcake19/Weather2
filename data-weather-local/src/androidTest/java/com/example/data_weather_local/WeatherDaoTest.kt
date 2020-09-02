@@ -43,7 +43,7 @@ class WeatherDaoTest {
 
         dao.insertFullForecast(weather,hourlyForecast,dailyForecast)
 
-        val weatherAll = dao.getWeather(placeId).test().values()[0]
+        val weatherAll = dao.getWeather(placeId).test().values()[0]!!
         assertThat(weatherAll.weather, `is`(weather))
         assertThat(weatherAll.hourlyForecast, `is`(hourlyForecast))
         assertThat(weatherAll.dailyForecast, `is`(dailyForecast))
@@ -65,7 +65,7 @@ class WeatherDaoTest {
 
         dao.insertFullForecast(weather,hourlyForecast,dailyForecast)
 
-        val weatherAll = dao.getWeather(placeId).test().values()[0]
+        val weatherAll = dao.getWeather(placeId).test().values()[0]!!
         assertThat(weatherAll.weather, `is`(weather))
         assertThat(weatherAll.hourlyForecast, `is`(hourlyForecast))
         assertThat(weatherAll.dailyForecast, `is`(dailyForecast))
@@ -110,10 +110,9 @@ class WeatherDaoTest {
         dao.insertFullForecast(weather,hourlyForecast,dailyForecast)
 
         dao.deleteWeatherForLocation(placeId)
-
-        val error = dao.getWeather(placeId).test().errors()[0]
-        val empty = error is EmptyResultSetException
+        val empty = dao.getWeather(placeId).isEmpty.test().values()[0]
 
         assertThat(empty, `is`(true))
     }
+
 }
