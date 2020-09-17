@@ -1,4 +1,4 @@
-package com.example.presentation_weather_2
+package com.example.presentation_weather_2.constants
 
 const val THUNDERSTORM_WITH_LIGHT_RAIN = 200
 const val THUNDERSTORM_WITH_RAIN = 201

@@ -9,10 +9,10 @@ data class WeatherTodayView (val placeId: String, val placeName: String, val dat
                            val daily: List<WeatherTodayDailyForecastView>)
 
 data class WeatherTodayHourlyForecastView(val time: String, val weatherId: Int,
-                                        val rain: String, val temperature: String)
+                                         val temperature: String,val rain: String)
 
-data class WeatherTodayDailyForecastView(val day: String,val weatherId: Int,val rain: String,
-                             val temperatureHigh: String,val temperatureLow: String)
+data class WeatherTodayDailyForecastView(val day: String,val weatherId: Int,
+                             val temperatureHigh: String,val temperatureLow: String,val rain: String)
 
 data class WeatherHourForecastView(val placeId: String,val placeName: String,val time: String,
                                    val weatherId: Int,val temperature: String,val feelsLike:String,

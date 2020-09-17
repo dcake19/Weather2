@@ -1,4 +1,4 @@
-package com.example.presentation_weather_2
+package com.example.presentation_weather_2.constants
 
 const val NORTH = 1
 const val NORTH_EAST = 2
