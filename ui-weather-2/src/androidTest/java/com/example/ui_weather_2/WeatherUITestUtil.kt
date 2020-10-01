@@ -1,14 +1,24 @@
 package com.example.ui_weather_2
 
-import com.example.presentation_weather_2.WeatherTodayDailyForecastView
-import com.example.presentation_weather_2.WeatherTodayHourlyForecastView
+import com.example.presentation_weather_2.*
 import com.example.presentation_weather_2.constants.*
 
 object WeatherUITestUtil {
 
+    fun getWeatherToday(i: Int,weatherListItem: Int = 0,temp: Int,feelLike:Int, rain: Int,
+                        sunrise: String,sunset: String,windSpeed: Double, windDirection: Int,
+                        cloudCoverage: Int,pressure: Int,humidity: Int,
+                        initHour: Int=0,initDay: Int=0): WeatherTodayView{
 
-    fun getOverviewHourly(i: Int): List<WeatherTodayHourlyForecastView>{
-        return (0..23).map { mapHour(i,it)}
+        return WeatherTodayView("placeId_$i","Place Name $i",
+            "$initHour:00",weatherIds[weatherListItem],"$temp\\u00B0C",
+            "$feelLike\\u00B0C","$rain mm",sunrise,sunset,"$windSpeed m/s",
+            windDirection,"$cloudCoverage%","$pressure hPa","$humidity%",
+            "Description $i",getOverviewHourly(i,initHour), getOverviewDay(i,initDay))
+    }
+
+    fun getOverviewHourly(i: Int,initHour: Int): List<WeatherTodayHourlyForecastView>{
+        return (1..24).map { mapHour(i,(it + initHour)%24)}
     }
 
     private fun mapHour(i: Int,hour: Int): WeatherTodayHourlyForecastView{
@@ -19,21 +29,39 @@ object WeatherUITestUtil {
         return WeatherTodayHourlyForecastView("$hour:00", weatherId,"$temp\\u00B0C","$rain mm")
     }
 
-    fun getOverviewDay(i: Int): List<WeatherTodayDailyForecastView>{
-        return (0..6).map { mapDay(i,it) }
+    fun getOverviewDay(i: Int,initDay: Int): List<WeatherTodayDailyForecastView>{
+        return (1..7).map { mapDay(i,(it + initDay)%7,initDay) }
     }
 
-    private fun mapDay(i: Int,day: Int): WeatherTodayDailyForecastView{
+    private fun mapDay(i: Int,day: Int,initDay: Int): WeatherTodayDailyForecastView{
         val id = (i*24 + day)% weatherIds.size
         val weatherId = weatherIds[id]
         val rain = rainIds.indexOf(weatherId) + 1
         val tempHigh = 15 + day + i%5
         val tempLow = day + i%5
-        return WeatherTodayDailyForecastView(days[day],weatherId,
+        val dayName = if (day==initDay) "Today" else days[day]
+        return WeatherTodayDailyForecastView(dayName,weatherId,
             "$tempHigh\\u00B0C","$tempLow\\u00B0C","$rain mm")
     }
 
-    val days = listOf("Today","Mon","Tue","Wed","Thu","Fri","Sat")
+    fun getHourForecastView(i: Int,hour:Int,weatherListItem: Int = 0,temp: Int,feelLike:Int, rain: Int,
+                            windSpeed: Double, windDirection: Int, cloudCoverage: Int): WeatherHourForecastView{
+        return WeatherHourForecastView("placeId_$i","Place Name $i","$hour:00",
+            weatherIds[weatherListItem],"$temp\\u00B0C",
+            "$feelLike\\u00B0C","$rain mm","$windSpeed m/s",
+            windDirection,"$cloudCoverage%", "Description $i")
+    }
+    fun getDayForecastView(i: Int,date: String,weatherListItem: Int = 0,tempHigh: Int,tempLow:Int, rain: Int,
+                           sunrise: String,sunset: String,windSpeed: Double, windDirection: Int,
+                           cloudCoverage: Int,pressure: Int,humidity: Int): WeatherDayForecastView{
+        return WeatherDayForecastView("placeId_$i","Place Name $i",date,
+            weatherIds[weatherListItem],"$tempHigh\\u00B0C",
+            "$tempLow\\u00B0C","$rain mm",sunrise,sunset,"$windSpeed m/s",
+            windDirection,"$cloudCoverage%","$pressure hPa","$humidity%",
+            "Description $i")
+    }
+
+    val days = listOf("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
 
     val weatherIds = listOf(THUNDERSTORM_WITH_LIGHT_RAIN,
         THUNDERSTORM_WITH_RAIN,
