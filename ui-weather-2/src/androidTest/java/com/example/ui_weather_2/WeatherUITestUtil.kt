@@ -51,11 +51,12 @@ object WeatherUITestUtil {
             "$feelLike\\u00B0C","$rain mm","$windSpeed m/s",
             windDirection,"$cloudCoverage%", "Description $i")
     }
-    fun getDayForecastView(i: Int,date: String,weatherListItem: Int = 0,tempHigh: Int,tempLow:Int, rain: Int,
+
+    fun getDayForecastView(i: Int,date: String,weatherId: Int = 0,tempHigh: Int,tempLow:Int, rain: Int,
                            sunrise: String,sunset: String,windSpeed: Double, windDirection: Int,
                            cloudCoverage: Int,pressure: Int,humidity: Int): WeatherDayForecastView{
         return WeatherDayForecastView("placeId_$i","Place Name $i",date,
-            weatherIds[weatherListItem],"$tempHigh\\u00B0C",
+            weatherId,"$tempHigh\\u00B0C",
             "$tempLow\\u00B0C","$rain mm",sunrise,sunset,"$windSpeed m/s",
             windDirection,"$cloudCoverage%","$pressure hPa","$humidity%",
             "Description $i")
