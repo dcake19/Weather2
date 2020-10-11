@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.swipeLeft
+import androidx.test.espresso.action.ViewActions.swipeRight
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.presentation_weather_2.WeatherDayForecastView
 import com.example.presentation_weather_2.constants.*
@@ -18,6 +21,10 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
+import com.example.ui_weather_2.daily.FragmentWeatherDaysArgs
+import org.hamcrest.core.AllOf.allOf
 
 @RunWith(AndroidJUnit4::class)
 class WeatherDayUITest {
@@ -30,10 +37,11 @@ class WeatherDayUITest {
         MockitoAnnotations.initMocks(this)
     }
 
-    private fun launchFragment(navController: NavController?=null){
+    private fun launchFragment(navController: NavController?=null,startDay: Int){
         val fragment = FragmentWeatherDays()
         fragment.viewModel = viewModel
-        val scenario = launchFragmentInContainer(Bundle(), R.style.Theme_AppCompat){
+
+        val scenario = launchFragmentInContainer(FragmentWeatherDaysArgs(startDay).toBundle(), R.style.Theme_AppCompat){
             fragment
         }
 
@@ -42,7 +50,6 @@ class WeatherDayUITest {
                 Navigation.setViewNavController(it.requireView(), navController)
             }
         }
-
     }
 
     private fun getWeather(): List<WeatherDayForecastView>{
@@ -67,12 +74,40 @@ class WeatherDayUITest {
 
     @Test
     fun displayWeatherDaily(){
+        val startDay = 3
+        val weather = getWeather()
         val navController = Mockito.mock(NavController::class.java)
         Mockito.`when`(viewModel.getWeatherDaysObservable())
             .thenReturn(Observable.create{emitter = it})
         Mockito.`when`(viewModel.getWeatherDays())
-            .then{emitter.onNext(getWeather())}
-        launchFragment(navController)
+            .then{emitter.onNext(weather)}
+        launchFragment(navController,startDay)
+
+        for (day in (startDay until weather.size)){
+            check(weather[day])
+            onView(allOf(withId(R.id.layout_weather_day), isDisplayed())).perform(swipeLeft())
+            Thread.sleep(1000)
+        }
+
+        for (day in weather.size-1 downTo 0){
+            check(weather[day])
+            onView(allOf(withId(R.id.layout_weather_day), isDisplayed())).perform(swipeRight())
+            Thread.sleep(1000)
+        }
+
+        val viewInteraction2 = onView(allOf(withId(R.id.text_rain_quantity),
+            isDescendantOfA(allOf(withId(R.id.layout_weather_day),isDisplayed()))))
+        viewInteraction2.perform(CustomScrollActions.nestedScrollTo())
+        viewInteraction2.check(matches(withText(weather.first().rain)))
+
+    }
+
+    private fun check(forecast: WeatherDayForecastView){
+        val viewInteraction = onView(allOf(withId(R.id.text_rain_quantity),
+            isDescendantOfA(allOf(withId(R.id.layout_weather_day),isDisplayed()))))
+
+        viewInteraction.perform(CustomScrollActions.nestedScrollTo())
+        viewInteraction.check(matches(withText(forecast.rain)))
     }
 
 }

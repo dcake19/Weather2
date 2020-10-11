@@ -18,6 +18,8 @@ class FragmentWeatherDays : Fragment() {
 
     @Inject lateinit var viewModel: WeatherDailyForecastViewModel
 
+    private var initialDay = 0
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (requireActivity().application as ApplicationFeatureWeather).injectWeather(this)
@@ -26,14 +28,25 @@ class FragmentWeatherDays : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val a = arguments
+        if (a!=null){
+            val args = FragmentWeatherDaysArgs.fromBundle(a)
+            initialDay = args.day
+        }
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.getWeatherDaysObservable()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { view?.findViewById<ViewPager>(R.id.pager_weather_day)?.adapter = WeatherDayPagerAdapter(it) }
+            .subscribe { onWeatherReady(it) }
         viewModel.getWeatherDays()
+    }
+
+    private fun onWeatherReady(weather: List<WeatherDayForecastView>){
+        val viewPager = view?.findViewById<ViewPager>(R.id.pager_weather_day)
+        viewPager?.adapter = WeatherDayPagerAdapter(weather)
+        viewPager?.currentItem = initialDay
     }
 
     inner class WeatherDayPagerAdapter(private val weather: List<WeatherDayForecastView>): FragmentPagerAdapter(childFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
@@ -47,6 +60,8 @@ class FragmentWeatherDays : Fragment() {
         override fun getCount(): Int {
             return weather.size
         }
+
+
 
     }
 }
