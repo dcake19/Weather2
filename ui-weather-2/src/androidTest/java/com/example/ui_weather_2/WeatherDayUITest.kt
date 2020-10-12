@@ -1,6 +1,5 @@
 package com.example.ui_weather_2
 
-import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -11,7 +10,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.presentation_weather_2.WeatherDayForecastView
 import com.example.presentation_weather_2.constants.*
 import com.example.presentation_weather_2.daily.WeatherDailyForecastViewModel
-import com.example.ui_weather_2.daily.FragmentWeatherDay
 import com.example.ui_weather_2.daily.FragmentWeatherDays
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
@@ -52,6 +50,12 @@ class WeatherDayUITest {
         }
     }
 
+    data class WeatherDayForecastViewTest(val date: String,val temperatureHigh: String,
+                                      val temperatureLow: String,val rain: String,
+                                      val sunrise: String, val sunset: String,val windSpeed: String,
+                                      val windDirection: String,val cloudCoverage: String,
+                                      val pressure: String,val humidity: String,val description: String)
+
     private fun getWeather(): List<WeatherDayForecastView>{
         val dates = listOf("Mon 5 October","Tue 6 October","Wed 7 October","Thu 8 October",
             "Fri 9 October","Sat 10 October","Sun 11 October")
@@ -72,6 +76,8 @@ class WeatherDayUITest {
             windDirection[it], cloudCoverage[it],pressure[it],humidity[it]) }
     }
 
+    private val winDirection = listOf("N","NE","NW","S","SE","SW","E")
+
     @Test
     fun displayWeatherDaily(){
         val startDay = 3
@@ -84,30 +90,44 @@ class WeatherDayUITest {
         launchFragment(navController,startDay)
 
         for (day in (startDay until weather.size)){
-            check(weather[day])
+            check(weather[day],winDirection[day])
             onView(allOf(withId(R.id.layout_weather_day), isDisplayed())).perform(swipeLeft())
             Thread.sleep(1000)
         }
 
         for (day in weather.size-1 downTo 0){
-            check(weather[day])
+            check(weather[day],winDirection[day])
             onView(allOf(withId(R.id.layout_weather_day), isDisplayed())).perform(swipeRight())
             Thread.sleep(1000)
         }
 
-        val viewInteraction2 = onView(allOf(withId(R.id.text_rain_quantity),
-            isDescendantOfA(allOf(withId(R.id.layout_weather_day),isDisplayed()))))
-        viewInteraction2.perform(CustomScrollActions.nestedScrollTo())
-        viewInteraction2.check(matches(withText(weather.first().rain)))
-
+        check(weather.first(),winDirection.first())
     }
 
-    private fun check(forecast: WeatherDayForecastView){
-        val viewInteraction = onView(allOf(withId(R.id.text_rain_quantity),
+    private fun check(forecast: WeatherDayForecastView,windDirection: String){
+
+        onView(allOf(withId(R.id.text_date),isDisplayed()))
+            .check(matches(withText(forecast.date)))
+
+        checkId(R.id.text_high_temp,forecast.temperatureHigh)
+        checkId(R.id.text_low_temp,forecast.temperatureLow)
+        checkId(R.id.text_summary,forecast.description)
+        checkId(R.id.text_rain_quantity,forecast.rain)
+        checkId(R.id.text_sunrise_time,forecast.sunrise)
+        checkId(R.id.text_sunset_time,forecast.sunset)
+        checkId(R.id.text_wind_speed,forecast.windSpeed)
+        checkId(R.id.text_wind_direction,windDirection)
+        checkId(R.id.text_cloud_coverage_pct,forecast.cloudCoverage)
+        checkId(R.id.text_pressure,forecast.pressure)
+        checkId(R.id.text_humidity_pct,forecast.humidity)
+    }
+
+    private fun checkId(id: Int,display: String){
+        val viewInteraction = onView(allOf(withId(id),
             isDescendantOfA(allOf(withId(R.id.layout_weather_day),isDisplayed()))))
 
         viewInteraction.perform(CustomScrollActions.nestedScrollTo())
-        viewInteraction.check(matches(withText(forecast.rain)))
+        viewInteraction.check(matches(withText(display)))
     }
 
 }

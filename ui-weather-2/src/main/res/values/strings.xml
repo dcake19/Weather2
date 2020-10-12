@@ -14,4 +14,13 @@
     <string name="hourly">Hourly</string>
     <string name="high">High:</string>
     <string name="low">Low:</string>
+
+    <string name="north_abbr">N</string>
+    <string name="north_east_abbr">NE</string>
+    <string name="north_west_abbr">NW</string>
+    <string name="west_abbr">W</string>
+    <string name="south_abbr">S</string>
+    <string name="south_east_abbr">SE</string>
+    <string name="south_west_abbr">SW</string>
+    <string name="east_abbr">E</string>
 </resources>
