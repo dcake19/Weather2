@@ -59,7 +59,7 @@ class WeatherDayUITest {
     private fun getWeather(): List<WeatherDayForecastView>{
         val dates = listOf("Mon 5 October","Tue 6 October","Wed 7 October","Thu 8 October",
             "Fri 9 October","Sat 10 October","Sun 11 October")
-        val weatherIds = listOf(THUNDERSTORM, DRIZZLE , RAIN_MODERATE, SNOW, CLEAR,CLOUDS_FEW,CLOUDS_OVERCAST)
+        val weatherIds = listOf(THUNDERSTORM, DRIZZLE_HEAVY_SHOWER_RAIN , RAIN_MODERATE, SNOW, CLEAR,CLOUDS_FEW,CLOUDS_OVERCAST)
         val tempHigh = listOf(20,19,16,3,26,23,21)
         val tempLow = listOf(8,4,2,-9,14,12,10)
         val rain = listOf(16,2,4,4,0,0,0)
@@ -78,6 +78,10 @@ class WeatherDayUITest {
 
     private val winDirection = listOf("N","NE","NW","S","SE","SW","E")
 
+    private val weatherDrawables = listOf(R.drawable.forecast_thunderstorm,
+        R.drawable.forecast_day_showers, R.drawable.forecast_rain,R.drawable.forecast_snow,
+        R.drawable.forecast_day_sunny,R.drawable.forecast_day_cloudy,R.drawable.ic_wi_cloud)
+
     @Test
     fun displayWeatherDaily(){
         val startDay = 3
@@ -90,24 +94,30 @@ class WeatherDayUITest {
         launchFragment(navController,startDay)
 
         for (day in (startDay until weather.size)){
-            check(weather[day],winDirection[day])
+            check(weather[day],winDirection[day],weatherDrawables[day])
             onView(allOf(withId(R.id.layout_weather_day), isDisplayed())).perform(swipeLeft())
             Thread.sleep(1000)
         }
 
         for (day in weather.size-1 downTo 0){
-            check(weather[day],winDirection[day])
+            check(weather[day],winDirection[day],weatherDrawables[day])
             onView(allOf(withId(R.id.layout_weather_day), isDisplayed())).perform(swipeRight())
             Thread.sleep(1000)
         }
 
-        check(weather.first(),winDirection.first())
+        check(weather.first(),winDirection.first(),weatherDrawables.first())
     }
 
-    private fun check(forecast: WeatherDayForecastView,windDirection: String){
+    private fun check(forecast: WeatherDayForecastView,windDirection: String,drawable: Int){
 
         onView(allOf(withId(R.id.text_date),isDisplayed()))
             .check(matches(withText(forecast.date)))
+
+        val viewInteraction = onView(allOf(withId(R.id.image_weather_icon),
+            isDescendantOfA(allOf(withId(R.id.layout_weather_day),isDisplayed()))))
+
+        viewInteraction.perform(CustomScrollActions.nestedScrollTo())
+        viewInteraction.check(matches(withDrawable(drawable,R.color.dark_icon_1)))
 
         checkId(R.id.text_high_temp,forecast.temperatureHigh)
         checkId(R.id.text_low_temp,forecast.temperatureLow)
@@ -128,6 +138,7 @@ class WeatherDayUITest {
 
         viewInteraction.perform(CustomScrollActions.nestedScrollTo())
         viewInteraction.check(matches(withText(display)))
+
     }
 
 }

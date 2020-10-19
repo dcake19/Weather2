@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:background="@drawable/ic_wi_day_sunny"/>
+        tools:background="@drawable/forecast_day_sunny"/>
 
 
     <ImageView

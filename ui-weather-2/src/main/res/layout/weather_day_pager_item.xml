@@ -37,8 +37,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:background="@drawable/ic_wi_day_sunny"
-                tools:backgroundTint="#fff"/>
+                tools:background="@drawable/forecast_day_sunny"
+                android:tint="@color/dark_icon_1"
+                tools:backgroundTint="@color/dark_icon_1"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -125,7 +126,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            tools:backgroundTint="@color/dark_icon_1"/>
 
                         <TextView
                             android:id="@+id/text_rain"
@@ -262,7 +263,7 @@
                             android:id="@+id/image_wind_speed"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:background="@drawable/ic_wi_windy"
+                            android:background="@drawable/forecast_windy"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

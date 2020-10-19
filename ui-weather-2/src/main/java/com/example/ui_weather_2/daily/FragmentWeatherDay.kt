@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.presentation_weather_2.WeatherDayForecastView
 import com.example.ui_weather_2.R
+import com.example.ui_weather_2.mapToImageResource
 import com.example.ui_weather_2.mapWindDirection
 
 class FragmentWeatherDay: Fragment() {
@@ -35,6 +37,10 @@ class FragmentWeatherDay: Fragment() {
             view.findViewById<TextView>(R.id.text_cloud_coverage_pct).text = w.cloudCoverage
             view.findViewById<TextView>(R.id.text_pressure).text = w.pressure
             view.findViewById<TextView>(R.id.text_humidity_pct).text = w.humidity
+
+            val d = mapToImageResource(w.weatherId)
+            view.findViewById<ImageView>(R.id.image_weather_icon)
+                .setImageResource(d)
         }
     }
 

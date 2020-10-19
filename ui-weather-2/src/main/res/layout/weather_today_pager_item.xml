@@ -46,7 +46,7 @@
                 android:id="@+id/image_weather_icon"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                tools:background="@drawable/ic_wi_day_sunny"
+                tools:background="@drawable/forecast_day_sunny"
                 tools:backgroundTint="#fff"/>
 
             <TextView
@@ -248,7 +248,7 @@
                         android:id="@+id/image_wind_speed"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:background="@drawable/ic_wi_windy"
+                        android:background="@drawable/forecast_windy"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
