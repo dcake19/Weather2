@@ -44,10 +44,10 @@ object WeatherUITestUtil {
             "$tempHigh\u00B0C","$tempLow\u00B0C","$rain mm")
     }
 
-    fun getHourForecastView(i: Int,hour:Int,weatherListItem: Int = 0,temp: Int,feelLike:Int, rain: Int,
+    fun getHourForecastView(i: Int,hour:Int,weatherId: Int = 0,temp: Int,feelLike:Int, rain: Int,
                             windSpeed: Double, windDirection: Int, cloudCoverage: Int): WeatherHourForecastView{
         return WeatherHourForecastView("placeId_$i","Place Name $i","$hour:00",
-            weatherIds[weatherListItem],"$temp\u00B0C",
+            weatherId,"$temp\u00B0C",
             "$feelLike\u00B0C","$rain mm","$windSpeed m/s",
             windDirection,"$cloudCoverage%", "Description $i")
     }

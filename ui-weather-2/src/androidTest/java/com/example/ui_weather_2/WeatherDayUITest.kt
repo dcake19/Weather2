@@ -59,7 +59,8 @@ class WeatherDayUITest {
     private fun getWeather(): List<WeatherDayForecastView>{
         val dates = listOf("Mon 5 October","Tue 6 October","Wed 7 October","Thu 8 October",
             "Fri 9 October","Sat 10 October","Sun 11 October")
-        val weatherIds = listOf(THUNDERSTORM, DRIZZLE_HEAVY_SHOWER_RAIN , RAIN_MODERATE, SNOW, CLEAR,CLOUDS_FEW,CLOUDS_OVERCAST)
+        val weatherIds = listOf(THUNDERSTORM, DRIZZLE_HEAVY_SHOWER_RAIN ,
+            RAIN_MODERATE, SNOW, CLEAR,CLOUDS_FEW,CLOUDS_OVERCAST)
         val tempHigh = listOf(20,19,16,3,26,23,21)
         val tempLow = listOf(8,4,2,-9,14,12,10)
         val rain = listOf(16,2,4,4,0,0,0)

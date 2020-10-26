@@ -61,7 +61,5 @@ class FragmentWeatherDays : Fragment() {
             return weather.size
         }
 
-
-
     }
 }
