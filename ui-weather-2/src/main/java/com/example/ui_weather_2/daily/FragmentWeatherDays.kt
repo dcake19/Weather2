@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
 import com.example.presentation_weather_2.WeatherDayForecastView
 import com.example.presentation_weather_2.daily.WeatherDailyForecastViewModel
@@ -33,6 +35,10 @@ class FragmentWeatherDays : Fragment() {
             val args = FragmentWeatherDaysArgs.fromBundle(a)
             initialDay = args.day
         }
+
+        view.findViewById<ImageButton>(R.id.button_back).setOnClickListener{
+            Navigation.findNavController(view).popBackStack()
+        }
     }
 
     override fun onResume() {
@@ -49,7 +55,9 @@ class FragmentWeatherDays : Fragment() {
         viewPager?.currentItem = initialDay
     }
 
-    inner class WeatherDayPagerAdapter(private val weather: List<WeatherDayForecastView>): FragmentPagerAdapter(childFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
+    inner class WeatherDayPagerAdapter(private val weather: List<WeatherDayForecastView>): FragmentPagerAdapter(
+        childFragmentManager,
+        BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
 
         override fun getItem(position: Int): Fragment {
             val fragment = FragmentWeatherDay()

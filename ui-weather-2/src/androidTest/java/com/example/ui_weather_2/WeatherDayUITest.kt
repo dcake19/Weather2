@@ -4,6 +4,7 @@ import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.swipeLeft
 import androidx.test.espresso.action.ViewActions.swipeRight
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -84,6 +85,20 @@ class WeatherDayUITest {
         R.drawable.forecast_day_sunny,R.drawable.forecast_day_cloudy,R.drawable.ic_wi_cloud)
 
     @Test
+    fun backPressed(){
+        val navController = Mockito.mock(NavController::class.java)
+        Mockito.`when`(viewModel.getWeatherDaysObservable())
+            .thenReturn(Observable.create{emitter = it})
+        Mockito.`when`(viewModel.getWeatherDays())
+            .then{emitter.onNext(getWeather())}
+
+        launchFragment(navController,3)
+
+        onView(withId(R.id.button_back)).perform(ViewActions.click())
+        Mockito.verify(navController).popBackStack()
+    }
+
+    @Test
     fun displayWeatherDaily(){
         val startDay = 3
         val weather = getWeather()
@@ -139,7 +154,6 @@ class WeatherDayUITest {
 
         viewInteraction.perform(CustomScrollActions.nestedScrollTo())
         viewInteraction.check(matches(withText(display)))
-
     }
 
 }

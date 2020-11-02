@@ -14,6 +14,7 @@
     <string name="hourly">Hourly</string>
     <string name="high">High:</string>
     <string name="low">Low:</string>
+    <string name="feels_like">Feels Like %1$s</string>
 
     <string name="north_abbr">N</string>
     <string name="north_east_abbr">NE</string>

@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -26,6 +27,7 @@ import org.mockito.MockitoAnnotations
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.ui_weather_2.daily.FragmentWeatherDaysArgs
+import io.reactivex.Observable
 import org.hamcrest.core.AllOf.allOf
 
 @RunWith(AndroidJUnit4::class)
@@ -77,13 +79,45 @@ class WeatherHourUITest {
         R.drawable.forecast_sandstorm,R.drawable.forecast_fog,R.drawable.forecast_smoke)
 
     @Test
+    fun backPressed(){
+        val navController = Mockito.mock(NavController::class.java)
+        Mockito.`when`(viewModel.getWeatherHoursObservable())
+            .thenReturn(Observable.create{emitter = it})
+        Mockito.`when`(viewModel.getWeatherHours())
+            .then{emitter.onNext(getWeather())}
+
+        launchFragment(navController,3)
+
+        onView(withId(R.id.button_back)).perform(ViewActions.click())
+        Mockito.verify(navController).popBackStack()
+    }
+
+    @Test
     fun displayWeatherHourly(){
         val startHour = 3
         val weather = getWeather()
 
         val navController = Mockito.mock(NavController::class.java)
+        Mockito.`when`(viewModel.getWeatherHoursObservable())
+            .thenReturn(Observable.create{emitter = it})
+        Mockito.`when`(viewModel.getWeatherHours())
+            .then{emitter.onNext(weather)}
 
         launchFragment(navController,startHour)
+
+        for (hour in (startHour until weather.size)) {
+            check(weather[hour], winDirection[hour], weatherDrawables[hour])
+            onView(allOf(withId(R.id.layout_weather_hour), isDisplayed())).perform(ViewActions.swipeLeft())
+            Thread.sleep(1000)
+        }
+
+        for (hour in  weather.size-1 downTo 0){
+            check(weather[hour], winDirection[hour], weatherDrawables[hour])
+            onView(allOf(withId(R.id.layout_weather_hour), isDisplayed())).perform(ViewActions.swipeRight())
+            Thread.sleep(1000)
+        }
+
+        check(weather.first(),winDirection.first(),weatherDrawables.first())
     }
 
     private fun check(forecast: WeatherHourForecastView,windDirection: String,drawable: Int){
