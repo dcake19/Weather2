@@ -1,5 +1,7 @@
 package com.example.presentation_weather_2
 
+data class LocationView(val placeId: String, val placeName: String)
+
 data class WeatherTodayView (val placeId: String, val placeName: String, val dateTime: String,
                            val weatherId:Int, val temperature: String,val feelsLike:String,
                            val rain: String, val sunrise: String, val sunset: String,

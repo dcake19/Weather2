@@ -20,7 +20,7 @@ import javax.inject.Inject
 class FragmentWeatherHours : Fragment() {
 
     @Inject lateinit var viewModel: WeatherHourlyForecastViewModel
-    private var initialHour = 3
+    private var initialHour = 0
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {

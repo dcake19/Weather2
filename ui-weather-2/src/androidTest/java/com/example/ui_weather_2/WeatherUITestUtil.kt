@@ -1,9 +1,14 @@
 package com.example.ui_weather_2
 
+import android.location.Location
 import com.example.presentation_weather_2.*
 import com.example.presentation_weather_2.constants.*
 
 object WeatherUITestUtil {
+
+    fun getLocation(i: Int): LocationView{
+        return LocationView("placeId_$i","Place Name $i")
+    }
 
     fun getWeatherToday(i: Int,weatherListItem: Int = 0,temp: Int,feelLike:Int, rain: Int,
                         sunrise: String,sunset: String,windSpeed: Double, windDirection: Int,
