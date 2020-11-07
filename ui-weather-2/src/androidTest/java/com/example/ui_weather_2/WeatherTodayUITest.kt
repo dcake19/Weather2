@@ -5,13 +5,23 @@ import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.swipeLeft
+import androidx.test.espresso.action.ViewActions.swipeRight
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import org.hamcrest.core.AllOf.allOf
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.presentation_weather_2.LocationView
 import com.example.presentation_weather_2.WeatherTodayView
+import com.example.presentation_weather_2.constants.CLEAR
+import com.example.presentation_weather_2.constants.NORTH
 import com.example.presentation_weather_2.main.WeatherMainForecastViewModel
 import com.example.ui_weather_2.daily.FragmentWeatherDays
 import com.example.ui_weather_2.today.FragmentWeatherTodayOverview
+import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import org.junit.Before
 import org.junit.Test
@@ -24,7 +34,8 @@ import org.mockito.MockitoAnnotations
 class WeatherTodayUITest {
 
     @Mock lateinit var viewModel: WeatherMainForecastViewModel
-    private lateinit var emitter: ObservableEmitter<WeatherTodayView>
+    private lateinit var locationsEmitter: ObservableEmitter<List<LocationView>>
+    private lateinit var weatherEmitter: ObservableEmitter<WeatherTodayView>
 
     @Before
     fun before(){
@@ -46,12 +57,64 @@ class WeatherTodayUITest {
 
     }
 
+    private fun getWeather(): List<WeatherTodayView>{
+        return (1..5).map { WeatherUITestUtil.getWeatherToday(it, CLEAR,25,20,2,
+            "7:00","8:00",0.8, NORTH,10,1000,80)}
+    }
+
+    private fun getLocations(): List<LocationView>{
+        return (1..5).map { WeatherUITestUtil.getLocation(it) }
+    }
+
     @Test
-    fun displayWeatherToday(){
+    fun displaLocations(){
+        val locations = getLocations()
+
         val navController = Mockito.mock(NavController::class.java)
+
+        Mockito.`when`(viewModel.getLocationsObservable())
+            .thenReturn(Observable.create { locationsEmitter = it })
+        Mockito.`when`(viewModel.getWeatherObservable())
+            .thenReturn(Observable.create { weatherEmitter = it })
+
+        Mockito.`when`(viewModel.getLocations()).then { locationsEmitter.onNext(locations) }
 
         launchFragment(navController)
 
+        for (location in locations) {
+            onView(allOf(withId(R.id.text_location), isDisplayed()))
+                .check(matches(withText(location.placeName)))
+
+//            onView(allOf(isDisplayed(), withId(R.id.progress)))
+//                .check(matches(isDisplayed()))
+//
+            onView(allOf(isDisplayed(), withId(R.id.layout_weather_forecast)))
+                .check(doesNotExist())
+
+            onView(allOf(withId(R.id.pager_weather_day), isDisplayed()))
+                .perform(swipeLeft())
+            Thread.sleep(1000)
+        }
+    }
+
+    @Test
+    fun displayWeatherToday(){
+        val locations = getLocations()
+        val weather = getWeather()
+
+        val navController = Mockito.mock(NavController::class.java)
+
+        Mockito.`when`(viewModel.getLocationsObservable())
+            .thenReturn(Observable.create { locationsEmitter = it })
+        Mockito.`when`(viewModel.getWeatherObservable())
+            .thenReturn(Observable.create { weatherEmitter = it })
+
+        for (i in 1..5) {
+            Mockito.`when`(viewModel.getWeather(locations[i].placeId))
+                .then{weatherEmitter.onNext(weather[i])}
+        }
+
+        launchFragment(navController)
 
     }
 

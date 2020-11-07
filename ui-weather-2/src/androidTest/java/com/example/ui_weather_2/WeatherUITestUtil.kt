@@ -10,13 +10,13 @@ object WeatherUITestUtil {
         return LocationView("placeId_$i","Place Name $i")
     }
 
-    fun getWeatherToday(i: Int,weatherListItem: Int = 0,temp: Int,feelLike:Int, rain: Int,
+    fun getWeatherToday(i: Int,weatherId: Int = 0,temp: Int,feelLike:Int, rain: Int,
                         sunrise: String,sunset: String,windSpeed: Double, windDirection: Int,
                         cloudCoverage: Int,pressure: Int,humidity: Int,
                         initHour: Int=0,initDay: Int=0): WeatherTodayView{
 
         return WeatherTodayView("placeId_$i","Place Name $i",
-            "$initHour:00",weatherIds[weatherListItem],"$temp\u00B0C",
+            "$initHour:00",weatherId,"$temp\u00B0C",
             "$feelLike\u00B0C","$rain mm",sunrise,sunset,"$windSpeed m/s",
             windDirection,"$cloudCoverage%","$pressure hPa","$humidity%",
             "Description $i",getOverviewHourly(i,initHour), getOverviewDay(i,initDay))
