@@ -41,7 +41,7 @@
                 android:id="@+id/layout_weather_forecast"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="invisible"
+                android:visibility="visible"
                 tools:visibility="visible">
 
                 <TextView

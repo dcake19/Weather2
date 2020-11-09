@@ -62,6 +62,9 @@ class WeatherTodayUITest {
             "7:00","8:00",0.8, NORTH,10,1000,80)}
     }
 
+    private val weatherDrawable = R.drawable.forecast_day_sunny
+    private val windDirection = "N"
+
     private fun getLocations(): List<LocationView>{
         return (1..5).map { WeatherUITestUtil.getLocation(it) }
     }
@@ -77,7 +80,7 @@ class WeatherTodayUITest {
         Mockito.`when`(viewModel.getWeatherObservable())
             .thenReturn(Observable.create { weatherEmitter = it })
 
-        Mockito.`when`(viewModel.getLocations()).then { locationsEmitter.onNext(locations) }
+        Mockito.`when`(viewModel.start()).then { locationsEmitter.onNext(locations) }
 
         launchFragment(navController)
 
@@ -109,13 +112,34 @@ class WeatherTodayUITest {
         Mockito.`when`(viewModel.getWeatherObservable())
             .thenReturn(Observable.create { weatherEmitter = it })
 
-        for (i in 1..5) {
+        Mockito.`when`(viewModel.start()).then { locationsEmitter.onNext(locations) }
+
+        for (i in 0..4) {
             Mockito.`when`(viewModel.getWeather(locations[i].placeId))
                 .then{weatherEmitter.onNext(weather[i])}
         }
 
         launchFragment(navController)
 
+        onView(allOf(withId(R.id.text_location), isDisplayed()))
+            .check(matches(withText(locations[0].placeName)))
+//
+        check(weather[0],windDirection,weatherDrawable)
+
+        Thread.sleep(1000)
+
+    }
+
+    private fun check(forecast: WeatherTodayView,windDirection: String,drawable: Int){
+        checkId(R.id.text_date_time,forecast.dateTime)
+    }
+
+    private fun checkId(id: Int,display: String){
+        val viewInteraction = onView(allOf(withId(id),
+            isDescendantOfA(allOf(withId(R.id.layout_weather_forecast),isDisplayed()))))
+
+        viewInteraction.perform(CustomScrollActions.nestedScrollTo())
+        viewInteraction.check(matches(withText(display)))
     }
 
 }

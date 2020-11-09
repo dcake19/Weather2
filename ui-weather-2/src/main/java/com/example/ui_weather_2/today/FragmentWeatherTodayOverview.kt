@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.presentation_weather_2.LocationView
+import com.example.presentation_weather_2.WeatherTodayView
 import com.example.presentation_weather_2.main.WeatherMainForecastViewModel
 import com.example.ui_weather_2.R
 import com.example.ui_weather_2.application.ApplicationFeatureWeather
@@ -17,6 +20,7 @@ import javax.inject.Inject
 class FragmentWeatherTodayOverview: Fragment() {
 
     @Inject lateinit var viewModel: WeatherMainForecastViewModel
+    private lateinit var pagerAdapter: WeatherTodayPagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,21 +33,32 @@ class FragmentWeatherTodayOverview: Fragment() {
         viewModel.getLocationsObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { onLocationsReady(it) }
-       // viewModel.getWeatherObservable()
-        viewModel.getLocations()
+        viewModel.getWeatherObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { pagerAdapter.addWeatherForecast(it) }
+        viewModel.start()
     }
 
     private fun onLocationsReady(locations: List<LocationView>){
         val viewPager = view?.findViewById<ViewPager>(R.id.pager_weather_day)
-        viewPager?.adapter = WeatherTodayPagerAdapter(locations)
+        pagerAdapter = WeatherTodayPagerAdapter(locations)
+        viewPager?.adapter = pagerAdapter
     }
 
     inner class WeatherTodayPagerAdapter(private val locations: List<LocationView>)
-        : FragmentPagerAdapter(childFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
+        : FragmentStatePagerAdapter(childFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
+
+        private val forecasts: HashMap<String,WeatherTodayView> = HashMap()
 
         override fun getItem(position: Int): Fragment {
             val fragment = FragmentWeatherTodayLocationOverview()
             fragment.setLocation(locations[position])
+
+            val forecast = forecasts[locations[position].placeId]
+            fragment.setForecast(forecast)
+
+            if (forecast==null) viewModel.getWeather(locations[position].placeId)
+
             return fragment
         }
 
@@ -51,5 +66,13 @@ class FragmentWeatherTodayOverview: Fragment() {
             return locations.size
         }
 
+        override fun getItemPosition(`object`: Any): Int {
+            return PagerAdapter.POSITION_NONE
+        }
+
+        fun addWeatherForecast(weather: WeatherTodayView){
+            forecasts[weather.placeId] = weather
+            notifyDataSetChanged()
+        }
     }
 }
