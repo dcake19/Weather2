@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.presentation_weather_2.LocationView
 import com.example.presentation_weather_2.WeatherTodayView
 import com.example.ui_weather_2.R
+import com.example.ui_weather_2.mapToImageResource
+import com.example.ui_weather_2.mapWindDirection
 
 class FragmentWeatherTodayLocationOverview : Fragment() {
 
@@ -44,6 +47,20 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
         if (f!=null){
             view?.findViewById<ConstraintLayout>(R.id.layout_weather_forecast)?.visibility = View.VISIBLE
             view?.findViewById<TextView>(R.id.text_date_time)?.text = f.dateTime
+            view?.findViewById<TextView>(R.id.text_temp)?.text = f.temperature
+            view?.findViewById<TextView>(R.id.text_temp_feel)?.text = f.feelsLike
+            view?.findViewById<TextView>(R.id.text_summary)?.text = f.description
+            view?.findViewById<TextView>(R.id.text_rain_quantity)?.text = f.rain
+            view?.findViewById<TextView>(R.id.text_sunrise_time)?.text = f.sunrise
+            view?.findViewById<TextView>(R.id.text_sunset_time)?.text = f.sunset
+            view?.findViewById<TextView>(R.id.text_wind_speed)?.text = f.windSpeed
+            view?.findViewById<TextView>(R.id.text_wind_direction)?.text =  mapWindDirection(context,f.windDirection)
+            view?.findViewById<TextView>(R.id.text_cloud_coverage_pct)?.text = f.cloudCoverage
+            view?.findViewById<TextView>(R.id.text_pressure)?.text = f.pressure
+            view?.findViewById<TextView>(R.id.text_humidity_pct)?.text = f.humidity
+
+            val d = mapToImageResource(f.weatherId)
+            view?.findViewById<ImageView>(R.id.image_weather_icon)?.setImageResource(d)
         }
     }
 

@@ -121,17 +121,37 @@ class WeatherTodayUITest {
 
         launchFragment(navController)
 
-        onView(allOf(withId(R.id.text_location), isDisplayed()))
-            .check(matches(withText(locations[0].placeName)))
-//
-        check(weather[0],windDirection,weatherDrawable)
+        for (i in locations.indices) {
+            onView(allOf(withId(R.id.text_location), isDisplayed()))
+                .check(matches(withText(locations[i].placeName)))
 
-        Thread.sleep(1000)
+            check(weather[i], windDirection, weatherDrawable)
+            onView(allOf(withId(R.id.layout_weather_forecast), isDisplayed())).perform(swipeLeft())
+
+            Thread.sleep(1000)
+        }
 
     }
 
     private fun check(forecast: WeatherTodayView,windDirection: String,drawable: Int){
         checkId(R.id.text_date_time,forecast.dateTime)
+        checkId(R.id.text_temp,forecast.temperature)
+        checkId(R.id.text_temp_feel,forecast.feelsLike)
+        checkId(R.id.text_summary,forecast.description)
+        checkId(R.id.text_rain_quantity,forecast.rain)
+        checkId(R.id.text_sunrise_time,forecast.sunrise)
+        checkId(R.id.text_sunset_time,forecast.sunset)
+        checkId(R.id.text_wind_speed,forecast.windSpeed)
+        checkId(R.id.text_wind_direction,windDirection)
+        checkId(R.id.text_cloud_coverage_pct,forecast.cloudCoverage)
+        checkId(R.id.text_pressure,forecast.pressure)
+        checkId(R.id.text_humidity_pct,forecast.humidity)
+
+        val viewInteraction = onView(allOf(withId(R.id.image_weather_icon),
+            isDescendantOfA(allOf(withId(R.id.layout_weather_forecast),isDisplayed()))))
+
+        viewInteraction.perform(CustomScrollActions.nestedScrollTo())
+        viewInteraction.check(matches(withDrawable(drawable,R.color.dark_icon_1)))
     }
 
     private fun checkId(id: Int,display: String){
