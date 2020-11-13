@@ -26,7 +26,8 @@
         app:layout_constraintTop_toBottomOf="@id/text_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:background="@drawable/forecast_day_sunny"/>
+        tools:src="@drawable/forecast_day_sunny"
+        android:tint="@color/dark_icon_1"/>
 
 
     <ImageView
@@ -35,6 +36,7 @@
         android:layout_height="30dp"
         android:background="@drawable/ic_wi_raindrop"
         android:layout_marginStart="10dp"
+        android:backgroundTint="@color/dark_icon_1"
         app:layout_constraintTop_toBottomOf="@id/image_weather_icon"
         app:layout_constraintStart_toStartOf="parent"/>
 

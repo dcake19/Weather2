@@ -67,7 +67,7 @@
                         android:id="@+id/image_weather_icon"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        tools:background="@drawable/forecast_day_sunny"
+                        tools:src="@drawable/forecast_day_sunny"
                         android:tint="@color/dark_icon_1"/>
 
                     <TextView
@@ -507,10 +507,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:orientation="horizontal"
                     app:layout_constraintTop_toBottomOf="@id/text_hourly"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:orientation="horizontal"
                     tools:listitem="@layout/weather_today_hour_item"/>
 
                 <TextView
@@ -530,10 +530,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:orientation="horizontal"
                     app:layout_constraintTop_toBottomOf="@id/text_daily"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:orientation="horizontal"
                     tools:listitem="@layout/weather_today_day_item"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 

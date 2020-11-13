@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.presentation_weather_2.LocationView
 import com.example.presentation_weather_2.WeatherTodayView
 import com.example.ui_weather_2.R
@@ -19,6 +21,9 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
     private var location: LocationView? = null
     private var forecast: WeatherTodayView? = null
 
+    private lateinit var hourlyAdapter: WeatherTodayHourlyAdapter
+    private lateinit var dailyAdapter: WeatherTodayDailyAdapter
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.weather_today_pager_item,container,false)
@@ -26,6 +31,9 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setAdapters()
+        createRecyclerViews(view)
 
         view.findViewById<TextView>(R.id.text_location).text = location?.placeName
 
@@ -39,6 +47,24 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
     fun setForecast(forecast: WeatherTodayView?){
         this.forecast = forecast
         displayForecast()
+    }
+
+    private fun setAdapters(){
+        if (!::hourlyAdapter.isInitialized) hourlyAdapter = WeatherTodayHourlyAdapter()
+        if (!::dailyAdapter.isInitialized) dailyAdapter = WeatherTodayDailyAdapter()
+    }
+
+    private fun createRecyclerViews(view: View){
+        val listHourly = view.findViewById<RecyclerView>(R.id.list_hourly)
+        val listDaily = view.findViewById<RecyclerView>(R.id.list_daily)
+
+        listDaily.layoutManager =  LinearLayoutManager(activity,
+            RecyclerView.HORIZONTAL, false)
+        listHourly.layoutManager = LinearLayoutManager(activity,
+            RecyclerView.HORIZONTAL, false)
+
+        listHourly.adapter = hourlyAdapter
+        listDaily.adapter = dailyAdapter
     }
 
     private fun displayForecast(){
@@ -61,6 +87,9 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
 
             val d = mapToImageResource(f.weatherId)
             view?.findViewById<ImageView>(R.id.image_weather_icon)?.setImageResource(d)
+
+            hourlyAdapter.items = f.hourly
+            dailyAdapter.items = f.daily
         }
     }
 
