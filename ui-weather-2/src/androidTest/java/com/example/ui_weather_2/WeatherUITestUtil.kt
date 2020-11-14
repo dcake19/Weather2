@@ -60,6 +60,7 @@ object WeatherUITestUtil {
     fun getDayForecastView(i: Int,date: String,weatherId: Int = 0,tempHigh: Int,tempLow:Int, rain: Int,
                            sunrise: String,sunset: String,windSpeed: Double, windDirection: Int,
                            cloudCoverage: Int,pressure: Int,humidity: Int): WeatherDayForecastView{
+
         return WeatherDayForecastView("placeId_$i","Place Name $i",date,
             weatherId,"$tempHigh\u00B0C",
             "$tempLow\u00B0C","$rain mm",sunrise,sunset,"$windSpeed m/s",
@@ -127,5 +128,67 @@ object WeatherUITestUtil {
 
     val rainIds = listOf(RAIN_LIGHT, RAIN_MODERATE, RAIN_FREEZING, RAIN_LIGHT_SHOWER,
         RAIN_RAGGED_SHOWER, RAIN_SHOWER, RAIN_HEAVY_SHOWER, RAIN_HEAVY, RAIN_VERY_HEAVY, RAIN_EXTREME)
+
+
+    fun getIcons(): HashMap<Int,Int>{
+        val icons = HashMap<Int,Int>()
+        icons[THUNDERSTORM_WITH_LIGHT_RAIN] = R.drawable.forecast_thunderstorm
+        icons[THUNDERSTORM_WITH_RAIN] = R.drawable.forecast_thunderstorm
+        icons[THUNDERSTORM_WITH_HEAVY_RAIN] = R.drawable.forecast_thunderstorm
+        icons[THUNDERSTORM_LIGHT] = R.drawable.forecast_thunderstorm
+        icons[THUNDERSTORM] = R.drawable.forecast_thunderstorm
+        icons[THUNDERSTORM_HEAVY] = R.drawable.forecast_thunderstorm
+        icons[THUNDERSTORM_RAGGED] = R.drawable.forecast_thunderstorm
+        icons[THUNDERSTORM_WITH_LIGHT_DRIZZLE] = R.drawable.forecast_thunderstorm
+        icons[THUNDERSTORM_WITH_DRIZZLE] = R.drawable.forecast_thunderstorm
+        icons[THUNDERSTORM_WITH_HEAVY_DRIZZLE] = R.drawable.forecast_thunderstorm
+        icons[DRIZZLE_LIGHT] = R.drawable.forecast_rain
+        icons[DRIZZLE] = R.drawable.forecast_rain
+        icons[DRIZZLE_HEAVY] = R.drawable.forecast_rain
+        icons[DRIZZLE_RAIN_LIGHT] = R.drawable.forecast_rain
+        icons[DRIZZLE_RAIN] = R.drawable.forecast_rain
+        icons[DRIZZLE_RAIN_HEAVY] = R.drawable.forecast_rain
+        icons[DRIZZLE_SHOWER_RAIN] = R.drawable.forecast_day_showers
+        icons[DRIZZLE_HEAVY_SHOWER_RAIN] = R.drawable.forecast_day_showers
+        icons[DRIZZLE_SHOWER] = R.drawable.forecast_day_showers
+        icons[RAIN_LIGHT] = R.drawable.forecast_rain
+        icons[RAIN_MODERATE] = R.drawable.forecast_rain
+        icons[RAIN_HEAVY] = R.drawable.forecast_rain
+        icons[RAIN_VERY_HEAVY] = R.drawable.forecast_rain
+        icons[RAIN_EXTREME] = R.drawable.forecast_rain
+        icons[RAIN_FREEZING] = R.drawable.forecast_hail
+        icons[RAIN_LIGHT_SHOWER] = R.drawable.forecast_day_rain
+        icons[RAIN_SHOWER] = R.drawable.forecast_day_rain
+        icons[RAIN_HEAVY_SHOWER] = R.drawable.forecast_day_rain
+        icons[RAIN_RAGGED_SHOWER] = R.drawable.forecast_day_rain
+        icons[SNOW_LIGHT] = R.drawable.forecast_snow
+        icons[SNOW] = R.drawable.forecast_snow
+        icons[SNOW_HEAVY] = R.drawable.forecast_snow
+        icons[SNOW_SLEET] = R.drawable.forecast_day_sleet
+        icons[SNOW_LIGHT_SHOWER_SLEET] = R.drawable.forecast_day_sleet
+        icons[SNOW_SHOWER_SLEET] = R.drawable.forecast_day_sleet
+        icons[SNOW_LIGHT_RAIN] = R.drawable.forecast_day_rain_mix
+        icons[SNOW_RAIN] = R.drawable.forecast_day_rain_mix
+        icons[SNOW_LIGHT_SHOWER] = R.drawable.forecast_day_rain_mix
+        icons[SNOW_SHOWER] = R.drawable.forecast_day_rain_mix
+        icons[SNOW_HEAVY_SHOWER] = R.drawable.forecast_day_rain_mix
+        icons[MIST] = R.drawable.forecast_fog
+        icons[SMOKE] = R.drawable.forecast_smoke
+        icons[HAZE] = R.drawable.forecast_day_haze
+        icons[DUST_WHIRLS] = R.drawable.forecast_dust
+        icons[FOG] = R.drawable.forecast_fog
+        icons[SAND] = R.drawable.forecast_sandstorm
+        icons[DUST] = R.drawable.forecast_dust
+        icons[ASH] = R.drawable.forecast_volcano
+        icons[SQUALL] = R.drawable.forecast_tornado
+        icons[TORNADO] = R.drawable.forecast_tornado
+        icons[CLEAR] = R.drawable.forecast_day_sunny
+        icons[CLOUDS_FEW] = R.drawable.forecast_day_cloudy
+        icons[CLOUDS_SCATTERED] = R.drawable.ic_wi_cloud
+        icons[CLOUDS_BROKEN] = R.drawable.ic_wi_cloud
+        icons[CLOUDS_OVERCAST] = R.drawable.ic_wi_cloud
+        return icons
+    }
+
 }
 

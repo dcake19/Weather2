@@ -34,14 +34,13 @@ fun withDrawable(@DrawableRes id: Int, @ColorRes tint: Int? = null, tintMode: Po
     }
 }
 
+fun Int.toColor(context: Context) = ContextCompat.getColor(context, this)
 
-private fun Int.toColor(context: Context) = ContextCompat.getColor(context, this)
-
-private fun Drawable.tinted(@ColorInt tintColor: Int? = null, tintMode: PorterDuff.Mode = PorterDuff.Mode.SRC_IN) =
+fun Drawable.tinted(@ColorInt tintColor: Int? = null, tintMode: PorterDuff.Mode = PorterDuff.Mode.SRC_IN) =
     apply {
         setTintList(tintColor?.toColorStateList())
         setTintMode(tintMode)
     }
 
-private fun Int.toColorStateList() = ColorStateList.valueOf(this)
+fun Int.toColorStateList() = ColorStateList.valueOf(this)
 

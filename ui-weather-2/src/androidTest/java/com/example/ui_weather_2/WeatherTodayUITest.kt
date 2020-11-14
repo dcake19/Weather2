@@ -2,11 +2,14 @@ package com.example.ui_weather_2
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.get
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.swipeLeft
@@ -28,6 +31,7 @@ import com.example.presentation_weather_2.main.WeatherMainForecastViewModel
 import com.example.ui_weather_2.RecyclerViewMatcher.withRecyclerView
 import com.example.ui_weather_2.daily.FragmentWeatherDays
 import com.example.ui_weather_2.today.FragmentWeatherTodayOverview
+import com.example.ui_weather_2.today.WeatherTodayHourlyAdapter
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import org.hamcrest.Description
@@ -136,21 +140,16 @@ class WeatherTodayUITest {
 
             check(weather[i], windDirection, weatherDrawable)
 
-//            for (j in weather[i].hourly.indices) {
-//                check(j, weather[i].hourly[j], weatherDrawable)
-//            }
+            for (j in weather[i].hourly.indices) {
+                check(j, weather[i].hourly[j])
+            }
 
-       //    check(0, weather[i].hourly[0], weatherDrawable)
-          //  Thread.sleep(1000)
+            Thread.sleep(1000)
 
             onView(allOf(withId(R.id.layout_weather_forecast), isDisplayed())).perform(swipeLeft())
 
             Thread.sleep(1000)
         }
-
-        check(0, weather[4].hourly[0], weatherDrawable)
-        Thread.sleep(3000)
-
     }
 
     private fun check(forecast: WeatherTodayView,windDirection: String,drawable: Int){
@@ -182,39 +181,39 @@ class WeatherTodayUITest {
         viewInteraction.check(matches(withText(display)))
     }
 
-    private fun check(position: Int,forecast: WeatherTodayHourlyForecastView,drawable: Int){
-
-        checkRecyclerViewId(R.id.list_hourly,R.id.text_hour_time,position,forecast.time)
-        //checkRecyclerViewId(R.id.list_hourly,R.id.text_hour_rain,position,forecast.rain)
-        //checkRecyclerViewId(R.id.list_hourly,R.id.text_hour_temp,position,forecast.temperature)
-    }
-
-    private fun checkRecyclerViewId(recyclerViewId: Int,id: Int,position: Int,display: String){
-//        onView(withRecyclerView(recyclerViewId)
-//            .atPositionOnView(position,id))
-//            .check(matches(withText2(display)))
-       // withRecyclerView(recyclerViewId).atPositionOnView(position,id)
+    private fun check(position: Int,forecast: WeatherTodayHourlyForecastView){
         val viewInteraction = onView(allOf(withId(R.id.list_hourly),
             isDescendantOfA(allOf(withId(R.id.layout_weather_forecast),isDisplayed()))))
 
         viewInteraction.perform(CustomScrollActions.nestedScrollTo())
-
-        viewInteraction.check(matches(withText2(display)))
-//        onView(allOf(withRecyclerView(recyclerViewId)
-//            .atPositionOnView(position,id),isDisplayed()))
-//            .check(matches(withText2(display)))
+        viewInteraction.perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(position))
+        Thread.sleep(1000)
+        viewInteraction.check(matches(withHourlyForecast(position,forecast)))
     }
 
-    fun withText2(text: String)= object : TypeSafeMatcher<View>() {
+    private fun withHourlyForecast(position: Int,
+                                   forecast: WeatherTodayHourlyForecastView)= object : TypeSafeMatcher<View>() {
         override fun describeTo(description: Description?) {
-            description?.appendText("The TextView/EditText has value")
+            description?.appendText("Hourly RecyclerView has value position: $position  time: ${forecast.time}  " +
+                    "rain: ${forecast.rain}  temp: ${forecast.temperature}  weather id: ${forecast.weatherId}")
         }
 
-        override fun matchesSafely(item: View?): Boolean {
-
-            val time = (item as RecyclerView)[0].findViewById<TextView>(R.id.text_hour_time).text
-            val temp = (item as RecyclerView)[0].findViewById<TextView>(R.id.text_hour_temp).text
-            return true
+        override fun matchesSafely(item: View): Boolean {
+            val context = item.context
+            val tintColor = (R.color.dark_icon_1).toColor(context)
+                val expectedBitmap =
+                    item.context.getDrawable(WeatherUITestUtil.getIcons()[forecast.weatherId] ?: -1)
+                        ?.tinted(tintColor)?.toBitmap()
+            return if (item !is RecyclerView) false
+            else {
+                val lm = (item.layoutManager as LinearLayoutManager)
+                val first = lm.findFirstVisibleItemPosition()
+                forecast.time == item[position-first].findViewById<TextView>(R.id.text_hour_time).text
+                        && forecast.rain == item[position-first].findViewById<TextView>(R.id.text_hour_rain).text
+                        && forecast.temperature == item[position-first].findViewById<TextView>(R.id.text_hour_temp).text
+                        && item[position-first].findViewById<ImageView>(R.id.image_weather_hour_icon).drawable.toBitmap()
+                    .sameAs(expectedBitmap)
+            }
         }
 
     }
