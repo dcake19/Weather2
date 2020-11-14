@@ -88,8 +88,10 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
             val d = mapToImageResource(f.weatherId)
             view?.findViewById<ImageView>(R.id.image_weather_icon)?.setImageResource(d)
 
-            hourlyAdapter.items = f.hourly
-            dailyAdapter.items = f.daily
+            if (::hourlyAdapter.isInitialized && ::dailyAdapter.isInitialized ){//&& f.placeId=="placeId_5") {
+                hourlyAdapter.items = f.hourly
+                dailyAdapter.items = f.daily
+            }
         }
     }
 

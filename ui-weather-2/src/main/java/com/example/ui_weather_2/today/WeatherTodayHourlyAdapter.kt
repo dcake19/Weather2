@@ -3,6 +3,7 @@ package com.example.ui_weather_2.today
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.presentation_weather_2.WeatherTodayHourlyForecastView
 import com.example.ui_weather_2.R
@@ -29,7 +30,9 @@ class WeatherTodayHourlyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>()
 
     inner class HourlyViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
         fun setData(forecast: WeatherTodayHourlyForecastView){
-
+            itemView.findViewById<TextView>(R.id.text_hour_time).text = forecast.time
+            itemView.findViewById<TextView>(R.id.text_hour_rain).text = forecast.rain
+            itemView.findViewById<TextView>(R.id.text_hour_temp).text = forecast.temperature
         }
     }
 

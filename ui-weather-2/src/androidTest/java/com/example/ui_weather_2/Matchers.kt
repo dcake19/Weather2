@@ -7,12 +7,15 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.toColor
+import androidx.core.view.get
+import androidx.recyclerview.widget.RecyclerView
 import org.hamcrest.Description
 import org.hamcrest.TypeSafeMatcher
 
@@ -41,3 +44,4 @@ private fun Drawable.tinted(@ColorInt tintColor: Int? = null, tintMode: PorterDu
     }
 
 private fun Int.toColorStateList() = ColorStateList.valueOf(this)
+

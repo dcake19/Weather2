@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
-        android:id="@+id/text_time"
+        android:id="@+id/text_hour_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/dark_text_1"
@@ -20,10 +20,10 @@
         tools:text="19:00"/>
 
     <ImageView
-        android:id="@+id/image_weather_icon"
+        android:id="@+id/image_weather_hour_icon"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        app:layout_constraintTop_toBottomOf="@id/text_time"
+        app:layout_constraintTop_toBottomOf="@id/text_hour_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:src="@drawable/forecast_day_sunny"
@@ -37,21 +37,21 @@
         android:background="@drawable/ic_wi_raindrop"
         android:layout_marginStart="10dp"
         android:backgroundTint="@color/dark_icon_1"
-        app:layout_constraintTop_toBottomOf="@id/image_weather_icon"
+        app:layout_constraintTop_toBottomOf="@id/image_weather_hour_icon"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
+        android:id="@+id/text_hour_rain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/dark_text_1"
         app:layout_constraintTop_toTopOf="@id/image_rain_drop"
         app:layout_constraintBottom_toBottomOf="@id/image_rain_drop"
         app:layout_constraintStart_toEndOf="@+id/image_rain_drop"
-        app:layout_constraintEnd_toEndOf="@id/image_weather_icon"
-        tools:text="6 mm"/>
+        tools:text="6 mm" />
 
     <TextView
-        android:id="@+id/text_temp"
+        android:id="@+id/text_hour_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/dark_text_1"
@@ -61,11 +61,11 @@
         tools:text="26\u00B0C"/>
 
     <View
-        android:id="@+id/temp_range"
+        android:id="@+id/temp_range_hour"
         android:layout_width="20dp"
         android:layout_height="60dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintTop_toBottomOf="@id/text_temp"
+        app:layout_constraintTop_toBottomOf="@id/text_hour_temp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

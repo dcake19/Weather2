@@ -1,9 +1,13 @@
 package com.example.ui_weather_2
 
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
+import androidx.core.view.get
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.swipeLeft
 import androidx.test.espresso.action.ViewActions.swipeRight
@@ -11,18 +15,23 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import org.hamcrest.core.AllOf.allOf
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.presentation_weather_2.LocationView
+import com.example.presentation_weather_2.WeatherTodayHourlyForecastView
 import com.example.presentation_weather_2.WeatherTodayView
 import com.example.presentation_weather_2.constants.CLEAR
 import com.example.presentation_weather_2.constants.NORTH
 import com.example.presentation_weather_2.main.WeatherMainForecastViewModel
+import com.example.ui_weather_2.RecyclerViewMatcher.withRecyclerView
 import com.example.ui_weather_2.daily.FragmentWeatherDays
 import com.example.ui_weather_2.today.FragmentWeatherTodayOverview
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
+import org.hamcrest.Description
+import org.hamcrest.TypeSafeMatcher
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -70,7 +79,7 @@ class WeatherTodayUITest {
     }
 
     @Test
-    fun displaLocations(){
+    fun displayLocations(){
         val locations = getLocations()
 
         val navController = Mockito.mock(NavController::class.java)
@@ -91,12 +100,12 @@ class WeatherTodayUITest {
 //            onView(allOf(isDisplayed(), withId(R.id.progress)))
 //                .check(matches(isDisplayed()))
 //
-            onView(allOf(isDisplayed(), withId(R.id.layout_weather_forecast)))
-                .check(doesNotExist())
-
-            onView(allOf(withId(R.id.pager_weather_day), isDisplayed()))
-                .perform(swipeLeft())
-            Thread.sleep(1000)
+//            onView(allOf(isDisplayed(), withId(R.id.layout_weather_forecast)))
+//                .check(doesNotExist())
+//
+//            onView(allOf(withId(R.id.pager_weather_day), isDisplayed()))
+//                .perform(swipeLeft())
+//            Thread.sleep(1000)
         }
     }
 
@@ -126,10 +135,21 @@ class WeatherTodayUITest {
                 .check(matches(withText(locations[i].placeName)))
 
             check(weather[i], windDirection, weatherDrawable)
+
+//            for (j in weather[i].hourly.indices) {
+//                check(j, weather[i].hourly[j], weatherDrawable)
+//            }
+
+       //    check(0, weather[i].hourly[0], weatherDrawable)
+          //  Thread.sleep(1000)
+
             onView(allOf(withId(R.id.layout_weather_forecast), isDisplayed())).perform(swipeLeft())
 
             Thread.sleep(1000)
         }
+
+        check(0, weather[4].hourly[0], weatherDrawable)
+        Thread.sleep(3000)
 
     }
 
@@ -162,4 +182,42 @@ class WeatherTodayUITest {
         viewInteraction.check(matches(withText(display)))
     }
 
+    private fun check(position: Int,forecast: WeatherTodayHourlyForecastView,drawable: Int){
+
+        checkRecyclerViewId(R.id.list_hourly,R.id.text_hour_time,position,forecast.time)
+        //checkRecyclerViewId(R.id.list_hourly,R.id.text_hour_rain,position,forecast.rain)
+        //checkRecyclerViewId(R.id.list_hourly,R.id.text_hour_temp,position,forecast.temperature)
+    }
+
+    private fun checkRecyclerViewId(recyclerViewId: Int,id: Int,position: Int,display: String){
+//        onView(withRecyclerView(recyclerViewId)
+//            .atPositionOnView(position,id))
+//            .check(matches(withText2(display)))
+       // withRecyclerView(recyclerViewId).atPositionOnView(position,id)
+        val viewInteraction = onView(allOf(withId(R.id.list_hourly),
+            isDescendantOfA(allOf(withId(R.id.layout_weather_forecast),isDisplayed()))))
+
+        viewInteraction.perform(CustomScrollActions.nestedScrollTo())
+
+        viewInteraction.check(matches(withText2(display)))
+//        onView(allOf(withRecyclerView(recyclerViewId)
+//            .atPositionOnView(position,id),isDisplayed()))
+//            .check(matches(withText2(display)))
+    }
+
+    fun withText2(text: String)= object : TypeSafeMatcher<View>() {
+        override fun describeTo(description: Description?) {
+            description?.appendText("The TextView/EditText has value")
+        }
+
+        override fun matchesSafely(item: View?): Boolean {
+
+            val time = (item as RecyclerView)[0].findViewById<TextView>(R.id.text_hour_time).text
+            val temp = (item as RecyclerView)[0].findViewById<TextView>(R.id.text_hour_temp).text
+            return true
+        }
+
+    }
+
 }
+

@@ -20,7 +20,7 @@
         tools:text="Today"/>
 
     <ImageView
-        android:id="@+id/image_weather_icon"
+        android:id="@+id/image_day_weather_icon"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:tint="@color/dark_icon_1"
@@ -36,21 +36,22 @@
         android:background="@drawable/ic_wi_raindrop"
         android:backgroundTint="@color/dark_icon_1"
         android:layout_marginStart="10dp"
-        app:layout_constraintTop_toBottomOf="@id/image_weather_icon"
+        app:layout_constraintTop_toBottomOf="@id/image_day_weather_icon"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
+        android:id="@+id/text_day_rain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/dark_text_1"
         app:layout_constraintTop_toTopOf="@id/image_rain_drop"
         app:layout_constraintBottom_toBottomOf="@id/image_rain_drop"
         app:layout_constraintStart_toEndOf="@+id/image_rain_drop"
-        app:layout_constraintEnd_toEndOf="@id/image_weather_icon"
+        app:layout_constraintEnd_toEndOf="@id/image_day_weather_icon"
         tools:text="6 mm"/>
 
     <TextView
-        android:id="@+id/text_temp_max"
+        android:id="@+id/text_day_temp_max"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/dark_text_1"
@@ -60,20 +61,20 @@
         tools:text="26\u00B0C"/>
 
     <View
-        android:id="@+id/temp_range"
+        android:id="@+id/temp_day_range"
         android:layout_width="20dp"
         android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@id/text_temp_max"
+        app:layout_constraintTop_toBottomOf="@id/text_day_temp_max"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/text_temp_min"
+        android:id="@+id/text_temp_day_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/dark_text_1"
         android:layout_marginBottom="8dp"
-        app:layout_constraintTop_toBottomOf="@id/temp_range"
+        app:layout_constraintTop_toBottomOf="@id/temp_day_range"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

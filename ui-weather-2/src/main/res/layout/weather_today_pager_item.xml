@@ -132,7 +132,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                tools:backgroundTint="#fff"/>
+                                android:backgroundTint="@color/dark_icon_1"/>
 
                             <TextView
                                 android:id="@+id/text_rain"
@@ -179,7 +179,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                tools:backgroundTint="#fff"/>
+                                android:backgroundTint="@color/dark_icon_1"/>
 
                             <TextView
                                 android:id="@+id/sunrise"
@@ -226,7 +226,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                tools:backgroundTint="#fff"/>
+                                android:backgroundTint="@color/dark_icon_1"/>
 
                             <TextView
                                 android:id="@+id/text_sunset"
@@ -273,7 +273,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                tools:backgroundTint="#fff"/>
+                                android:backgroundTint="@color/dark_icon_1"/>
 
                             <TextView
                                 android:id="@+id/text_wind_speed_name"
@@ -320,7 +320,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                tools:backgroundTint="#fff"/>
+                                android:backgroundTint="@color/dark_icon_1"/>
 
                             <TextView
                                 android:id="@+id/text_wind_direction_name"
@@ -367,7 +367,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                tools:backgroundTint="#fff"/>
+                                android:backgroundTint="@color/dark_icon_1"/>
 
                             <TextView
                                 android:id="@+id/text_cloud_coverage"
@@ -414,7 +414,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                tools:backgroundTint="#fff"/>
+                                android:backgroundTint="@color/dark_icon_1"/>
 
                             <TextView
                                 android:id="@+id/text_pressure_name"
@@ -461,7 +461,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                tools:backgroundTint="#fff"/>
+                                android:backgroundTint="@color/dark_icon_1"/>
 
                             <TextView
                                 android:id="@+id/text_humidity"
