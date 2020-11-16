@@ -1,16 +1,18 @@
 package com.example.ui_weather_2.today
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.presentation_weather_2.WeatherTodayHourlyForecastView
 import com.example.ui_weather_2.R
 import com.example.ui_weather_2.mapToImageResource
 
-class WeatherTodayHourlyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WeatherTodayHourlyAdapter(private val placeId: String): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var items = listOf<WeatherTodayHourlyForecastView>()
 
@@ -26,18 +28,25 @@ class WeatherTodayHourlyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>()
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
-            is HourlyViewHolder -> holder.setData(items[position])
+            is HourlyViewHolder -> holder.setData(items[position],position)
         }
     }
 
     inner class HourlyViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
-        fun setData(forecast: WeatherTodayHourlyForecastView){
+        fun setData(forecast: WeatherTodayHourlyForecastView,position: Int){
             itemView.findViewById<TextView>(R.id.text_hour_time).text = forecast.time
             itemView.findViewById<TextView>(R.id.text_hour_rain).text = forecast.rain
             itemView.findViewById<TextView>(R.id.text_hour_temp).text = forecast.temperature
             val d = mapToImageResource(forecast.weatherId)
             itemView.findViewById<ImageView>(R.id.image_weather_hour_icon)
                 .setImageResource(d)
+
+            itemView.setOnClickListener {
+
+                itemView.findNavController()
+                    .navigate(FragmentWeatherTodayOverviewDirections
+                        .actionWeatherTodayToHourly(placeId,position))
+            }
         }
     }
 

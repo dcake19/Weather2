@@ -26,6 +26,9 @@
         android:label="fragment_weather_hourly"
         tools:layout="@layout/weather_hour_fragment">
         <argument
+            android:name="placeId"
+            app:argType="string"/>
+        <argument
             android:name="day"
             app:argType="integer"/>
     </fragment>
@@ -35,6 +38,9 @@
         android:name="com.example.ui_weather_2.daily.FragmentWeatherDays"
         android:label="fragment_weather_daily"
         tools:layout="@layout/weather_day_fragment">
+        <argument
+            android:name="placeId"
+            app:argType="string"/>
         <argument
             android:name="day"
             app:argType="integer"/>

@@ -50,8 +50,11 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
     }
 
     private fun setAdapters(){
-        if (!::hourlyAdapter.isInitialized) hourlyAdapter = WeatherTodayHourlyAdapter()
-        if (!::dailyAdapter.isInitialized) dailyAdapter = WeatherTodayDailyAdapter()
+        val l = location
+        if (l!=null) {
+            if (!::hourlyAdapter.isInitialized) hourlyAdapter = WeatherTodayHourlyAdapter(l.placeId)
+            if (!::dailyAdapter.isInitialized) dailyAdapter = WeatherTodayDailyAdapter()
+        }
     }
 
     private fun createRecyclerViews(view: View){

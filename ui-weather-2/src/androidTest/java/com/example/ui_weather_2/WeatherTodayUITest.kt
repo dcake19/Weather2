@@ -12,6 +12,9 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions.swipeLeft
 import androidx.test.espresso.action.ViewActions.swipeRight
 import androidx.test.espresso.action.ViewActions
@@ -31,16 +34,19 @@ import com.example.presentation_weather_2.main.WeatherMainForecastViewModel
 import com.example.ui_weather_2.RecyclerViewMatcher.withRecyclerView
 import com.example.ui_weather_2.daily.FragmentWeatherDays
 import com.example.ui_weather_2.today.FragmentWeatherTodayOverview
+import com.example.ui_weather_2.today.FragmentWeatherTodayOverviewDirections
 import com.example.ui_weather_2.today.WeatherTodayHourlyAdapter
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import org.hamcrest.Description
+import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 @RunWith(AndroidJUnit4::class)
@@ -142,6 +148,8 @@ class WeatherTodayUITest {
 
             for (j in weather[i].hourly.indices) {
                 check(j, weather[i].hourly[j])
+                verify(navController).navigate(FragmentWeatherTodayOverviewDirections
+                    .actionWeatherTodayToHourly( weather[i].placeId,j))
             }
 
             Thread.sleep(1000)
@@ -185,10 +193,12 @@ class WeatherTodayUITest {
         val viewInteraction = onView(allOf(withId(R.id.list_hourly),
             isDescendantOfA(allOf(withId(R.id.layout_weather_forecast),isDisplayed()))))
 
+
         viewInteraction.perform(CustomScrollActions.nestedScrollTo())
         viewInteraction.perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(position))
-        Thread.sleep(1000)
+
         viewInteraction.check(matches(withHourlyForecast(position,forecast)))
+        viewInteraction.perform(forecastClick(position,forecast))
     }
 
     private fun withHourlyForecast(position: Int,
@@ -208,15 +218,36 @@ class WeatherTodayUITest {
             else {
                 val lm = (item.layoutManager as LinearLayoutManager)
                 val first = lm.findFirstVisibleItemPosition()
-                forecast.time == item[position-first].findViewById<TextView>(R.id.text_hour_time).text
-                        && forecast.rain == item[position-first].findViewById<TextView>(R.id.text_hour_rain).text
-                        && forecast.temperature == item[position-first].findViewById<TextView>(R.id.text_hour_temp).text
-                        && item[position-first].findViewById<ImageView>(R.id.image_weather_hour_icon).drawable.toBitmap()
+                val view = item[position-first]
+                forecast.time == view.findViewById<TextView>(R.id.text_hour_time).text
+                        && forecast.rain == view.findViewById<TextView>(R.id.text_hour_rain).text
+                        && forecast.temperature == view.findViewById<TextView>(R.id.text_hour_temp).text
+                        && view.findViewById<ImageView>(R.id.image_weather_hour_icon).drawable.toBitmap()
                     .sameAs(expectedBitmap)
             }
         }
 
     }
+
+    private fun forecastClick(position: Int,forecast: WeatherTodayHourlyForecastView) = object : ViewAction{
+        override fun getDescription(): String {
+            return ""
+        }
+
+        override fun getConstraints(): Matcher<View> {
+            return withHourlyForecast(position, forecast)
+        }
+
+        override fun perform(uiController: UiController?, view: View?) {
+            if (view is RecyclerView){
+                val first = (view.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                val item = view[position-first]
+                item.performClick()
+            }
+        }
+    }
+
+
 
 }
 

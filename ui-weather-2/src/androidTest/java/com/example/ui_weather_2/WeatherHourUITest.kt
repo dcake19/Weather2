@@ -36,6 +36,8 @@ class WeatherHourUITest {
     @Mock lateinit var viewModel: WeatherHourlyForecastViewModel
     private lateinit var emitter: ObservableEmitter<List<WeatherHourForecastView>>
 
+    private val placeId = "place_id"
+
     @Before
     fun before(){
         MockitoAnnotations.initMocks(this)
@@ -44,7 +46,7 @@ class WeatherHourUITest {
     private fun launchFragment(navController: NavController?=null,startHour: Int){
         val fragment = FragmentWeatherHours()
         fragment.viewModel = viewModel
-        val scenario = launchFragmentInContainer(FragmentWeatherHoursArgs(startHour).toBundle(), R.style.Theme_AppCompat){
+        val scenario = launchFragmentInContainer(FragmentWeatherHoursArgs(placeId,startHour).toBundle(), R.style.Theme_AppCompat){
             fragment
         }
 
