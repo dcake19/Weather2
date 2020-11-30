@@ -3,12 +3,16 @@ package com.example.ui_weather_2.today
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.presentation_weather_2.WeatherTodayDailyForecastView
 import com.example.ui_weather_2.R
+import com.example.ui_weather_2.mapToImageResource
 
 
-class WeatherTodayDailyAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WeatherTodayDailyAdapter(private val placeId: String): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var items = listOf<WeatherTodayDailyForecastView>()
 
@@ -30,7 +34,21 @@ class WeatherTodayDailyAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>(
 
     inner class DailyViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
         fun setData(forecast: WeatherTodayDailyForecastView){
+            itemView.findViewById<TextView>(R.id.text_day).text = forecast.day
+            itemView.findViewById<TextView>(R.id.text_day_rain).text = forecast.rain
+            itemView.findViewById<TextView>(R.id.text_day_temp_max).text = forecast.temperatureHigh
+            itemView.findViewById<TextView>(R.id.text_day_temp_min).text = forecast.temperatureLow
 
+            val d = mapToImageResource(forecast.weatherId)
+            itemView.findViewById<ImageView>(R.id.image_weather_day_icon)
+                .setImageResource(d)
+
+            itemView.setOnClickListener {
+
+                itemView.findNavController()
+                    .navigate(FragmentWeatherTodayOverviewDirections
+                        .actionWeatherTodayToDaily(placeId,adapterPosition))
+            }
         }
     }
 }

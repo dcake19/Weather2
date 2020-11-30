@@ -26,6 +26,7 @@ import org.hamcrest.core.AllOf.allOf
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.presentation_weather_2.LocationView
+import com.example.presentation_weather_2.WeatherTodayDailyForecastView
 import com.example.presentation_weather_2.WeatherTodayHourlyForecastView
 import com.example.presentation_weather_2.WeatherTodayView
 import com.example.presentation_weather_2.constants.CLEAR
@@ -152,6 +153,12 @@ class WeatherTodayUITest {
                     .actionWeatherTodayToHourly( weather[i].placeId,j))
             }
 
+            for (j in weather[i].daily.indices){
+                check(j,weather[i].daily[j])
+//                verify(navController).navigate(FragmentWeatherTodayOverviewDirections
+//                    .actionWeatherTodayToDaily( weather[i].placeId,j))
+            }
+
             Thread.sleep(1000)
 
             onView(allOf(withId(R.id.layout_weather_forecast), isDisplayed())).perform(swipeLeft())
@@ -193,7 +200,6 @@ class WeatherTodayUITest {
         val viewInteraction = onView(allOf(withId(R.id.list_hourly),
             isDescendantOfA(allOf(withId(R.id.layout_weather_forecast),isDisplayed()))))
 
-
         viewInteraction.perform(CustomScrollActions.nestedScrollTo())
         viewInteraction.perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(position))
 
@@ -201,8 +207,19 @@ class WeatherTodayUITest {
         viewInteraction.perform(forecastClick(position,forecast))
     }
 
+    private fun check(position: Int,forecast: WeatherTodayDailyForecastView){
+        val viewInteraction = onView(allOf(withId(R.id.list_daily),
+            isDescendantOfA(allOf(withId(R.id.layout_weather_forecast),isDisplayed()))))
+
+        viewInteraction.perform(CustomScrollActions.nestedScrollTo())
+        viewInteraction.perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(position))
+
+        viewInteraction.check(matches(withDailyForecast(position,forecast)))
+        viewInteraction.perform(forecastClick(position,forecast))
+    }
+
     private fun withHourlyForecast(position: Int,
-                                   forecast: WeatherTodayHourlyForecastView)= object : TypeSafeMatcher<View>() {
+                                   forecast: WeatherTodayHourlyForecastView) = object : TypeSafeMatcher<View>() {
         override fun describeTo(description: Description?) {
             description?.appendText("Hourly RecyclerView has value position: $position  time: ${forecast.time}  " +
                     "rain: ${forecast.rain}  temp: ${forecast.temperature}  weather id: ${forecast.weatherId}")
@@ -211,9 +228,9 @@ class WeatherTodayUITest {
         override fun matchesSafely(item: View): Boolean {
             val context = item.context
             val tintColor = (R.color.dark_icon_1).toColor(context)
-                val expectedBitmap =
-                    item.context.getDrawable(WeatherUITestUtil.getIcons()[forecast.weatherId] ?: -1)
-                        ?.tinted(tintColor)?.toBitmap()
+            val expectedBitmap =
+                item.context.getDrawable(WeatherUITestUtil.getIcons()[forecast.weatherId] ?: -1)
+                    ?.tinted(tintColor)?.toBitmap()
             return if (item !is RecyclerView) false
             else {
                 val lm = (item.layoutManager as LinearLayoutManager)
@@ -247,7 +264,51 @@ class WeatherTodayUITest {
         }
     }
 
+    private fun withDailyForecast(position: Int,
+                                  forecast: WeatherTodayDailyForecastView) = object : TypeSafeMatcher<View>() {
+        override fun describeTo(description: Description?) {
+            //description?.appendText("Hourly RecyclerView has value position: $position  time: ${forecast.time}  " +
+            //        "rain: ${forecast.rain}  temp: ${forecast.temperature}  weather id: ${forecast.weatherId}")
+        }
 
+        override fun matchesSafely(item: View): Boolean {
+            val context = item.context
+            val tintColor = (R.color.dark_icon_1).toColor(context)
+            val expectedBitmap =
+                item.context.getDrawable(WeatherUITestUtil.getIcons()[forecast.weatherId] ?: -1)
+                    ?.tinted(tintColor)?.toBitmap()
+            return if (item !is RecyclerView) false
+            else {
+                val lm = (item.layoutManager as LinearLayoutManager)
+                val first = lm.findFirstVisibleItemPosition()
+                val view = item[position-first]
+                forecast.day == view.findViewById<TextView>(R.id.text_day).text
+                        && forecast.rain == view.findViewById<TextView>(R.id.text_day_rain).text
+                        && forecast.temperatureHigh == view.findViewById<TextView>(R.id.text_day_temp_max).text
+                        && forecast.temperatureLow == view.findViewById<TextView>(R.id.text_day_temp_min).text
+                        && view.findViewById<ImageView>(R.id.image_weather_day_icon).drawable.toBitmap()
+                    .sameAs(expectedBitmap)
+            }
+        }
+    }
+
+    private fun forecastClick(position: Int,forecast: WeatherTodayDailyForecastView) = object : ViewAction{
+        override fun getDescription(): String {
+            return ""
+        }
+
+        override fun getConstraints(): Matcher<View> {
+            return withDailyForecast(position, forecast)
+        }
+
+        override fun perform(uiController: UiController?, view: View?) {
+            if (view is RecyclerView){
+                val first = (view.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                val item = view[position-first]
+                item.performClick()
+            }
+        }
+    }
 
 }
 

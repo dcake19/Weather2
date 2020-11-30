@@ -53,7 +53,7 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
         val l = location
         if (l!=null) {
             if (!::hourlyAdapter.isInitialized) hourlyAdapter = WeatherTodayHourlyAdapter(l.placeId)
-            if (!::dailyAdapter.isInitialized) dailyAdapter = WeatherTodayDailyAdapter()
+            if (!::dailyAdapter.isInitialized) dailyAdapter = WeatherTodayDailyAdapter(l.placeId)
         }
     }
 
