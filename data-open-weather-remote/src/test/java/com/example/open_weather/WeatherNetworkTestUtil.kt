@@ -8,19 +8,19 @@ object WeatherNetworkTestUtil {
     fun getWeatherData1(): WeatherData{
         return WeatherData(1597484140,500,16.93f,
             15.91f,0.26f,1597466577,1597519434,
-            4.1f, 20,90,1016,93,
+            4.1f, 20,90,1016,93,"light rain",
             getWeatherHourlyForecastData1(), getWeatherDailyForecastData1())
     }
 
     fun getWeatherHourlyForecastData1(): List<WeatherHourlyForecastData>{
         return listOf(WeatherHourlyForecastData(1597482000,804,16.93f,
-            15.79f,0f,4.27f,44,90),
+            15.79f,0f,4.27f,44,90,"overcast clouds"),
             WeatherHourlyForecastData(1597485600,500,18.94f,18.11f,
-            0.37f,4.24f,46,93),
+            0.37f,4.24f,46,93,"light rain"),
             WeatherHourlyForecastData(1597489200,804,19.36f,18.67f,
-            0f,4.41f,40,95),
+            0f,4.41f,40,95,"overcast clouds"),
             WeatherHourlyForecastData(1597492800,500,21.84f,
-                21.08f,0.67f,4.77f,40,96)
+                21.08f,0.67f,4.77f,40,96,"light rain")
         )
     }
 
@@ -28,17 +28,17 @@ object WeatherNetworkTestUtil {
         return listOf(WeatherDailyForecastData(1597492800,501,
             20.77f,17.93f,5.02f,
             1597466577,1597519434,4.77f,40,
-            93,1016,84),
+            93,1016,84,"moderate rain"),
             WeatherDailyForecastData(1597579200,502,
                 21.53f,16.91f,0f,
                 1597553076,1597605711,3.17f,30,
-                100,1011,77))
+                100,1011,77,"heavy intensity rain"))
     }
 
     fun getWeatherData2(): WeatherData{
         return WeatherData(1597484140,804,16.93f,
             15.91f,0f,1597466577,1597519434,
-            4.1f, 20,90,1016,93,
+            4.1f, 20,90,1016,93,"overcast clouds",
             getWeatherHourlyForecastData1(), getWeatherDailyForecastData1())
     }
 

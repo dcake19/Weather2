@@ -28,7 +28,7 @@ class WeatherRepositoryImpl(private val weatherDataNetwork: WeatherNetwork,
     private fun map(wd: WeatherData): WeatherToday{
         return WeatherToday(wd.timestamp,wd.weatherId,wd.temperature,wd.feelsLike,wd.rain,
             wd.sunriseTimestamp,wd.sunsetTimestamp,wd.windSpeed,wd.windDirection,
-            wd.cloudCoverage,wd.pressure,wd.humidity,
+            wd.cloudCoverage,wd.pressure,wd.humidity,wd.description,
             wd.hourlyForecast.map { mapForFullForecast(it)},
             wd.dailyForecast.map { mapForFullForecast(it)})
     }
@@ -44,13 +44,13 @@ class WeatherRepositoryImpl(private val weatherDataNetwork: WeatherNetwork,
 
     private fun map(hf: WeatherHourlyForecastData): WeatherHourForecast{
         return WeatherHourForecast(hf.timestamp,hf.weatherId,hf.temperature,hf.feelsLike,
-            hf.rain,hf.windSpeed,hf.windDirection,hf.cloudCoverage)
+            hf.rain,hf.windSpeed,hf.windDirection,hf.cloudCoverage,hf.description)
     }
 
     private fun map(df: WeatherDailyForecastData): WeatherDayForecast{
         return WeatherDayForecast(df.timestamp,df.weatherId,df.temperatureHigh,df.temperatureLow,
             df.rain,df.sunriseTimestamp,df.sunsetTimestamp, df.windSpeed,
-            df.windDirection,df.cloudCoverage,df.pressure,df.humidity)
+            df.windDirection,df.cloudCoverage,df.pressure,df.humidity,df.description)
     }
 
 }

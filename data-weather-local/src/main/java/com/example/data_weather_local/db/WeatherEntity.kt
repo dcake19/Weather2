@@ -16,7 +16,8 @@ data class WeatherEntity(
     @ColumnInfo(name = CurrentWeatherColumns.WIND_DIRECTION)var windDirection: Int,
     @ColumnInfo(name = CurrentWeatherColumns.CLOUD_COVERAGE)var cloudCoverage: Int,
     @ColumnInfo(name = CurrentWeatherColumns.PRESSURE)var pressure: Int,
-    @ColumnInfo(name = CurrentWeatherColumns.HUMIDITY)var humidity: Int) {
+    @ColumnInfo(name = CurrentWeatherColumns.HUMIDITY)var humidity: Int,
+    @ColumnInfo(name = CurrentWeatherColumns.DESCRIPTION)var description: String) {
 }
 
 @Entity(tableName = WeatherTables.HOURLY_FORECAST,
@@ -33,7 +34,8 @@ data class HourlyForecastEntity(
     @ColumnInfo(name = HourlyForecastColumns.RAIN)var rain: Float,
     @ColumnInfo(name = HourlyForecastColumns.WIND_SPEED)var windSpeed: Float,
     @ColumnInfo(name = HourlyForecastColumns.WIND_DIRECTION)var windDirection: Int,
-    @ColumnInfo(name = HourlyForecastColumns.CLOUD_COVERAGE)var cloudCoverage: Int){
+    @ColumnInfo(name = HourlyForecastColumns.CLOUD_COVERAGE)var cloudCoverage: Int,
+    @ColumnInfo(name = HourlyForecastColumns.DESCRIPTION)var description: String){
     @PrimaryKey(autoGenerate = true) var id:Long = 0
 }
 
@@ -55,7 +57,8 @@ data class DailyForecastEntity(
     @ColumnInfo(name = DailyForecastColumns.WIND_DIRECTION)var windDirection: Int,
     @ColumnInfo(name = DailyForecastColumns.CLOUD_COVERAGE)var cloudCoverage: Int,
     @ColumnInfo(name = DailyForecastColumns.PRESSURE)var pressure: Int,
-    @ColumnInfo(name = DailyForecastColumns.HUMIDITY)var humidity: Int){
+    @ColumnInfo(name = DailyForecastColumns.HUMIDITY)var humidity: Int,
+    @ColumnInfo(name = DailyForecastColumns.DESCRIPTION)var description: String){
     @PrimaryKey(autoGenerate = true) var id:Long = 0
 }
 

@@ -39,38 +39,38 @@ class WeatherCache(weatherDatabase: WeatherDatabaseProvider): WeatherDataCache {
     private fun map(placeId: String, wd: WeatherData): WeatherEntity{
         return WeatherEntity(placeId,wd.timestamp,wd.weatherId,wd.temperature,wd.feelsLike,wd.rain,
             wd.sunriseTimestamp,wd.sunsetTimestamp,wd.windSpeed,wd.windDirection,
-            wd.cloudCoverage,wd.pressure,wd.humidity)
+            wd.cloudCoverage,wd.pressure,wd.humidity,wd.description)
     }
 
     private fun map(placeId: String,hf: WeatherHourlyForecastData): HourlyForecastEntity{
         return HourlyForecastEntity(placeId,hf.timestamp,hf.weatherId,hf.temperature,hf.feelsLike,
-            hf.rain,hf.windSpeed,hf.windDirection,hf.cloudCoverage)
+            hf.rain,hf.windSpeed,hf.windDirection,hf.cloudCoverage,hf.description)
     }
 
     private fun map(placeId: String,df: WeatherDailyForecastData): DailyForecastEntity{
         return DailyForecastEntity(placeId,df.timestamp,df.weatherId,
             df.temperatureHigh,df.temperatureLow,df.rain,
             df.sunriseTimestamp,df.sunsetTimestamp,
-            df.windSpeed,df.windDirection,df.cloudCoverage,df.pressure,df.humidity)
+            df.windSpeed,df.windDirection,df.cloudCoverage,df.pressure,df.humidity,df.description)
     }
 
     private fun map(forecast: WeatherAllForLocation): WeatherData{
         val we = forecast.weather
         return WeatherData(we.timestamp,we.weatherId,we.temperature,we.feelsLike,we.rain,
             we.sunriseTimestamp,we.sunsetTimestamp,we.windSpeed,we.windDirection,we.cloudCoverage,
-            we.pressure,we.humidity,forecast.hourlyForecast.map { map(it) },
+            we.pressure,we.humidity,we.description,forecast.hourlyForecast.map { map(it) },
             forecast.dailyForecast.map { map(it) })
     }
 
     private fun map(hfe: HourlyForecastEntity): WeatherHourlyForecastData{
         return WeatherHourlyForecastData(hfe.timestamp,hfe.weatherId,hfe.temperature,hfe.feelsLike,
-            hfe.rain,hfe.windSpeed,hfe.windDirection,hfe.cloudCoverage)
+            hfe.rain,hfe.windSpeed,hfe.windDirection,hfe.cloudCoverage,hfe.description)
     }
 
     private fun map(dfe: DailyForecastEntity): WeatherDailyForecastData{
         return WeatherDailyForecastData(dfe.timestamp,dfe.weatherId,dfe.temperatureHigh,
             dfe.temperatureLow,dfe.rain,dfe.sunriseTimestamp,dfe.sunsetTimestamp,dfe.windSpeed,
-            dfe.windDirection,dfe.cloudCoverage,dfe.pressure,dfe.humidity)
+            dfe.windDirection,dfe.cloudCoverage,dfe.pressure,dfe.humidity,dfe.description)
     }
 
 }

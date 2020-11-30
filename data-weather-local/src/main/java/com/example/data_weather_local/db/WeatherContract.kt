@@ -24,6 +24,7 @@ object CurrentWeatherColumns{
     const val CLOUD_COVERAGE = "cloud_coverage"
     const val PRESSURE = "pressure"
     const val HUMIDITY = "humidity"
+    const val DESCRIPTION = "description"
 }
 
 object HourlyForecastColumns{
@@ -35,6 +36,7 @@ object HourlyForecastColumns{
     const val WIND_SPEED = "wind_speed"
     const val WIND_DIRECTION = "wind_direction"
     const val CLOUD_COVERAGE = "cloud_coverage"
+    const val DESCRIPTION = "description"
 }
 
 object DailyForecastColumns{
@@ -50,4 +52,5 @@ object DailyForecastColumns{
     const val CLOUD_COVERAGE = "cloud_coverage"
     const val PRESSURE = "pressure"
     const val HUMIDITY = "humidity"
+    const val DESCRIPTION = "description"
 }
