@@ -5,5 +5,5 @@ import io.reactivex.Observable
 
 interface WeatherDailyForecastViewModel {
     fun getWeatherDaysObservable(): Observable<List<WeatherDayForecastView>>
-    fun getWeatherDays()
+    fun getWeatherDays(placeId: String)
 }

@@ -85,7 +85,7 @@ class WeatherHourUITest {
         val navController = Mockito.mock(NavController::class.java)
         Mockito.`when`(viewModel.getWeatherHoursObservable())
             .thenReturn(Observable.create{emitter = it})
-        Mockito.`when`(viewModel.getWeatherHours())
+        Mockito.`when`(viewModel.getWeatherHours(placeId))
             .then{emitter.onNext(getWeather())}
 
         launchFragment(navController,3)
@@ -102,7 +102,7 @@ class WeatherHourUITest {
         val navController = Mockito.mock(NavController::class.java)
         Mockito.`when`(viewModel.getWeatherHoursObservable())
             .thenReturn(Observable.create{emitter = it})
-        Mockito.`when`(viewModel.getWeatherHours())
+        Mockito.`when`(viewModel.getWeatherHours(placeId))
             .then{emitter.onNext(weather)}
 
         launchFragment(navController,startHour)

@@ -21,6 +21,7 @@ class FragmentWeatherHours : Fragment() {
 
     @Inject lateinit var viewModel: WeatherHourlyForecastViewModel
     private var initialHour = 0
+    private var placeId = ""
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,6 +35,7 @@ class FragmentWeatherHours : Fragment() {
         if (a!=null){
             val args = FragmentWeatherDaysArgs.fromBundle(a)
             initialHour = args.day
+            placeId = args.placeId
         }
 
         view.findViewById<ImageButton>(R.id.button_back).setOnClickListener{
@@ -46,7 +48,7 @@ class FragmentWeatherHours : Fragment() {
         viewModel.getWeatherHoursObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { onWeatherReady(it) }
-        viewModel.getWeatherHours()
+        viewModel.getWeatherHours(placeId)
     }
 
     private fun onWeatherReady(weather: List<WeatherHourForecastView>){
