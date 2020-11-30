@@ -39,6 +39,7 @@ import com.example.ui_weather_2.today.FragmentWeatherTodayOverviewDirections
 import com.example.ui_weather_2.today.WeatherTodayHourlyAdapter
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
+import io.reactivex.Single
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
@@ -155,8 +156,8 @@ class WeatherTodayUITest {
 
             for (j in weather[i].daily.indices){
                 check(j,weather[i].daily[j])
-//                verify(navController).navigate(FragmentWeatherTodayOverviewDirections
-//                    .actionWeatherTodayToDaily( weather[i].placeId,j))
+                verify(navController).navigate(FragmentWeatherTodayOverviewDirections
+                    .actionWeatherTodayToDaily( weather[i].placeId,j))
             }
 
             Thread.sleep(1000)
@@ -166,6 +167,8 @@ class WeatherTodayUITest {
             Thread.sleep(1000)
         }
     }
+
+
 
     private fun check(forecast: WeatherTodayView,windDirection: String,drawable: Int){
         checkId(R.id.text_date_time,forecast.dateTime)
