@@ -36,7 +36,7 @@ class WeatherHourViewModelTests {
     fun getWeatherHoursForecast(){
         val placeId = "place_id"
 
-        val expectedForecastForView = createWeatherHourForecastViewList(placeId,"Place Name")
+        val expectedForecastForView = createWeatherHourForecastViewList(placeId)
 
         Mockito.`when`(interactor.getHourlyForecast(placeId))
             .thenReturn(Single.just(createWeatherHourForecastList()))

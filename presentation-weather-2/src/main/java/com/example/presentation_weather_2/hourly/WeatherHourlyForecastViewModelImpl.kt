@@ -2,6 +2,7 @@ package com.example.presentation_weather_2.hourly
 
 import com.example.domain.use_cases.weather.*
 import com.example.presentation_weather_2.WeatherHourForecastView
+import com.example.presentation_weather_2.convertToTime
 import com.example.presentation_weather_2.convertToWindDirection
 import com.example.utils.ViewModelEmitter
 import com.example.utils.schedulers.RxSchedulerProvider
@@ -41,12 +42,12 @@ class WeatherHourlyForecastViewModelImpl(
     }
 
     private fun map(placeId: String,forecast: WeatherHourForecast): WeatherHourForecastView{
-        val dateTime = DateTime(forecast.timestamp * 1000L)
-        val timeText = DateTimeFormat.forPattern("HH:mm").print(dateTime)
+       // val dateTime = DateTime(forecast.timestamp * 1000L)
+        //val timeText = DateTimeFormat.forPattern("HH:mm").print(dateTime)
 
         return WeatherHourForecastView(
             placeId,
-            timeText,
+            convertToTime(forecast.timestamp),
             forecast.weatherId,
             "${Math.round(forecast.temperature)}$TEMPERATURE",
             "${Math.round(forecast.feelsLike)}$TEMPERATURE",

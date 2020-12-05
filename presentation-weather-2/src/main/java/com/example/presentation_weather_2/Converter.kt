@@ -1,6 +1,8 @@
 package com.example.presentation_weather_2
 
 import com.example.presentation_weather_2.constants.*
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 
 fun convertToWindDirection(windDeg: Int):Int{
     return when(windDeg){
@@ -16,3 +18,9 @@ fun convertToWindDirection(windDeg: Int):Int{
         else -> 0
     }
 }
+
+fun convertToTime(timestamp: Int): String{
+    val dateTime = DateTime(timestamp * 1000L)
+    return DateTimeFormat.forPattern("H:mm").print(dateTime)
+}
+

@@ -22,12 +22,12 @@ object WeatherPresentationTestUtil {
     fun createWeatherDailyForecastList() = listOf(
         WeatherDayForecast(timestamp+3600*24,501,
             20.77f,17.93f,5.02f,
-            timestamp+3600*(24+2),timestamp+3600*(24+6),4.77f,
+            timestamp+3600*(24-2),timestamp+3600*(24+6),4.77f,
             40, 93,
             1016,84,"moderate rain"),
         WeatherDayForecast(timestamp+3600*24*2,502,
             21.53f,16.91f,0f,
-            timestamp+3600*(24*2+2),timestamp+3600*(24*2+6),
+            timestamp+3600*(24*2-2),timestamp+3600*(24*2+6),
             3.17f,30, 100,
             1011,77,"heavy intensity rain")
     )
@@ -80,7 +80,7 @@ object WeatherPresentationTestUtil {
         )
     }
 
-    fun createWeatherHourForecastViewList(placeId: String,placeName: String): List<WeatherHourForecastView>{
+    fun createWeatherHourForecastViewList(placeId: String): List<WeatherHourForecastView>{
         return listOf(
             WeatherHourForecastView(placeId,"10:00",804,
             "17\u00B0C","16\u00B0C","0 mm","4.3 m/s",
@@ -96,7 +96,7 @@ object WeatherPresentationTestUtil {
                 NORTH_EAST,"96%","light rain"))
     }
 
-    fun createWeatherDayForecastViewList(placeId: String,placeName: String): List<WeatherDayForecastView>{
+    fun createWeatherDayForecastViewList(placeId: String): List<WeatherDayForecastView>{
         return listOf(
             WeatherDayForecastView(placeId,"Tue 1 December",501,
                 "21\u00B0C","18\u00B0C","5 mm",
