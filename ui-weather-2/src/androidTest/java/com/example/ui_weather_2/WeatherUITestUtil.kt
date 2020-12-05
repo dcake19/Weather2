@@ -51,7 +51,7 @@ object WeatherUITestUtil {
 
     fun getHourForecastView(i: Int,hour:Int,weatherId: Int = 0,temp: Int,feelLike:Int, rain: Int,
                             windSpeed: Double, windDirection: Int, cloudCoverage: Int): WeatherHourForecastView{
-        return WeatherHourForecastView("placeId_$i","Place Name $i","$hour:00",
+        return WeatherHourForecastView("placeId_$i","$hour:00",
             weatherId,"$temp\u00B0C",
             "$feelLike\u00B0C","$rain mm","$windSpeed m/s",
             windDirection,"$cloudCoverage%", "Description $i")
@@ -61,7 +61,7 @@ object WeatherUITestUtil {
                            sunrise: String,sunset: String,windSpeed: Double, windDirection: Int,
                            cloudCoverage: Int,pressure: Int,humidity: Int): WeatherDayForecastView{
 
-        return WeatherDayForecastView("placeId_$i","Place Name $i",date,
+        return WeatherDayForecastView("placeId_$i",date,
             weatherId,"$tempHigh\u00B0C",
             "$tempLow\u00B0C","$rain mm",sunrise,sunset,"$windSpeed m/s",
             windDirection,"$cloudCoverage%","$pressure hPa","$humidity%",

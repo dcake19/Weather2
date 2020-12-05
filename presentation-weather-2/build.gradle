@@ -8,6 +8,8 @@ dependencies {
     implementation project(':utils')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    implementation 'joda-time:joda-time:2.9.9'
+
     annotationProcessor "com.google.dagger:dagger-compiler:2.25.2"
     kapt "com.google.dagger:dagger-compiler:2.25.2"
 

@@ -82,27 +82,27 @@ object WeatherPresentationTestUtil {
 
     fun createWeatherHourForecastViewList(placeId: String,placeName: String): List<WeatherHourForecastView>{
         return listOf(
-            WeatherHourForecastView(placeId,placeName,"10:00",804,
+            WeatherHourForecastView(placeId,"10:00",804,
             "17\u00B0C","16\u00B0C","0 mm","4.3 m/s",
                 NORTH_EAST,"90%","overcast clouds"),
-            WeatherHourForecastView(placeId,placeName,"11:00",500,
+            WeatherHourForecastView(placeId,"11:00",500,
                 "19\u00B0C","18\u00B0C","0 mm","4.2 m/s",
                 NORTH_EAST,"93%","light rain"),
-            WeatherHourForecastView(placeId,placeName,"12:00",804,
+            WeatherHourForecastView(placeId,"12:00",804,
                 "19\u00B0C","19\u00B0C","0 mm","4.4 m/s",
                 NORTH_EAST,"95%","overcast clouds"),
-            WeatherHourForecastView(placeId,placeName,"13:00",500,
+            WeatherHourForecastView(placeId,"13:00",500,
                 "22\u00B0C","21\u00B0C","1 mm","4.8 m/s",
                 NORTH_EAST,"96%","light rain"))
     }
 
     fun createWeatherDayForecastViewList(placeId: String,placeName: String): List<WeatherDayForecastView>{
         return listOf(
-            WeatherDayForecastView(placeId,placeName,"Tue 1 December",501,
+            WeatherDayForecastView(placeId,"Tue 1 December",501,
                 "21\u00B0C","18\u00B0C","5 mm",
                 "8:00","16:00","4.8 m/s", NORTH_EAST,"93%",
                 "1016 hPa","84%","moderate rain"),
-            WeatherDayForecastView(placeId,placeName,"Wed 2 December",502,
+            WeatherDayForecastView(placeId,"Wed 2 December",502,
                 "22\u00B0C","17\u00B0C","0 mm",
                 "8:00","16:00","3.2 m/s", NORTH_EAST,"100%",
                 "1011 hPa","77%","heavy intensity rain")

@@ -16,12 +16,12 @@ data class WeatherTodayHourlyForecastView(val time: String, val weatherId: Int,
 data class WeatherTodayDailyForecastView(val day: String,val weatherId: Int,
                              val temperatureHigh: String,val temperatureLow: String,val rain: String)
 
-data class WeatherHourForecastView(val placeId: String,val placeName: String,val time: String,
+data class WeatherHourForecastView(val placeId: String,val time: String,
                                    val weatherId: Int,val temperature: String,val feelsLike:String,
                                    val rain: String, val windSpeed: String, val windDirection: Int,
                                    val cloudCoverage: String,val description: String)
 
-data class WeatherDayForecastView(val placeId: String,val placeName: String,val date: String,
+data class WeatherDayForecastView(val placeId: String,val date: String,
                                   val weatherId: Int,val temperatureHigh: String,
                                   val temperatureLow: String,val rain: String,
                                   val sunrise: String, val sunset: String,val windSpeed: String,
