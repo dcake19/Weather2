@@ -9,6 +9,5 @@ interface WeatherMainForecastViewModel {
     fun pause()
     fun getLocationsObservable(): Observable<List<LocationView>>
     fun getWeatherObservable(): Observable<WeatherTodayView>
-   // fun getLocations()
     fun getWeather(placeId: String)
 }

@@ -1,5 +1,6 @@
 package com.example.presentation_weather
 
+import com.example.domain.use_cases.location.Location
 import com.example.domain.use_cases.weather.*
 import com.example.presentation_weather_2.*
 import com.example.presentation_weather_2.constants.NORTH
@@ -7,6 +8,11 @@ import com.example.presentation_weather_2.constants.NORTH_EAST
 
 object WeatherPresentationTestUtil {
     private val timestamp = 1606730400
+
+    fun createLocationsViewList() = (1..4).map { LocationView("place_id_$it","Place Name $it") }
+
+    fun createLocationsList() = (1..4).map { Location("place_id_$it","Place Name $it",
+        "","",0.0,0.0) }
 
     fun createWeatherHourForecastList() = listOf(
         WeatherHourForecast(timestamp,804,16.93f, 15.79f,0f,
