@@ -12,6 +12,8 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:2.25.2"
    // annotationProcessor "com.google.dagger:dagger-compiler:2.22"
 
+    implementation 'joda-time:joda-time:2.9.9'
+
 }
 
 sourceCompatibility = "7"

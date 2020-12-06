@@ -4,6 +4,8 @@ import com.example.domain.use_cases.location.LocationInteractor
 import com.example.domain.use_cases.weather.WeatherInteractor
 import com.example.presentation_weather.WeatherPresentationTestUtil.createLocationsList
 import com.example.presentation_weather.WeatherPresentationTestUtil.createLocationsViewList
+import com.example.presentation_weather.WeatherPresentationTestUtil.createWeatherToday
+import com.example.presentation_weather.WeatherPresentationTestUtil.createWeatherTodayView
 import com.example.presentation_weather_2.LocationView
 import com.example.presentation_weather_2.WeatherTodayView
 import com.example.presentation_weather_2.main.WeatherMainForecastViewModel
@@ -44,6 +46,27 @@ class WeatherMainForecastViewModelTests {
         viewModel.start()
 
         Mockito.verify(locationsEmitter).post(expectedLocationForView)
+    }
+
+    @Test
+    fun getForecast(){
+        val place =  createLocationsViewList()[0]
+        val placeId = place.placeId
+
+        val expectedForecastView = createWeatherTodayView(placeId,place.placeName)
+
+        createWeatherToday()
+
+        Mockito.`when`(locationInteractor.getStoredLocations())
+            .thenReturn(Single.just(createLocationsList()))
+
+        Mockito.`when`(weatherInteractor.getForecast(placeId)).thenReturn(Single.just(createWeatherToday()))
+
+        viewModel.start()
+
+        viewModel.getWeather(placeId)
+
+        Mockito.verify(forecastEmitter).post(expectedForecastView)
     }
 
 }

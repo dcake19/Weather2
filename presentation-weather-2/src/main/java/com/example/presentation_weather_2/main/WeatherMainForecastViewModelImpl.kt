@@ -3,6 +3,7 @@ package com.example.presentation_weather_2.main
 import com.example.domain.use_cases.location.Location
 import com.example.domain.use_cases.location.LocationInteractor
 import com.example.domain.use_cases.weather.WeatherInteractor
+import com.example.domain.use_cases.weather.WeatherToday
 import com.example.presentation_weather_2.LocationView
 import com.example.presentation_weather_2.WeatherTodayView
 import com.example.utils.ViewModelEmitter
@@ -16,10 +17,14 @@ class WeatherMainForecastViewModelImpl(private val weatherInteractor: WeatherInt
                                        private val scheduler: RxSchedulerProvider,
                                        private val locationsEmitter: ViewModelEmitter<List<LocationView>>,
                                        private val forecastEmitter: ViewModelEmitter<WeatherTodayView>): WeatherMainForecastViewModel {
+
+    private val forecastPending = HashMap<String,Boolean>()
+
     override fun start() {
         locationInteractor.getStoredLocations()
             .subscribeOn(scheduler.computation())
             .observeOn(scheduler.computation())
+            .doOnSuccess { it.forEach { forecastPending[it.placeId] = false } }
             .map { it.map { map(it)} }
             .subscribe(object : SingleObserver<List<LocationView>>{
                 override fun onSuccess(t: List<LocationView>) {
@@ -42,7 +47,8 @@ class WeatherMainForecastViewModelImpl(private val weatherInteractor: WeatherInt
     }
 
     override fun pause() {
-        TODO("Not yet implemented")
+        locationsEmitter.stopEmitting()
+        forecastEmitter.stopEmitting()
     }
 
     override fun getLocationsObservable(): Observable<List<LocationView>> {
@@ -54,7 +60,32 @@ class WeatherMainForecastViewModelImpl(private val weatherInteractor: WeatherInt
     }
 
     override fun getWeather(placeId: String) {
-        TODO("Not yet implemented")
+        if (forecastPending[placeId]==false){
+            weatherInteractor.getForecast(placeId)
+                .subscribeOn(scheduler.io())
+                .observeOn(scheduler.computation())
+                .map { map(it) }
+                .subscribe(object : SingleObserver<WeatherTodayView>{
+                    override fun onSuccess(t: WeatherTodayView) {
+                        forecastPending[placeId] = false
+                        forecastEmitter.post(t)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+                        forecastPending[placeId] = true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        forecastPending[placeId] = false
+                    }
+
+                })
+
+        }
+    }
+
+    private fun map(forecast: WeatherToday): WeatherTodayView{
+        
     }
 
 
