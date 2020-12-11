@@ -64,8 +64,8 @@ object WeatherPresentationTestUtil {
 
     // timestamp = 1606730400
     // 2020-11-30 10:00:00 GMT
-    fun createWeatherTodayView(placeId: String,placeName: String): WeatherTodayView{
-        return WeatherTodayView(placeId,placeName,"Mon 30 November 10:00",500,
+    fun createWeatherTodayView(placeId: String): WeatherTodayView{
+        return WeatherTodayView(placeId,"Mon 30 November 10:00",500,
             "17\u00B0C","16\u00B0C","0 mm","8:00","16:00",
             "4.1 m/s",NORTH,"90%","1016 hPa", "93%",
             "light rain", createWeatherTodayHourly(), createWeatherTodayDaily())
@@ -82,7 +82,7 @@ object WeatherPresentationTestUtil {
     fun createWeatherTodayDaily(): List<WeatherTodayDailyForecastView>{
         return listOf(
             WeatherTodayDailyForecastView("Tue",501,"21\u00B0C","18\u00B0C","5 mm"),
-            WeatherTodayDailyForecastView("Wed",5012,"22\u00B0C","17\u00B0C","0 mm")
+            WeatherTodayDailyForecastView("Wed",502,"22\u00B0C","17\u00B0C","0 mm")
         )
     }
 

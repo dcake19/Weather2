@@ -115,10 +115,11 @@ class WeatherTodayUITest {
 //            onView(allOf(isDisplayed(), withId(R.id.layout_weather_forecast)))
 //                .check(doesNotExist())
 //
-//            onView(allOf(withId(R.id.pager_weather_day), isDisplayed()))
-//                .perform(swipeLeft())
-//            Thread.sleep(1000)
+            onView(allOf(withId(R.id.pager_weather_day), isDisplayed()))
+                .perform(swipeLeft())
+            Thread.sleep(1000)
         }
+
     }
 
     @Test

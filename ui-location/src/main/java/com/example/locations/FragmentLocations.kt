@@ -117,6 +117,7 @@ class FragmentLocations: Fragment() {
         locationsAdapter.toggleEditable()
         view.findViewById<ConstraintLayout>(R.id.top_bar_locations).visibility = View.INVISIBLE
         view.findViewById<ConstraintLayout>(R.id.top_bar_locations_editing).visibility = View.VISIBLE
+
         itemTouchHelper.attachToRecyclerView(locationsList)
 
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true){

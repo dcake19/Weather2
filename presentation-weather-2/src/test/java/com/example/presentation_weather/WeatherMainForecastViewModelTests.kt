@@ -53,14 +53,15 @@ class WeatherMainForecastViewModelTests {
         val place =  createLocationsViewList()[0]
         val placeId = place.placeId
 
-        val expectedForecastView = createWeatherTodayView(placeId,place.placeName)
+        val expectedForecastView = createWeatherTodayView(placeId)
 
         createWeatherToday()
 
         Mockito.`when`(locationInteractor.getStoredLocations())
             .thenReturn(Single.just(createLocationsList()))
 
-        Mockito.`when`(weatherInteractor.getForecast(placeId)).thenReturn(Single.just(createWeatherToday()))
+        Mockito.`when`(weatherInteractor.getForecast(placeId))
+            .thenReturn(Single.just(createWeatherToday()))
 
         viewModel.start()
 

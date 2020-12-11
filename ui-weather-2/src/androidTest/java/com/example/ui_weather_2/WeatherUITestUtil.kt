@@ -15,7 +15,7 @@ object WeatherUITestUtil {
                         cloudCoverage: Int,pressure: Int,humidity: Int,
                         initHour: Int=0,initDay: Int=0): WeatherTodayView{
 
-        return WeatherTodayView("placeId_$i","Place Name $i",
+        return WeatherTodayView("placeId_$i",
             "$initHour:00",weatherId,"$temp\u00B0C",
             "$feelLike\u00B0C","$rain mm",sunrise,sunset,"$windSpeed m/s",
             windDirection,"$cloudCoverage%","$pressure hPa","$humidity%",

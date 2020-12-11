@@ -24,3 +24,14 @@ fun convertToTime(timestamp: Int): String{
     return DateTimeFormat.forPattern("H:mm").print(dateTime)
 }
 
+fun convertToDate(timestamp: Int): String{
+    val dateTime = DateTime(timestamp * 1000L)
+    return DateTimeFormat.forPattern("EE d MMMMM H:mm").print(dateTime)
+}
+
+fun convertToDay(timestamp: Int): String{
+    val dateTime = DateTime(timestamp * 1000L)
+    return DateTimeFormat.forPattern("EE").print(dateTime)
+}
+
+

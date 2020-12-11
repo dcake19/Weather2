@@ -2,10 +2,8 @@ package com.example.presentation_weather_2.main
 
 import com.example.domain.use_cases.location.Location
 import com.example.domain.use_cases.location.LocationInteractor
-import com.example.domain.use_cases.weather.WeatherInteractor
-import com.example.domain.use_cases.weather.WeatherToday
-import com.example.presentation_weather_2.LocationView
-import com.example.presentation_weather_2.WeatherTodayView
+import com.example.domain.use_cases.weather.*
+import com.example.presentation_weather_2.*
 import com.example.utils.ViewModelEmitter
 import com.example.utils.schedulers.RxSchedulerProvider
 import io.reactivex.Observable
@@ -64,7 +62,7 @@ class WeatherMainForecastViewModelImpl(private val weatherInteractor: WeatherInt
             weatherInteractor.getForecast(placeId)
                 .subscribeOn(scheduler.io())
                 .observeOn(scheduler.computation())
-                .map { map(it) }
+                .map { map(placeId,it) }
                 .subscribe(object : SingleObserver<WeatherTodayView>{
                     override fun onSuccess(t: WeatherTodayView) {
                         forecastPending[placeId] = false
@@ -84,8 +82,37 @@ class WeatherMainForecastViewModelImpl(private val weatherInteractor: WeatherInt
         }
     }
 
-    private fun map(forecast: WeatherToday): WeatherTodayView{
-        
+    private fun map(placeId: String,forecast: WeatherToday): WeatherTodayView{
+        return WeatherTodayView(placeId,
+            convertToDate(forecast.timestamp),
+            forecast.weatherId,
+            "${Math.round(forecast.temperature)}$TEMPERATURE",
+            "${Math.round(forecast.feelsLike)}$TEMPERATURE",
+            "${Math.round(forecast.rain)} $RAIN",
+            convertToTime(forecast.sunriseTimestamp),
+            convertToTime(forecast.sunsetTimestamp),
+            "${String.format("%.1f",forecast.windSpeed)} $WIND_SPEED",
+            convertToWindDirection(forecast.windDirection),
+            "${forecast.cloudCoverage}$CLOUD_COVERAGE",
+            "${forecast.pressure} $PRESSURE",
+            "${forecast.humidity}$HUMIDITY",
+            forecast.description,
+            forecast.hourly.map {
+                WeatherTodayHourlyForecastView(
+                    convertToTime(it.timestamp),
+                    it.weatherId,
+                    "${Math.round(it.temperature)}$TEMPERATURE",
+                    "${Math.round(it.rain)} $RAIN")
+            },
+            forecast.daily.map {
+                WeatherTodayDailyForecastView(
+                    convertToDay(it.timestamp),
+                    it.weatherId,
+                    "${Math.round(it.temperatureHigh)}$TEMPERATURE",
+                    "${Math.round(it.temperatureLow)}$TEMPERATURE",
+                    "${Math.round(it.rain)} $RAIN"
+                )
+            })
     }
 
 
