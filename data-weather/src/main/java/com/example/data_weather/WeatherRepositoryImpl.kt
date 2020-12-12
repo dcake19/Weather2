@@ -12,9 +12,17 @@ class WeatherRepositoryImpl(private val weatherDataNetwork: WeatherNetwork,
     override fun getForecast(placeId: String, latitude: Double, longitude: Double,
                              mustBeNewerThan: Int): Single<WeatherToday> {
         return weatherDataCache.getForecast(placeId)
-            .switchIfEmpty (Maybe.defer{weatherDataNetwork.getWeather(latitude, longitude).toMaybe()})
-           .flatMapSingle { if (it.timestamp>=mustBeNewerThan) Single.just(map(it))
-            else weatherDataNetwork.getWeather(latitude, longitude).map { forecast -> map(forecast) } }
+            .switchIfEmpty (Maybe.defer{weatherDataNetwork.getWeather(latitude, longitude)
+                .doOnSuccess { weatherDataCache.insertWeatherForecast(placeId,it,it.hourlyForecast,it.dailyForecast) }
+                .toMaybe()})
+           .flatMapSingle {
+               if (it.timestamp>=mustBeNewerThan)
+                   Single.just(map(it))
+               else
+                   weatherDataNetwork.getWeather(latitude, longitude)
+                       .doOnSuccess { weatherDataCache.insertWeatherForecast(placeId,it,it.hourlyForecast,it.dailyForecast) }
+                       .map { forecast -> map(forecast) }
+           }
     }
 
     override fun getHourlyForecast(placeId: String): Single<List<WeatherHourForecast>> {

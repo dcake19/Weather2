@@ -22,13 +22,15 @@
         android:id="@+id/scroll_hour_weather"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/text_time">
+        app:layout_constraintTop_toBottomOf="@id/text_time"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_weather_hour"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/dark_background">
+            android:background="@color/dark_background"
+            android:paddingBottom="16dp">
 
             <LinearLayout
                 android:id="@+id/layout_weather_main"
@@ -109,7 +111,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            android:backgroundTint="@color/dark_icon_1"/>
 
                         <TextView
                             android:id="@+id/text_rain"
@@ -157,7 +159,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            android:backgroundTint="@color/dark_icon_1"/>
 
                         <TextView
                             android:id="@+id/text_wind_speed_name"
@@ -204,7 +206,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            android:backgroundTint="@color/dark_icon_1"/>
 
                         <TextView
                             android:id="@+id/text_wind_direction_name"
@@ -251,7 +253,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            android:backgroundTint="@color/dark_icon_1"/>
 
                         <TextView
                             android:id="@+id/text_cloud_coverage"

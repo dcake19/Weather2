@@ -79,17 +79,19 @@ class WeatherRepositoryTests {
         val cachedTimestamp = 500
         val nowTimestamp = 1000
         val forecastExpected = WeatherRepositoryTestUtil.createWeatherToday(nowTimestamp)
-
+        val weatherData = WeatherRepositoryTestUtil.createWeatherData(nowTimestamp)
         `when`(cache.getForecast(placeId))
             .thenReturn(Maybe.just(WeatherRepositoryTestUtil.createWeatherData(cachedTimestamp)))
 
         `when`(network.getWeather(latitude,longitude))
-            .thenReturn(Single.just(WeatherRepositoryTestUtil.createWeatherData(nowTimestamp)))
+            .thenReturn(Single.just(weatherData))
 
         val forecastActual = repository.getForecast(placeId,latitude,longitude,700)
             .test().values()[0]
 
         assertThat(forecastActual, `is`(forecastExpected))
+
+        verify(cache).insertWeatherForecast(placeId,weatherData,weatherData.hourlyForecast,weatherData.dailyForecast)
     }
 
     //cache empty
@@ -100,18 +102,19 @@ class WeatherRepositoryTests {
         val nowTimestamp = 1000
 
         val forecastExpected = WeatherRepositoryTestUtil.createWeatherToday(nowTimestamp)
+        val weatherData = WeatherRepositoryTestUtil.createWeatherData(nowTimestamp)
 
         `when`(cache.getForecast(placeId)).thenReturn(Maybe.empty())
 
         `when`(network.getWeather(latitude,longitude))
-            .thenReturn(Single.just(WeatherRepositoryTestUtil.createWeatherData(nowTimestamp)))
-
-        val test = repository.getForecast(placeId,latitude,longitude,700).test()
+            .thenReturn(Single.just(weatherData))
 
         val forecastActual = repository.getForecast(placeId,latitude,longitude,700)
             .test().values()[0]
 
         assertThat(forecastActual, `is`(forecastExpected))
+
+        verify(cache).insertWeatherForecast(placeId,weatherData,weatherData.hourlyForecast,weatherData.dailyForecast)
     }
 
 }

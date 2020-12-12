@@ -22,13 +22,15 @@
         android:id="@+id/scroll_hour_weather"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/text_date">
+        app:layout_constraintTop_toBottomOf="@id/text_date"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_weather_day"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/dark_background">
+            android:background="@color/dark_background"
+            android:paddingBottom="16dp">
 
             <ImageView
                 android:id="@+id/image_weather_icon"
@@ -126,7 +128,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="@color/dark_icon_1"/>
+                            android:backgroundTint="@color/dark_icon_1"/>
 
                         <TextView
                             android:id="@+id/text_rain"
@@ -165,15 +167,16 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <ImageView
                             android:id="@+id/image_sunrise"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:background="@drawable/ic_wi_sunrise"
-                            app:layout_constraintTop_toTopOf="parent"
+                            android:backgroundTint="@color/dark_icon_1"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/sunrise"
@@ -212,15 +215,16 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <ImageView
                             android:id="@+id/image_sunset"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:background="@drawable/ic_wi_sunset"
-                            app:layout_constraintTop_toTopOf="parent"
+                            android:backgroundTint="@color/dark_icon_1"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/text_sunset"
@@ -267,7 +271,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            android:backgroundTint="@color/dark_icon_1"/>
 
                         <TextView
                             android:id="@+id/text_wind_speed_name"
@@ -306,15 +310,16 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <ImageView
                             android:id="@+id/image_wind_direction"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:background="@drawable/ic_wi_wind_deg"
-                            app:layout_constraintTop_toTopOf="parent"
+                            android:backgroundTint="@color/dark_icon_1"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/text_wind_direction_name"
@@ -361,7 +366,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            android:backgroundTint="@color/dark_icon_1"/>
 
                         <TextView
                             android:id="@+id/text_cloud_coverage"
@@ -408,7 +413,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            android:backgroundTint="@color/dark_icon_1"/>
 
                         <TextView
                             android:id="@+id/text_pressure_name"
@@ -455,7 +460,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:backgroundTint="#fff"/>
+                            android:backgroundTint="@color/dark_icon_1"/>
 
                         <TextView
                             android:id="@+id/text_humidity"
