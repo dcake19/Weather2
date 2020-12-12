@@ -44,7 +44,6 @@ class WeatherTodayDailyAdapter(private val placeId: String): RecyclerView.Adapte
                 .setImageResource(d)
 
             itemView.setOnClickListener {
-
                 itemView.findNavController()
                     .navigate(FragmentWeatherTodayOverviewDirections
                         .actionWeatherTodayToDaily(placeId,adapterPosition))

@@ -7,6 +7,7 @@
     app:startDestination="@id/weather">
 
     <include app:graph="@navigation/location_graph" />
+    <include app:graph="@navigation/weather_graph" />
 
     <fragment
         android:id="@+id/weather"
@@ -21,6 +22,11 @@
         <action
             android:id="@+id/action_weather_to_map"
             app:destination="@id/location_graph" />
+
+        <action
+            android:id="@+id/action_weather_to_forecast"
+            app:destination="@+id/weather_graph"
+            />
 
     </fragment>
 

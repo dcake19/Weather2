@@ -27,6 +27,12 @@ class FragmentWeather : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //viewModel.init()
 
+
+        view.findViewById<Button>(R.id.button_forecast).setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_weather_to_forecast)
+        }
+
+
         view.findViewById<Button>(R.id.button_locations).setOnClickListener {
            Navigation.findNavController(view).navigate(R.id.action_weather_to_locations)
         }
