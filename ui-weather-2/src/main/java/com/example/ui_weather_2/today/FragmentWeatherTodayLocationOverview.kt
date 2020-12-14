@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.presentation_weather_2.LocationView
 import com.example.presentation_weather_2.WeatherTodayView
+import com.example.ui_weather_2.ForecastNavigation
 import com.example.ui_weather_2.R
 import com.example.ui_weather_2.mapToImageResource
 import com.example.ui_weather_2.mapWindDirection
@@ -52,8 +53,8 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
     private fun setAdapters(){
         val l = location
         if (l!=null) {
-            if (!::hourlyAdapter.isInitialized) hourlyAdapter = WeatherTodayHourlyAdapter(l.placeId)
-            if (!::dailyAdapter.isInitialized) dailyAdapter = WeatherTodayDailyAdapter(l.placeId)
+            if (!::hourlyAdapter.isInitialized) hourlyAdapter = WeatherTodayHourlyAdapter(l.placeId) {(activity as ForecastNavigation).mainForecastClosed()}
+            if (!::dailyAdapter.isInitialized) dailyAdapter = WeatherTodayDailyAdapter(l.placeId) {(activity as ForecastNavigation).mainForecastClosed()}
         }
     }
 

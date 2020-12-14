@@ -12,7 +12,8 @@ import com.example.presentation_weather_2.WeatherTodayHourlyForecastView
 import com.example.ui_weather_2.R
 import com.example.ui_weather_2.mapToImageResource
 
-class WeatherTodayHourlyAdapter(private val placeId: String): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WeatherTodayHourlyAdapter(private val placeId: String,
+                                private val openHour: () -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var items = listOf<WeatherTodayHourlyForecastView>()
 
@@ -42,7 +43,7 @@ class WeatherTodayHourlyAdapter(private val placeId: String): RecyclerView.Adapt
                 .setImageResource(d)
 
             itemView.setOnClickListener {
-
+                openHour()
                 itemView.findNavController()
                     .navigate(FragmentWeatherTodayOverviewDirections
                         .actionWeatherTodayToHourly(placeId,position))

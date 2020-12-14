@@ -8,11 +8,13 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.presentation_weather_2.WeatherTodayDailyForecastView
+import com.example.ui_weather_2.ForecastNavigation
 import com.example.ui_weather_2.R
 import com.example.ui_weather_2.mapToImageResource
 
 
-class WeatherTodayDailyAdapter(private val placeId: String): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WeatherTodayDailyAdapter(private val placeId: String,
+                               private val openDay: () -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var items = listOf<WeatherTodayDailyForecastView>()
 
@@ -44,6 +46,7 @@ class WeatherTodayDailyAdapter(private val placeId: String): RecyclerView.Adapte
                 .setImageResource(d)
 
             itemView.setOnClickListener {
+               openDay()
                 itemView.findNavController()
                     .navigate(FragmentWeatherTodayOverviewDirections
                         .actionWeatherTodayToDaily(placeId,adapterPosition))

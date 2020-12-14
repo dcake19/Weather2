@@ -339,8 +339,8 @@
 
                             <TextView
                                 android:id="@+id/text_wind_direction"
-                                android:layout_width="20dp"
-                                android:layout_height="22dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_marginEnd="8dp"
                                 android:textColor="@color/dark_text_1"
                                 android:textSize="24sp"

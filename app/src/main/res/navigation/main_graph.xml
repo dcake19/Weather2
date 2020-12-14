@@ -4,16 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/weather">
+    app:startDestination="@id/weather_graph">
 
     <include app:graph="@navigation/location_graph" />
     <include app:graph="@navigation/weather_graph" />
 
-    <fragment
-        android:id="@+id/weather"
-        android:name="com.example.weather2.FragmentWeather"
-        android:label="fragment_weather"
-        tools:layout="@layout/weather_fragment">
+<!--    <fragment-->
+<!--        android:id="@+id/weather"-->
+<!--        android:name="com.example.weather2.FragmentWeather"-->
+<!--        android:label="fragment_weather"-->
+<!--        tools:layout="@layout/weather_fragment">-->
 
         <action
             android:id="@+id/action_weather_to_locations"
@@ -28,7 +28,7 @@
             app:destination="@+id/weather_graph"
             />
 
-    </fragment>
+<!--    </fragment>-->
 
 <!--    <fragment-->
 <!--        android:id="@+id/locations"-->

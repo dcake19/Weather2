@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.presentation_weather_2.LocationView
 import com.example.presentation_weather_2.WeatherTodayView
 import com.example.presentation_weather_2.main.WeatherMainForecastViewModel
+import com.example.ui_weather_2.ForecastNavigation
 import com.example.ui_weather_2.R
 import com.example.ui_weather_2.application.ApplicationFeatureWeather
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,6 +27,11 @@ class FragmentWeatherTodayOverview: Fragment() {
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (requireActivity().application as ApplicationFeatureWeather).injectWeather(this)
         return inflater.inflate(R.layout.weather_today_fragment,container,false)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (activity as ForecastNavigation).mainForecastOpened()
     }
 
     override fun onResume() {
