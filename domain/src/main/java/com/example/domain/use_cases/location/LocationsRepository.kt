@@ -11,5 +11,6 @@ interface LocationsRepository {
     fun deleteLocations(placeIds:  List<String>)
     fun updateLocationsOrder(locations: List<String>)
     fun getLocationByPlaceId(placeId: String): Single<Location>
+    fun getCachedLocationByPlaceId(placeId: String): Single<Location>
     fun getLocationByName(name: String): Single<Location>
 }

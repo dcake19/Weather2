@@ -68,4 +68,9 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
         return locationDataNetwork.getLocations(name)
             .map { locationData -> mapToLocation(locationData) }
     }
+
+    override fun getCachedLocationByPlaceId(placeId: String): Single<Location> {
+        return locationDataCache.getLocation(placeId)
+            .map { locationData -> mapToLocation(locationData) }
+    }
 }

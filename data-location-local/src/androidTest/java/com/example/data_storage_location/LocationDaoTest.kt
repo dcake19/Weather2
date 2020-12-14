@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.data_storage_location.db.LocationDao
 import com.example.data_storage_location.db.LocationDatabase
 import com.example.data_storage_location.db.LocationEntity
+import io.reactivex.Maybe
 import io.reactivex.Single
 import org.junit.After
 import org.junit.Before
@@ -90,6 +91,16 @@ class LocationDaoTest {
         val locationsSingle = dao.getLocationsSingle()
 
         assertThat(locationsSingle.test().values(), `is`(Single.just(locationsIn).test().values()))
+    }
+
+    @Test
+    fun getLocationByPlaceId1(){
+        val locationsIn = (0..20).map { TestUtil.createLocation(it) }
+        dao.insert(locationsIn)
+
+        val locationMaybe = dao.getLocation(locationsIn[0].placeId)
+
+        assertThat(locationMaybe.test().values(), `is`(Single.just(locationsIn[0]).test().values()))
     }
 
     @Test

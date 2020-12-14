@@ -10,7 +10,7 @@ class WeatherInteractor(private val weatherRepository: WeatherRepository,
 
     fun getForecast(placeId: String): Single<WeatherToday>{
         val timeNowSecs = (DateTime.now().millis/1000).toInt()
-        return locationsRepository.getLocationByPlaceId(placeId)
+        return locationsRepository.getCachedLocationByPlaceId(placeId)
             .flatMap { weatherRepository.getForecast(it.placeId,it.latitude,it.longitude,
                 timeNowSecs - MAX_FORECAST_STORE_TIME)}
     }

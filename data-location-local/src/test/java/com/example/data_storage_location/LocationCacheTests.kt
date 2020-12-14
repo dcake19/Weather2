@@ -3,6 +3,7 @@ package com.example.data_storage_location
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.data_storage_location.db.LocationDao
 import com.example.data_storage_location.db.LocationDatabaseProvider
+import io.reactivex.Maybe
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Rule
@@ -55,6 +56,19 @@ class LocationCacheTests {
         `when`(dao.getLocationsBoundingSingle(3.0,3.0)).thenReturn(Single.just(locationEntities))
 
         val locationDataActual = cache.getLocationsBounding(3.0,3.0).test().values()[0]
+
+        assertThat(locationDataExpected, `is`(locationDataActual))
+    }
+
+    //location exists
+    @Test
+    fun getLocationByPlaceId1(){
+        val locationEntity = CacheTestUtil.createLocationEntity(1)
+        val locationDataExpected = CacheTestUtil.createLocationData(1)
+
+        `when`(dao.getLocation(locationEntity.placeId)).thenReturn(Single.just(locationEntity))
+
+        val locationDataActual = cache.getLocation(locationEntity.placeId).test().values()[0]
 
         assertThat(locationDataExpected, `is`(locationDataActual))
     }

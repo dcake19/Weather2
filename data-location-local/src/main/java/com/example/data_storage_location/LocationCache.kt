@@ -4,6 +4,7 @@ import com.example.data_repository_location.LocationData
 import com.example.data_repository_location.LocationDataCache
 import com.example.data_storage_location.db.LocationDatabaseProvider
 import com.example.data_storage_location.db.LocationEntity
+import io.reactivex.Maybe
 import io.reactivex.Single
 
 class LocationCache(locationDatabase: LocationDatabaseProvider) : LocationDataCache {
@@ -13,6 +14,11 @@ class LocationCache(locationDatabase: LocationDatabaseProvider) : LocationDataCa
     override fun getLocationsBounding(lat: Double, lng: Double): Single<List<LocationData>> {
         return locationDao.getLocationsBoundingSingle(lat, lng)
             .map { locations -> locations.map { mapToLocationData(it) } }
+    }
+
+    override fun getLocation(placeId: String): Single<LocationData> {
+        return locationDao.getLocation(placeId)
+            .map { mapToLocationData(it) }
     }
 
     override fun getLocations(): Single<List<LocationData>> {

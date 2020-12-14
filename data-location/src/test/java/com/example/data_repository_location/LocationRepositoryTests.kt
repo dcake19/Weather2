@@ -126,4 +126,17 @@ class LocationRepositoryTests {
         assertThat(actualLocation, `is`(location))
     }
 
+    @Test
+    fun getCachedLocationByPlaceId(){
+        val placeId = "place_0"
+
+        val location = RepositoryTestUtil.createLocation(0)
+        val locationData = RepositoryTestUtil.createLocationData(0)
+
+        `when`(locationDataCache.getLocation(placeId)).thenReturn(Single.just(locationData))
+
+        val actualLocation = repository.getCachedLocationByPlaceId(placeId).test().values()[0]
+
+        assertThat(actualLocation, `is`(location))
+    }
 }
