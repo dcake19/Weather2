@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.LocationNavigation
 import com.example.application.ApplicationFeatureLocation
 import com.example.presentation_location_view_model.locations.LocationsViewModel
 import com.example.view_model.R
@@ -52,7 +53,8 @@ class FragmentLocations: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!::locationsAdapter.isInitialized){
-            locationsAdapter = LocationsAdapter(requireActivity(),viewModel,::selectedUpdated)
+            locationsAdapter = LocationsAdapter(requireActivity(),viewModel, ::selectedUpdated)
+            {placeId: String -> (activity as LocationNavigation).locationSelected(placeId) }
         }
         createRecyclerView(view)
 
@@ -147,5 +149,7 @@ class FragmentLocations: Fragment() {
         checkBoxSelectAll.isChecked = allChecked
         buttonDelete.isEnabled = someChecked
     }
+
+
 
 }

@@ -23,10 +23,22 @@ class FragmentWeatherTodayOverview: Fragment() {
     @Inject lateinit var viewModel: WeatherMainForecastViewModel
     private lateinit var pagerAdapter: WeatherTodayPagerAdapter
 
+    private var initialPlaceId: String? = null
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (requireActivity().application as ApplicationFeatureWeather).injectWeather(this)
         return inflater.inflate(R.layout.weather_today_fragment,container,false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+            arguments?.let{
+                val args = FragmentWeatherTodayOverviewArgs.fromBundle(it)
+                initialPlaceId = args.placeId
+            }
+
     }
 
     override fun onStart() {
@@ -49,6 +61,12 @@ class FragmentWeatherTodayOverview: Fragment() {
         val viewPager = view?.findViewById<ViewPager>(R.id.pager_weather_day)
         pagerAdapter = WeatherTodayPagerAdapter(locations)
         viewPager?.adapter = pagerAdapter
+
+       // val index = locations.indexOfFirst { it.placeId == initialPlaceId }
+        viewPager?.currentItem = if (initialPlaceId!=null) {
+            val index = locations.indexOfFirst { it.placeId == initialPlaceId }
+            if (index<0) 0 else index
+        }else 0
     }
 
     inner class WeatherTodayPagerAdapter(private val locations: List<LocationView>)

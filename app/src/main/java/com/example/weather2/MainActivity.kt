@@ -10,11 +10,12 @@ import android.widget.ImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import com.example.LocationNavigation
 import com.example.open_weather.TestOpenWeather
 import com.example.ui_weather_2.ForecastNavigation
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), ForecastNavigation {
+class MainActivity : AppCompatActivity(), ForecastNavigation, LocationNavigation {
 
     lateinit var weatherNavigationController: WeatherNavigationController
 
@@ -80,5 +81,10 @@ class MainActivity : AppCompatActivity(), ForecastNavigation {
 
     override fun mainForecastClosed() {
         findViewById<ConstraintLayout>(R.id.top_bar).visibility = View.GONE
+    }
+
+    override fun locationSelected(placeId: String) {
+        Navigation.findNavController(this,R.id.nav_host_fragment)
+            .navigate(MainDirections.actionWeatherToForecast(placeId))
     }
 }

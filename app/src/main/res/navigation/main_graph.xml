@@ -25,8 +25,11 @@
 
         <action
             android:id="@+id/action_weather_to_forecast"
-            app:destination="@+id/weather_graph"
-            />
+            app:destination="@+id/weather_graph">
+            <argument
+                android:name="placeId"
+                app:argType="string" />
+        </action>
 
 <!--    </fragment>-->
 

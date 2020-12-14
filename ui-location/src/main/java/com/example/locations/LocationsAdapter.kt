@@ -19,7 +19,8 @@ import com.example.view_model.R
 
 class LocationsAdapter(private val context: Context,
                        private val viewModel: LocationsViewModel,
-                       private val allSelected: (allChecked: Boolean,someSelected: Boolean) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
+                       private val allSelected: (allChecked: Boolean,someSelected: Boolean) -> Unit,
+                       private val locationSelected: (placeId: String) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
     companion object {
         const val EDITABLE = 1
@@ -106,6 +107,10 @@ class LocationsAdapter(private val context: Context,
             itemView.findViewById<TextView>(R.id.location_text_place_name).text = locationsView.name
             itemView.findViewById<TextView>(R.id.location_text_region_name).text =
                 context.getString(R.string.region_country, locationsView.region,locationsView.country)
+
+            itemView.setOnClickListener{
+                locationSelected(locationsView.placeId)
+            }
         }
     }
 

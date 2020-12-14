@@ -12,6 +12,11 @@
         android:name="com.example.ui_weather_2.today.FragmentWeatherTodayOverview"
         android:label="fragment_weather_today"
         tools:layout="@layout/weather_today_fragment">
+        <argument
+            android:name="placeId"
+            app:argType="string"
+            android:defaultValue=""
+            app:nullable="true"/>
         <action
             android:id="@+id/action_weather_today_to_hourly"
             app:destination="@id/weather_hourly" />
