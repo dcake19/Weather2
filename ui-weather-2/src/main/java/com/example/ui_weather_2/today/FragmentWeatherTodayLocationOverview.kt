@@ -10,17 +10,22 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.presentation_weather_2.LocationView
 import com.example.presentation_weather_2.WeatherTodayView
+import com.example.presentation_weather_2.daily.WeatherDailyForecastViewModelImpl
+import com.example.presentation_weather_2.main.WeatherMainForecastViewModel
 import com.example.ui_weather_2.ForecastNavigation
 import com.example.ui_weather_2.R
 import com.example.ui_weather_2.mapToImageResource
 import com.example.ui_weather_2.mapWindDirection
 
-class FragmentWeatherTodayLocationOverview : Fragment() {
+class FragmentWeatherTodayLocationOverview(
+    private val viewModel: WeatherMainForecastViewModel) : Fragment() {
 
     private var location: LocationView? = null
     private var forecast: WeatherTodayView? = null
+    var pending: Boolean = false
 
     private lateinit var hourlyAdapter: WeatherTodayHourlyAdapter
     private lateinit var dailyAdapter: WeatherTodayDailyAdapter
@@ -37,6 +42,10 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
         createRecyclerViews(view)
 
         view.findViewById<TextView>(R.id.text_location).text = location?.placeName
+        view.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh).apply {
+            isRefreshing = pending
+            setOnRefreshListener { location?.let { viewModel.getWeather(it.placeId,true) }}
+        }
 
         displayForecast()
     }
@@ -53,8 +62,8 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
     private fun setAdapters(){
         val l = location
         if (l!=null) {
-            if (!::hourlyAdapter.isInitialized) hourlyAdapter = WeatherTodayHourlyAdapter(l.placeId) {(activity as ForecastNavigation).mainForecastClosed()}
-            if (!::dailyAdapter.isInitialized) dailyAdapter = WeatherTodayDailyAdapter(l.placeId) {(activity as ForecastNavigation).mainForecastClosed()}
+            if (!::hourlyAdapter.isInitialized) hourlyAdapter = WeatherTodayHourlyAdapter(l.placeId) { if(activity is ForecastNavigation) (activity as ForecastNavigation).mainForecastClosed()}
+            if (!::dailyAdapter.isInitialized) dailyAdapter = WeatherTodayDailyAdapter(l.placeId) { if(activity is ForecastNavigation) (activity as ForecastNavigation).mainForecastClosed()}
         }
     }
 
@@ -92,7 +101,7 @@ class FragmentWeatherTodayLocationOverview : Fragment() {
             val d = mapToImageResource(f.weatherId)
             view?.findViewById<ImageView>(R.id.image_weather_icon)?.setImageResource(d)
 
-            if (::hourlyAdapter.isInitialized && ::dailyAdapter.isInitialized ){//&& f.placeId=="placeId_5") {
+            if (::hourlyAdapter.isInitialized && ::dailyAdapter.isInitialized ){
                 hourlyAdapter.items = f.hourly
                 dailyAdapter.items = f.daily
             }

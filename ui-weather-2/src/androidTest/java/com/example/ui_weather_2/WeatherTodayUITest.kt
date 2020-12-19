@@ -35,6 +35,7 @@ import com.example.presentation_weather_2.main.WeatherMainForecastViewModel
 import com.example.ui_weather_2.RecyclerViewMatcher.withRecyclerView
 import com.example.ui_weather_2.daily.FragmentWeatherDays
 import com.example.ui_weather_2.today.FragmentWeatherTodayOverview
+import com.example.ui_weather_2.today.FragmentWeatherTodayOverviewArgs
 import com.example.ui_weather_2.today.FragmentWeatherTodayOverviewDirections
 import com.example.ui_weather_2.today.WeatherTodayHourlyAdapter
 import io.reactivex.Observable
@@ -57,6 +58,8 @@ class WeatherTodayUITest {
     @Mock lateinit var viewModel: WeatherMainForecastViewModel
     private lateinit var locationsEmitter: ObservableEmitter<List<LocationView>>
     private lateinit var weatherEmitter: ObservableEmitter<WeatherTodayView>
+    private lateinit var errorEmitter: ObservableEmitter<String>
+    private lateinit var pendingEmitter: ObservableEmitter<Unit>
 
     @Before
     fun before(){
@@ -66,7 +69,8 @@ class WeatherTodayUITest {
     private fun launchFragment(navController: NavController?=null){
         val fragment = FragmentWeatherTodayOverview()
         fragment.viewModel = viewModel
-        val scenario = launchFragmentInContainer(Bundle(), R.style.Theme_AppCompat){
+
+        val scenario = launchFragmentInContainer(FragmentWeatherTodayOverviewArgs("").toBundle(), R.style.Theme_AppCompat){
             fragment
         }
 
@@ -100,6 +104,10 @@ class WeatherTodayUITest {
             .thenReturn(Observable.create { locationsEmitter = it })
         Mockito.`when`(viewModel.getWeatherObservable())
             .thenReturn(Observable.create { weatherEmitter = it })
+        Mockito.`when`(viewModel.getErrorObservable())
+            .thenReturn(Observable.create { errorEmitter = it })
+        Mockito.`when`(viewModel.getPendingObservable())
+            .thenReturn(Observable.create { pendingEmitter = it })
 
         Mockito.`when`(viewModel.start()).then { locationsEmitter.onNext(locations) }
 
@@ -133,11 +141,15 @@ class WeatherTodayUITest {
             .thenReturn(Observable.create { locationsEmitter = it })
         Mockito.`when`(viewModel.getWeatherObservable())
             .thenReturn(Observable.create { weatherEmitter = it })
+        Mockito.`when`(viewModel.getErrorObservable())
+            .thenReturn(Observable.create { errorEmitter = it })
+        Mockito.`when`(viewModel.getPendingObservable())
+            .thenReturn(Observable.create { pendingEmitter = it })
 
         Mockito.`when`(viewModel.start()).then { locationsEmitter.onNext(locations) }
 
         for (i in 0..4) {
-            Mockito.`when`(viewModel.getWeather(locations[i].placeId))
+            Mockito.`when`(viewModel.getWeather(locations[i].placeId,false))
                 .then{weatherEmitter.onNext(weather[i])}
         }
 

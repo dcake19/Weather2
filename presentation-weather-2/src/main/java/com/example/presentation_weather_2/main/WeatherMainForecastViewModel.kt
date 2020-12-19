@@ -5,9 +5,12 @@ import com.example.presentation_weather_2.WeatherTodayView
 import io.reactivex.Observable
 
 interface WeatherMainForecastViewModel {
-    fun start()
-    fun pause()
     fun getLocationsObservable(): Observable<List<LocationView>>
     fun getWeatherObservable(): Observable<WeatherTodayView>
-    fun getWeather(placeId: String)
+    fun getErrorObservable(): Observable<String>
+    fun getPendingObservable(): Observable<Unit>
+    fun start()
+    fun pause()
+    fun getWeather(placeId: String,refresh: Boolean)
+    fun isPending(placeId: String): Boolean
 }

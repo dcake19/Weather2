@@ -25,6 +25,8 @@ class WeatherMainForecastViewModelTests {
     @Mock lateinit var locationInteractor: LocationInteractor
     @Mock lateinit var locationsEmitter: ViewModelEmitter<List<LocationView>>
     @Mock lateinit var forecastEmitter: ViewModelEmitter<WeatherTodayView>
+    @Mock lateinit var errorEmitter: ViewModelEmitter<String>
+    @Mock lateinit var pendingEmitter: ViewModelEmitter<Unit>
 
     private lateinit var viewModel: WeatherMainForecastViewModel
 
@@ -33,7 +35,8 @@ class WeatherMainForecastViewModelTests {
         MockitoAnnotations.initMocks(this)
 
         viewModel = WeatherMainForecastViewModelImpl(weatherInteractor,locationInteractor,
-            RxSchedulerProviderTrampoline(),locationsEmitter, forecastEmitter)
+            RxSchedulerProviderTrampoline(),locationsEmitter, forecastEmitter,
+                    errorEmitter,pendingEmitter)
     }
 
     @Test
@@ -65,7 +68,7 @@ class WeatherMainForecastViewModelTests {
 
         viewModel.start()
 
-        viewModel.getWeather(placeId)
+        viewModel.getWeather(placeId,false)
 
         Mockito.verify(forecastEmitter).post(expectedForecastView)
     }

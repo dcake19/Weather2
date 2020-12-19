@@ -29,8 +29,10 @@ class FeatureWeatherModule {
                                             scheduler: RxSchedulerProvider): WeatherMainForecastViewModel{
         val locationsEmitter = ViewModelEmitter<List<LocationView>>(true)
         val forecastEmitter = ViewModelEmitter<WeatherTodayView>()
+        val errorEmitter = ViewModelEmitter<String>()
+        val pendingEmitter = ViewModelEmitter<Unit>()
         return WeatherMainForecastViewModelImpl(weatherInteractor,locationInteractor,
-            scheduler,locationsEmitter, forecastEmitter)
+            scheduler,locationsEmitter, forecastEmitter,errorEmitter,pendingEmitter)
     }
 
     @Provides

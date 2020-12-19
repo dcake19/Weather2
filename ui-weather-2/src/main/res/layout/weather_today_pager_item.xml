@@ -19,32 +19,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="London"/>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/text_location"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <FrameLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
-
-<!--            <ProgressBar-->
-<!--                android:id="@+id/progress"-->
-<!--                android:layout_width="80dp"-->
-<!--                android:layout_height="80dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:layout_gravity="center_horizontal"-->
-<!--                android:visibility="visible"-->
-<!--                tools:visibility="invisible"/>-->
+            android:layout_height="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_weather_forecast"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:visibility="invisible"
                 tools:visibility="visible">
 
                 <TextView
@@ -540,6 +532,6 @@
                     tools:listitem="@layout/weather_today_day_item"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </FrameLayout>
-    </androidx.core.widget.NestedScrollView>
+         </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

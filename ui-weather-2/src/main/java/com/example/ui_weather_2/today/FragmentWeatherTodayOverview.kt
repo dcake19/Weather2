@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
@@ -43,7 +43,7 @@ class FragmentWeatherTodayOverview: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as ForecastNavigation).mainForecastOpened()
+        if(activity is ForecastNavigation) (activity as ForecastNavigation).mainForecastOpened()
     }
 
     override fun onResume() {
@@ -54,6 +54,15 @@ class FragmentWeatherTodayOverview: Fragment() {
         viewModel.getWeatherObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { pagerAdapter.addWeatherForecast(it) }
+        viewModel.getErrorObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                context?.let{c -> Toast.makeText(c,it,Toast.LENGTH_SHORT)}
+                pagerAdapter.notifyDataSetChanged()
+            }
+        viewModel.getPendingObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { pagerAdapter.notifyDataSetChanged() }
         viewModel.start()
     }
 
@@ -75,14 +84,18 @@ class FragmentWeatherTodayOverview: Fragment() {
         private val forecasts: HashMap<String,WeatherTodayView> = HashMap()
 
         override fun getItem(position: Int): Fragment {
-            val fragment = FragmentWeatherTodayLocationOverview()
-            fragment.setLocation(locations[position])
+            val fragment = FragmentWeatherTodayLocationOverview(viewModel)
+            locations[position]?.let {
+                fragment.setLocation(it)
 
-            val forecast = forecasts[locations[position].placeId]
-            fragment.setForecast(forecast)
+                val forecast = forecasts[it.placeId]
+                fragment.setForecast(forecast)
 
-            if (forecast==null) viewModel.getWeather(locations[position].placeId)
+                fragment.pending = viewModel.isPending(it.placeId)
 
+                if (forecast == null) viewModel.getWeather(it.placeId,false)
+
+            }
             return fragment
         }
 
@@ -98,5 +111,6 @@ class FragmentWeatherTodayOverview: Fragment() {
             forecasts[weather.placeId] = weather
             notifyDataSetChanged()
         }
+
     }
 }
