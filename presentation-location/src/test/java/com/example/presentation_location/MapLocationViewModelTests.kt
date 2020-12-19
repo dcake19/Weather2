@@ -19,6 +19,7 @@ class MapLocationViewModelTests {
     @Mock lateinit var interactor: LocationInteractor
     @Mock lateinit var mapLocationEmitter: ViewModelEmitter<List<MapLocationView>>
     @Mock lateinit var newMapLocationEmitter: ViewModelEmitter<NewMapLocationView>
+    @Mock lateinit var errorEmitter: ViewModelEmitter<String>
 
     private lateinit var viewModel: MapLocationsViewModelImpl
 
@@ -28,7 +29,7 @@ class MapLocationViewModelTests {
 
         viewModel = MapLocationsViewModelImpl(interactor,
             RxSchedulerProviderTrampoline(), MapLocationMapper(),
-            mapLocationEmitter,newMapLocationEmitter)
+            mapLocationEmitter,newMapLocationEmitter,errorEmitter)
     }
 
     @Test

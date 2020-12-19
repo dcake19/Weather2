@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
@@ -92,6 +93,11 @@ class FragmentMap: Fragment(){
         mapLocationViewModel.getLocationsObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe{onLocationsReady(it)}
+        mapLocationViewModel.getErrorObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                context?.let{c -> Toast.makeText(c,it, Toast.LENGTH_SHORT)}
+            }
     }
 
     private fun onMapReady(googleMap: GoogleMap){

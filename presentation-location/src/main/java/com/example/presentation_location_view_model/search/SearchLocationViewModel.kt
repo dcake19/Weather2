@@ -6,5 +6,6 @@ interface SearchLocationViewModel {
     fun searchLocation(term: String)
     fun getSearchResultsObservable(): Observable<SearchResultsView>
     fun getLocationAddedObservable(): Observable<Boolean>
+    fun getErrorObservable(): Observable<String>
     fun addLocation(placeId: String)
 }

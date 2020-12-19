@@ -22,6 +22,7 @@ class SearchLocationViewModelTests {
     @Mock lateinit var interactor: PredictionInteractor
     @Mock lateinit var searchResultsEmitter: ViewModelEmitter<SearchResultsView>
     @Mock lateinit var locationsAddedEmitter: ViewModelEmitter<Boolean>
+    @Mock lateinit var errorEmitter: ViewModelEmitter<String>
 
     private lateinit var viewModel: SearchLocationViewModelImpl
 
@@ -31,8 +32,7 @@ class SearchLocationViewModelTests {
 
         viewModel = SearchLocationViewModelImpl(interactor,
             RxSchedulerProviderTrampoline(), SearchLocationMapper(),
-            searchResultsEmitter,locationsAddedEmitter
-        )
+            searchResultsEmitter,locationsAddedEmitter,errorEmitter)
     }
 
     @Test

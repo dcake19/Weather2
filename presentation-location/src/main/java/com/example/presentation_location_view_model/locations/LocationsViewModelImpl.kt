@@ -12,7 +12,10 @@ import io.reactivex.disposables.Disposable
 class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
                              private val scheduler: RxSchedulerProvider,
                              private val mapper: LocationsMapper,
-                             private val locationsEmitter: ViewModelEmitter<List<LocationsView>>): LocationsViewModel {
+                             private val locationsEmitter: ViewModelEmitter<List<LocationsView>>,
+                             private val errorEmitter: ViewModelEmitter<String>): LocationsViewModel {
+
+    private var locationsCached: List<LocationsView>? = null
 
     override fun init() {
         val observer = object : SingleObserver<Location>{
@@ -62,24 +65,35 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
         return Observable.create{locationsEmitter.initEmitter(it)}
     }
 
+    override fun getErrorObservable(): Observable<String> {
+        return Observable.create { errorEmitter.initEmitter(it) }
+    }
+
+
     override fun getStoredLocations(){
-        locationInteractor.getStoredLocations()
-            .subscribeOn(scheduler.computation())
-            .observeOn(scheduler.computation())
-            .map {mapper.map(it)}
-            .subscribe(object : SingleObserver<List<LocationsView>>{
-                override fun onSuccess(t: List<LocationsView>) {
-                   locationsEmitter.post(t)
-                }
+        if (locationsCached==null) {
 
-                override fun onSubscribe(d: Disposable) {
+            locationInteractor.getStoredLocations()
+                .subscribeOn(scheduler.computation())
+                .observeOn(scheduler.computation())
+                .map { mapper.map(it) }
+                .subscribe(object : SingleObserver<List<LocationsView>> {
+                    override fun onSuccess(t: List<LocationsView>) {
+                        locationsCached = t
+                        locationsEmitter.post(locationsCached)
+                    }
 
-                }
+                    override fun onSubscribe(d: Disposable) {
 
-                override fun onError(e: Throwable) {
+                    }
 
-                }
-            })
+                    override fun onError(e: Throwable) {
+                        errorEmitter.post(e.message)
+                    }
+                })
+        }else{
+            locationsEmitter.post(locationsCached)
+        }
     }
 
     override fun updateLocationsOrder(locations: List<LocationsView>) {

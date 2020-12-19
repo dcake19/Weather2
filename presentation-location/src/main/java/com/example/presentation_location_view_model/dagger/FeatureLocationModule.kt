@@ -28,9 +28,9 @@ class FeatureLocationModule {
                                  rxSchedulerProvider: RxSchedulerProvider,
                                  locationsMapper: LocationsMapper): LocationsViewModel {
         val locationsViewModelEmitter = ViewModelEmitter<List<LocationsView>>(true)
-
+        val errorEmitter = ViewModelEmitter<String>()
         return LocationsViewModelImpl(locationInteractor,rxSchedulerProvider,
-            locationsMapper,locationsViewModelEmitter)
+            locationsMapper,locationsViewModelEmitter,errorEmitter)
     }
 
     @Provides
@@ -50,9 +50,9 @@ class FeatureLocationModule {
     fun provideSearchLocationViewModel(interactor: PredictionInteractor,
                                        rxSchedulerProvider: RxSchedulerProvider,
                                        mapper: SearchLocationMapper): SearchLocationViewModel{
+        val errorEmitter = ViewModelEmitter<String>()
         return SearchLocationViewModelImpl(interactor,rxSchedulerProvider,mapper,
-            ViewModelEmitter(),ViewModelEmitter()
-        )
+            ViewModelEmitter(),ViewModelEmitter(),errorEmitter)
     }
 
     @Provides
@@ -72,8 +72,9 @@ class FeatureLocationModule {
     fun provideMapLocationViewModel(locationInteractor: LocationInteractor,
                                     rxSchedulerProvider: RxSchedulerProvider,
                                     mapper: MapLocationMapper): MapLocationViewModel{
+        val errorEmitter = ViewModelEmitter<String>()
         return MapLocationsViewModelImpl(locationInteractor,rxSchedulerProvider,
-            mapper, ViewModelEmitter(),ViewModelEmitter())
+            mapper, ViewModelEmitter(),ViewModelEmitter(),errorEmitter)
     }
 
     @Provides

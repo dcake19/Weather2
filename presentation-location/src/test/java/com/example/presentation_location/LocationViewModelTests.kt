@@ -18,9 +18,9 @@ class LocationViewModelTests {
 
     @Mock lateinit var interactor: LocationInteractor
     @Mock lateinit var emitter: ViewModelEmitter<List<LocationsView>>
+    @Mock lateinit var errorEmitter: ViewModelEmitter<String>
 
     private lateinit var viewModel: LocationsViewModelImpl
-
 
     @Before
     fun init() {
@@ -28,7 +28,7 @@ class LocationViewModelTests {
 
         viewModel = LocationsViewModelImpl(interactor,
             RxSchedulerProviderTrampoline(),
-            LocationsMapper(),emitter)
+            LocationsMapper(),emitter,errorEmitter)
     }
 
     @Test

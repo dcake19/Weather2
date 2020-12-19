@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -73,7 +74,12 @@ class FragmentSearch: Fragment() {
             .subscribe { display(it) }
         viewModel.getLocationAddedObservable()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { Navigation.findNavController(view!!).popBackStack() }
+            .subscribe { view?.let { it1 -> Navigation.findNavController(it1).popBackStack() } }
+        viewModel.getErrorObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                context?.let{c -> Toast.makeText(c,it, Toast.LENGTH_SHORT)}
+            }
     }
 
     private fun display(searchResultsView: SearchResultsView){

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -66,9 +67,9 @@ class FragmentLocations: Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_locations_to_search)
         }
 
-        view.findViewById<ImageButton>(R.id.button_settings).setOnClickListener{
-
-        }
+//        view.findViewById<ImageButton>(R.id.button_settings).setOnClickListener{
+//
+//        }
 
         buttonDelete = view.findViewById<ImageButton>(R.id.button_delete)
         buttonDelete.setOnClickListener{
@@ -107,10 +108,14 @@ class FragmentLocations: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        //viewModel.init()
         viewModel.getLocationsObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { locationsAdapter.items = it.toMutableList() }
+        viewModel.getErrorObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                context?.let{c -> Toast.makeText(c,it, Toast.LENGTH_SHORT)}
+            }
         viewModel.getStoredLocations()
     }
 

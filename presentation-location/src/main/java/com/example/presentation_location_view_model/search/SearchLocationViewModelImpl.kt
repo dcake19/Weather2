@@ -12,7 +12,8 @@ class SearchLocationViewModelImpl(private val predictionInteractor: PredictionIn
                                   private val scheduler: RxSchedulerProvider,
                                   private val mapper: SearchLocationMapper,
                                   private val searchResultsEmitter: ViewModelEmitter<SearchResultsView>,
-                                  private val locationAddedEmitter: ViewModelEmitter<Boolean>): SearchLocationViewModel {
+                                  private val locationAddedEmitter: ViewModelEmitter<Boolean>,
+                                  private val errorEmitter: ViewModelEmitter<String>): SearchLocationViewModel {
     //search terms to be displayed
     private val searchTerms = mutableListOf<String>()
 
@@ -25,6 +26,10 @@ class SearchLocationViewModelImpl(private val predictionInteractor: PredictionIn
 
     override fun getLocationAddedObservable(): Observable<Boolean> {
         return Observable.create{locationAddedEmitter.initEmitter(it)}
+    }
+
+    override fun getErrorObservable(): Observable<String> {
+        return Observable.create { errorEmitter.initEmitter(it) }
     }
 
     override fun searchLocation(term: String) {
