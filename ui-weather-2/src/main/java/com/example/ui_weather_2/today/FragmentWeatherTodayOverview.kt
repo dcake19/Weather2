@@ -18,9 +18,10 @@ import com.example.ui_weather_2.application.ApplicationFeatureWeather
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class FragmentWeatherTodayOverview: Fragment() {
+class FragmentWeatherTodayOverview: Fragment(){
 
     @Inject lateinit var viewModel: WeatherMainForecastViewModel
+    @Inject lateinit var locationSetter: LocationSetter
     private lateinit var pagerAdapter: WeatherTodayPagerAdapter
 
     private var initialPlaceId: String? = null
@@ -67,15 +68,29 @@ class FragmentWeatherTodayOverview: Fragment() {
     }
 
     private fun onLocationsReady(locations: List<LocationView>){
-        val viewPager = view?.findViewById<ViewPager>(R.id.pager_weather_day)
-        pagerAdapter = WeatherTodayPagerAdapter(locations)
-        viewPager?.adapter = pagerAdapter
+        if (locations.isEmpty()){
+            activity?.let {locationSetter.getLocation(it,viewModel)}
+        }else {
+            val viewPager = view?.findViewById<ViewPager>(R.id.pager_weather_day)
+            pagerAdapter = WeatherTodayPagerAdapter(locations)
+            viewPager?.adapter = pagerAdapter
 
-       // val index = locations.indexOfFirst { it.placeId == initialPlaceId }
-        viewPager?.currentItem = if (initialPlaceId!=null) {
-            val index = locations.indexOfFirst { it.placeId == initialPlaceId }
-            if (index<0) 0 else index
-        }else 0
+            // val index = locations.indexOfFirst { it.placeId == initialPlaceId }
+            viewPager?.currentItem = if (initialPlaceId != null) {
+                val index = locations.indexOfFirst { it.placeId == initialPlaceId }
+                if (index < 0) 0 else index
+            } else 0
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode==LocationSetter.LOCATION_REQUEST_CODE)
+            locationSetter.setLocation()
     }
 
     inner class WeatherTodayPagerAdapter(private val locations: List<LocationView>)

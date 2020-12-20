@@ -32,8 +32,8 @@
         <module name="Weather.data-location-remote" />
         <module name="Weather.utils" />
         <module name="Weather.presentation-weather-2" />
-        <module name="Weather.presentation-location" />
         <module name="Weather.data-open-weather-remote" />
+        <module name="Weather.presentation-location" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

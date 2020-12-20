@@ -13,4 +13,5 @@ interface WeatherMainForecastViewModel {
     fun pause()
     fun getWeather(placeId: String,refresh: Boolean)
     fun isPending(placeId: String): Boolean
+    fun getForecast(latitude: Double,longitude: Double)
 }

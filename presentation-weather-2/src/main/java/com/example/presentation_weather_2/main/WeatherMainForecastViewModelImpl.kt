@@ -21,6 +21,7 @@ class WeatherMainForecastViewModelImpl(private val weatherInteractor: WeatherInt
 
     private val forecastPending = HashMap<String,Boolean>()
     private val forecastCache = HashMap<String,WeatherTodayView>()
+    private var newLocationPending = false
 
     override fun getLocationsObservable(): Observable<List<LocationView>> {
         return Observable.create { locationsEmitter.initEmitter(it) }
@@ -138,4 +139,29 @@ class WeatherMainForecastViewModelImpl(private val weatherInteractor: WeatherInt
             })
     }
 
+    override fun getForecast(latitude: Double, longitude: Double) {
+        if (!newLocationPending) {
+            weatherInteractor.getForecast(latitude, longitude)
+                .subscribeOn(scheduler.io())
+                .observeOn(scheduler.computation())
+                .map { Pair(map(it.first), map(it.first.placeId, it.second)) }
+                .subscribe(object : SingleObserver<Pair<LocationView, WeatherTodayView>> {
+                    override fun onSuccess(t: Pair<LocationView, WeatherTodayView>) {
+                        locationsEmitter.post(listOf(t.first))
+                        forecastCache[t.second.placeId] = t.second
+                        forecastEmitter.post(t.second)
+                        newLocationPending = false
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+                        newLocationPending = true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        newLocationPending = false
+                        errorEmitter.post(e.message)
+                    }
+                })
+        }
+    }
 }

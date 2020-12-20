@@ -12,7 +12,6 @@ class LocationsRepositoryImpl(private val locationDataNetwork: LocationDataNetwo
     override fun getLocation(latitude: Double, longitude: Double): Single<Location> {
         return locationDataCache
             .getLocationsBounding(latitude,longitude)
-           // .subscribeOn(Schedulers.io())
             .flatMap { locations ->
                 if (locations.isEmpty())
                     locationDataNetwork.getLocations(latitude, longitude)
