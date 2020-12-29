@@ -38,7 +38,7 @@ class LocationsTest<T:Activity> {
     @Before
     fun before(){
         MockitoAnnotations.initMocks(this)
-        ViewModelProvider.locationsViewModel = mockLocationsViewModel
+        //ViewModelProvider.locationsViewModel = mockLocationsViewModel
     }
 
     @Test

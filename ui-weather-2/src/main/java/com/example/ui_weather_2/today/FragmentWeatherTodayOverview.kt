@@ -15,6 +15,7 @@ import com.example.presentation_weather_2.main.WeatherMainForecastViewModel
 import com.example.ui_weather_2.ForecastNavigation
 import com.example.ui_weather_2.R
 import com.example.ui_weather_2.application.ApplicationFeatureWeather
+import com.example.ui_weather_2.idling_resource.EspressoIdlingResource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
@@ -51,16 +52,18 @@ class FragmentWeatherTodayOverview: Fragment(){
         super.onResume()
         viewModel.getLocationsObservable()
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext { EspressoIdlingResource.decrement() }
             .subscribe { onLocationsReady(it) }
         viewModel.getWeatherObservable()
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext { EspressoIdlingResource.decrement() }
             .subscribe { pagerAdapter.addWeatherForecast(it) }
         viewModel.getErrorObservable()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe ({
                 context?.let{c -> Toast.makeText(c,it,Toast.LENGTH_SHORT)}
                 pagerAdapter.notifyDataSetChanged()
-            }
+            })
         viewModel.getPendingObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { pagerAdapter.notifyDataSetChanged() }
@@ -69,6 +72,7 @@ class FragmentWeatherTodayOverview: Fragment(){
 
     private fun onLocationsReady(locations: List<LocationView>){
         if (locations.isEmpty()){
+            EspressoIdlingResource.increment()
             activity?.let {locationSetter.getLocation(it,viewModel)}
         }else {
             val viewPager = view?.findViewById<ViewPager>(R.id.pager_weather_day)
@@ -108,7 +112,10 @@ class FragmentWeatherTodayOverview: Fragment(){
 
                 fragment.pending = viewModel.isPending(it.placeId)
 
-                if (forecast == null) viewModel.getWeather(it.placeId,false)
+                if (forecast == null){
+                    EspressoIdlingResource.increment()
+                    viewModel.getWeather(it.placeId,false)
+                }
 
             }
             return fragment

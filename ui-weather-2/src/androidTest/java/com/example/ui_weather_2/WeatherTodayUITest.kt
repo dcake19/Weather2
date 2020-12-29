@@ -181,8 +181,6 @@ class WeatherTodayUITest {
         }
     }
 
-
-
     private fun check(forecast: WeatherTodayView,windDirection: String,drawable: Int){
         checkId(R.id.text_date_time,forecast.dateTime)
         checkId(R.id.text_temp,forecast.temperature)
