@@ -53,7 +53,9 @@ class SearchAdapter(private val context: Context?,
                     getColor(context,R.color.dark_text_1),getColor(context,R.color.highlight_text))
             itemView.findViewById<TextView>(R.id.location_text_region_name).text = searchResultView.placeRegion
             itemView.findViewById<ConstraintLayout>(R.id.layout_search_item)
-                .setOnClickListener { viewModel.addLocation(searchResultView.placeId) }
+                .setOnClickListener {
+                    viewModel.addLocation(searchResultView.placeId)
+                }
         }
     }
 

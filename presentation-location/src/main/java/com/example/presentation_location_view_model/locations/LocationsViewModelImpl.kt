@@ -15,8 +15,6 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
                              private val locationsEmitter: ViewModelEmitter<List<LocationsView>>,
                              private val errorEmitter: ViewModelEmitter<String>): LocationsViewModel {
 
-    private var locationsCached: List<LocationsView>? = null
-
     override fun init() {
         val observer = object : SingleObserver<Location>{
             override fun onSuccess(t: Location) {}
@@ -71,7 +69,7 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
 
 
     override fun getStoredLocations(){
-        if (locationsCached==null) {
+
 
             locationInteractor.getStoredLocations()
                 .subscribeOn(scheduler.computation())
@@ -79,8 +77,7 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
                 .map { mapper.map(it) }
                 .subscribe(object : SingleObserver<List<LocationsView>> {
                     override fun onSuccess(t: List<LocationsView>) {
-                        locationsCached = t
-                        locationsEmitter.post(locationsCached)
+                        locationsEmitter.post(t)
                     }
 
                     override fun onSubscribe(d: Disposable) {
@@ -91,9 +88,7 @@ class LocationsViewModelImpl(private val locationInteractor: LocationInteractor,
                         errorEmitter.post(e.message)
                     }
                 })
-        }else{
-            locationsEmitter.post(locationsCached)
-        }
+
     }
 
     override fun updateLocationsOrder(locations: List<LocationsView>) {
