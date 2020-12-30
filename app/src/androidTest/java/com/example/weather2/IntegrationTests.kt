@@ -1,10 +1,14 @@
 package com.example.weather2
 
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.IdlingResource
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
@@ -21,6 +25,7 @@ import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
+import org.hamcrest.core.AllOf
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -48,7 +53,7 @@ class IntegrationTests {
     private var mockWebServer = MockWebServer()
     private lateinit var db: LocationDatabase
     private lateinit var dao: LocationDao
-  
+
     @Before
     fun init(){
         EspressoIdlingResource.createIdlingResource()
@@ -122,8 +127,26 @@ class IntegrationTests {
         mockWebServer.dispatcher = dispatcher
 
         activityRule.launchActivity(null)
+
+        // below is a small sample of what should be tested
+        checkId(R.id.text_temp,"0°C")
+        onView(
+            AllOf.allOf(
+                withId(R.id.layout_weather_forecast),
+                ViewMatchers.isDisplayed()
+            )
+        ).perform(ViewActions.swipeLeft())
+
         onView(withId(R.id.button_locations)).perform(click())
-        Thread.sleep(3000)
+
+        onView(withId(R.id.list_locations))
+            .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(0))
+        onView(
+            RecyclerViewMatcher.withRecyclerView(R.id.list_locations)
+            .atPositionOnView(0, R.id.location_text_place_name))
+            .check(ViewAssertions.matches(ViewMatchers.withText("Eaton Ford")))
+
+        onView(withId(R.id.button_back)).perform(click())
     }
 
     @Test
@@ -158,8 +181,41 @@ class IntegrationTests {
 
         activityRule.launchActivity(null)
 
-       // onView(withId(R.id.text_temp)).
+        // below is a small sample of what should be tested
+        checkId(R.id.text_temp,"0°C")
+        onView(
+            AllOf.allOf(
+                withId(R.id.layout_weather_forecast),
+                ViewMatchers.isDisplayed()
+            )
+        ).perform(ViewActions.swipeLeft())
+
         onView(withId(R.id.button_locations)).perform(click())
-        Thread.sleep(3000)
+
+        onView(withId(R.id.list_locations))
+            .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(0))
+        onView(
+            RecyclerViewMatcher.withRecyclerView(R.id.list_locations)
+                .atPositionOnView(0, R.id.location_text_place_name))
+            .check(ViewAssertions.matches(ViewMatchers.withText("Eaton Ford")))
+
+        onView(withId(R.id.button_back)).perform(click())
+    }
+
+    private fun checkId(id: Int,display: String){
+        val viewInteraction = onView(
+            AllOf.allOf(
+                withId(id),
+                ViewMatchers.isDescendantOfA(
+                    AllOf.allOf(
+                        withId(R.id.layout_weather_forecast),
+                        ViewMatchers.isDisplayed()
+                    )
+                )
+            )
+        )
+
+        viewInteraction.perform(CustomScrollActions.nestedScrollTo())
+        viewInteraction.check(ViewAssertions.matches(ViewMatchers.withText(display)))
     }
 }

@@ -1,4 +1,4 @@
-package com.example.ui_weather_2;
+package com.example.weather2;
 
 import android.content.res.Resources;
 import android.view.View;
